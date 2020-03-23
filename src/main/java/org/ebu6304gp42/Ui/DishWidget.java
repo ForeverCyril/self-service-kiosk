@@ -17,6 +17,7 @@ import javafx.scene.control.Label;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 public class DishWidget extends HBox {
@@ -32,10 +33,12 @@ public class DishWidget extends HBox {
         this.setHeight(HEIGHT);
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 
+        //
         Image image;
         try {
             image = new Image(new FileInputStream(dish.getPic()));
-        } catch (FileNotFoundException e){
+        } catch (IOException e){
+            System.out.println("Not Found");
             image = new Image(default_pic);
         }
         image_view = new ImageView(image);
@@ -65,7 +68,7 @@ public class DishWidget extends HBox {
         imformation_box.setPadding(new Insets(5));
         imformation_box.setSpacing(8);
         imformation_box.setMaxWidth(HEIGHT*1.6);
-        imformation_box.getChildren().addAll(name,price, description,new Label("Recomened"));
+        imformation_box.getChildren().addAll(name,price, description);
 
         description.setWrapText(true);
         this.getChildren().addAll(image_view, imformation_box);

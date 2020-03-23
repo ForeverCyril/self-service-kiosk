@@ -18,7 +18,7 @@ public class Mainwindow extends Application {
         Dish dish = new Dish();
         dish.setName("Test Name");
         dish.setDescription("Tiosfj jdflas jfdsk ghdfhj fhda kafopjf fjid fa nffa;jf");
-        dish.setPic("Res/pic/dish/type1.png");
+        dish.setPic("pic/dish/type1.pngd");
         dish.setPrice(12.9887);
         DishWidget dishWidget = new DishWidget(dish);
         dishWidget.setLayoutX(10);
