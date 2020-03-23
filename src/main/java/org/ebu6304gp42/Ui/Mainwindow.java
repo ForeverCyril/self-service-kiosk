@@ -3,14 +3,15 @@ package org.ebu6304gp42.Ui;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Event.MenuClickedEvent;
 
 import java.util.ArrayList;
 
-
+/**
+ * Main window of this Application
+ */
 public class Mainwindow extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -25,7 +26,7 @@ public class Mainwindow extends Application {
             dish.setName("Dish "+(i+1));
             dish.setDescription(String.format("This is the description for dish %d", i+1));
             dish.setPrice(0.99 + (i+1));
-            dish.setPic("pic/dish/type1.png");
+            dish.setPic("pic/dish/ramen.jfif");
             dishes.add(dish);
         }
 

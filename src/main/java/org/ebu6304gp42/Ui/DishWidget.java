@@ -16,10 +16,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.control.Label;
 
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 
+/**
+ * Widget To Display a Dish
+ */
 public class DishWidget extends HBox {
     final static InputStream default_pic = DishWidget.class.getResourceAsStream(PathConfig.DEFAULT_PIC);
     final static double HEIGHT = 120;
@@ -33,35 +35,41 @@ public class DishWidget extends HBox {
         this.setHeight(HEIGHT);
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 
-        //
+        // Create Image for Dish
         Image image;
         try {
             image = new Image(new FileInputStream(dish.getPic()));
         } catch (IOException e){
-            System.out.println("Not Found");
+            //if no pic found or other IOException, use default pic
+            System.err.println(String.format("No picture found for %s, use default image.", dish.getName()));
             image = new Image(default_pic);
         }
         image_view = new ImageView(image);
         image_view.preserveRatioProperty().setValue(false);
+        // Bind the height and width of image to the Height of Dishwidget
         image_view.fitWidthProperty().bind(this.heightProperty());
         image_view.fitHeightProperty().bind(this.heightProperty());
 
-
+        // Label Display Dish Name
         Label name = new Label(dish.getName());
         name.setFont(Font.font(null, FontWeight.BOLD, 14));
         name.setTextFill(Color.BLACK);
 
+        // Label Display Dish Price
         Label price = new Label(String.format("%.2f $", dish.getPrice()));
         price.setFont(Font.font(null,FontWeight.BOLD, 14));
         price.setTextFill(Color.RED);
 
+        // Label Display Dish Description
         Label description = new Label(dish.getDescription());
         description.setTextFill(Color.GRAY);
         description.setFont(Font.font(null,11));
         description.setMaxHeight(HEIGHT);
         description.setAlignment(Pos.TOP_LEFT);
-        VBox.setVgrow(description, Priority.ALWAYS);
+        description.setWrapText(true);
+        VBox.setVgrow(description, Priority.ALWAYS); // Make it auto fill empty space of imformation_box
 
+        // A layout contain the information of dish
         VBox imformation_box = new VBox();
         imformation_box.prefHeightProperty().bind(this.heightProperty());
         imformation_box.setFillWidth(true);
@@ -70,10 +78,10 @@ public class DishWidget extends HBox {
         imformation_box.setMaxWidth(HEIGHT*1.6);
         imformation_box.getChildren().addAll(name,price, description);
 
-        description.setWrapText(true);
+        // Add image and imformation_box
         this.getChildren().addAll(image_view, imformation_box);
 
-        //Drop Shadow and it effect when mouse entering
+        //Set Drop Shadow and it effect when mouse entering
         DropShadow shadow = new DropShadow();
         shadow.setBlurType(BlurType.GAUSSIAN);
         shadow.setColor(Color.GRAY);

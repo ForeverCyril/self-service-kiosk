@@ -4,6 +4,9 @@ import javafx.event.Event;
 import javafx.event.EventType;
 import org.ebu6304gp42.Data.Dish;
 
+/**
+ * Event which send by MenuWidget when a DishWidget Clicked
+ */
 public class MenuClickedEvent extends Event {
     public static final EventType<MenuClickedEvent> MENU_CLICKED_EVENT = new EventType<>("Menu Clicked");
 
@@ -14,6 +17,10 @@ public class MenuClickedEvent extends Event {
         this.dish = dish;
     }
 
+    /**
+     * Get Choose Dish
+     * @return Choose Dish
+     */
     public Dish getDish() {
         return dish;
     }

@@ -14,6 +14,7 @@ public class MenuWidget extends ScrollPane {
 
     public MenuWidget(){
         flowPane = new FlowPane();
+        //Setting for flowPane
         flowPane.setPadding(new Insets(6));
         flowPane.setVgap(18);
         flowPane.setHgap(18);
@@ -21,10 +22,15 @@ public class MenuWidget extends ScrollPane {
         this.setContent(flowPane);
     }
 
+    /**
+     * Load Dished from ArrayList<Dish>
+     * @param dishes The list of Dish you want to add to Menu
+     */
     public void load(ArrayList<Dish> dishes){
         for(var dish:dishes){
             DishWidget dishWidget = new DishWidget(dish);
             flowPane.getChildren().add(dishWidget);
+            // FireEvent When DishWidget was Clicked
             dishWidget.setOnMouseReleased(event -> {
                 this.fireEvent(new MenuClickedEvent(MenuClickedEvent.MENU_CLICKED_EVENT, dish));
             });
