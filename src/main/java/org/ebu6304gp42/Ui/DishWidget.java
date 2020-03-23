@@ -78,8 +78,8 @@ public class DishWidget extends HBox {
         shadow.setBlurType(BlurType.GAUSSIAN);
         shadow.setColor(Color.GRAY);
         shadow.setSpread(0.1);
-        shadow.setOffsetX(1);
-        shadow.setOffsetY(1);
+        shadow.setOffsetX(2);
+        shadow.setOffsetY(2);
         this.setEffect(shadow);
         this.setOnMouseEntered(event -> {shadow.setSpread(0.5);});
         this.setOnMouseExited(event -> {shadow.setSpread(0.1);});
