@@ -44,8 +44,11 @@ public class OrderedDishWidget extends VBox {
         imformation_box.setSpacing(8);
         imformation_box.getChildren().addAll(name,price);
 
-
-        Label description = new Label(orderedDish.getOptions().toString());
+        StringBuilder data = new StringBuilder("Option: ");
+        for(var option:orderedDish.getOptions()){
+            data.append(option.getName()).append(": ").append(option.getSelected_option()).append("; ");
+        }
+        Label description = new Label(data.toString());
         description.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(description, Priority.ALWAYS);
         description.setAlignment(Pos.BOTTOM_LEFT);

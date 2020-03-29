@@ -18,6 +18,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Config.GeneraConfig;
 import org.ebu6304gp42.Data.Dish;
+import org.ebu6304gp42.Data.DishOption;
 import org.ebu6304gp42.Data.OrderedDish;
 import org.ebu6304gp42.Event.MenuClickedEvent;
 
@@ -71,17 +72,19 @@ public class Mainwindow extends Application {
             dish.setDescription(String.format("This is the description for dish %d", i+1));
             dish.setPrice(0.99 + (i+1));
             dish.setPic("pic/dish/ramen.jfif");
+            for(int j=0; j<=i%3; j++){
+                DishOption option = new DishOption("Op"+j);
+                for(int k=0;k<3;k++)
+                    option.addOption("Sel"+k);
+                dish.addOption(option);
+            }
             dishes.add(dish);
         }
         menu.load(dishes);
         menu.addEventHandler(MenuClickedEvent.MENU_CLICKED_EVENT, event -> {
-            System.out.println(event.getDish().getName());
-            OrderedDish orderedDish = new OrderedDish();
-            orderedDish.setPrice(0.99);
-            orderedDish.setAmount(2);
-            orderedDish.setName(event.getDish().getName());
-            orderedDish.addOption("Test Option", event.getDish().getName());
-            cart.addDish(orderedDish);
+            OptionDialog dialog = new OptionDialog(event.getDish());
+            var res = dialog.showAndWait();
+            res.ifPresent(orderedDish -> cart.addDish(orderedDish));
         });
         HBox.setHgrow(menu, Priority.ALWAYS);
         buyArea.getChildren().add(menu);
