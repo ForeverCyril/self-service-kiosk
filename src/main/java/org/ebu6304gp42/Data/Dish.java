@@ -73,6 +73,10 @@ public class Dish {
         this.pic = pic;
     }
 
+    public ArrayList<DishOption> getOptions() {
+        return options;
+    }
+
     public String toString(){
         return "Name"+name+"Description"+description;
     }

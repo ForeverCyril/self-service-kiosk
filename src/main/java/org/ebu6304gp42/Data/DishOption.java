@@ -24,4 +24,8 @@ public class DishOption {
     public void addOption(String name){
         options.add(name);
     }
+
+    public ArrayList<String> getOptions() {
+        return options;
+    }
 }

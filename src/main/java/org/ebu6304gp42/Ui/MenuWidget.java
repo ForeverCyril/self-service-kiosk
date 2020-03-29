@@ -2,7 +2,10 @@ package org.ebu6304gp42.Ui;
 
 import javafx.geometry.Insets;
 import javafx.scene.control.ScrollPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.FlowPane;
+import javafx.scene.paint.Color;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Event.MenuClickedEvent;
 
@@ -13,12 +16,15 @@ public class MenuWidget extends ScrollPane {
     private FlowPane flowPane;
 
     public MenuWidget(){
+        //disable horizon scrollbar
+        this.setHbarPolicy(ScrollBarPolicy.NEVER);
+        this.setPadding(new Insets(6));
         flowPane = new FlowPane();
         //Setting for flowPane
-        flowPane.setPadding(new Insets(6));
-        flowPane.setVgap(18);
-        flowPane.setHgap(18);
-        flowPane.prefWidthProperty().bind(this.widthProperty().subtract(10));
+        flowPane.setVgap(16);
+        flowPane.setHgap(16);
+        // bind the flowpane width to scrollPane
+        flowPane.prefWidthProperty().bind(this.widthProperty());
         this.setContent(flowPane);
     }
 
