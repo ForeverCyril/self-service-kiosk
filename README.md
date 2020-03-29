@@ -47,3 +47,7 @@ Screenshot:
     chmod +x ./gradlew
     ```
 
+## Dependence
+
+- JavaFx 14
+- com.google.code.gson (2.8.6)
