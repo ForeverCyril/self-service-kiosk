@@ -12,7 +12,6 @@ import org.ebu6304gp42.Config.PathConfig;
 /**
  * @author Dong Bo
  * @author Liu Yingying
- * @Date 2020/3/20
  */
 
 public class AccountBank {
@@ -20,9 +19,9 @@ public class AccountBank {
     ArrayList<Account> list = new ArrayList<>();
 
     public void register(String first_name,String last_name,String phone,String email) {
-        //读库 给新用户赋予ID
+
         load();
-        //将ID转换为8位字符型数据
+
         int currentID = list.size()+1;
         DecimalFormat nf = new DecimalFormat("00000000");
         String ID = nf.format(currentID);
@@ -39,7 +38,7 @@ public class AccountBank {
     }
 
 
-    //用于写一条信息入库
+
     private void save(Account saveAccount) {
         File file = new File(PathConfig.ACCOUNT_FILE);
         FileOutputStream fileOutputStream = null;
@@ -68,7 +67,7 @@ public class AccountBank {
 
         } catch (Exception e) {
             e.printStackTrace();
-        }finally {   //关闭流
+        }finally {
             try {
                 if (outputStreamWriter != null) {
                     outputStreamWriter.close();
@@ -86,7 +85,7 @@ public class AccountBank {
         }
     }
 
-    //用于修改用户信息（1。消费完邮票增加 2。更改手机）
+
     public void changeInformation(Account saveAccount){
         load();
         File file = new File(PathConfig.ACCOUNT_FILE);
@@ -126,7 +125,6 @@ public class AccountBank {
 
     }
 
-    // 将库中文件打印出来
     public void printInformation(){
         load();
         Iterator it1 = list.iterator();

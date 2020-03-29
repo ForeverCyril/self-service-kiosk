@@ -14,7 +14,6 @@ import org.ebu6304gp42.Data.OrderedDish;
 /**
  * @author Liu Yingying
  * @author Dong Bo
- * @Date 2020/3/27
  */
 public class OrderedDishWidget extends VBox {
     private OrderedDish orderedDish;

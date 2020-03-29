@@ -3,7 +3,6 @@ package org.ebu6304gp42.Data;
 /**
  * @author Dong Bo
  * @author Liu Yingying
- * @Date 2020/3/18
  */
 public class Account {
     private String first_name;

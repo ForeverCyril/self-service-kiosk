@@ -29,7 +29,7 @@ public class MenuWidget extends ScrollPane {
     }
 
     /**
-     * Load Dished from ArrayList<Dish>
+     * Load Dished
      * @param dishes The list of Dish you want to add to Menu
      */
     public void load(ArrayList<Dish> dishes){
