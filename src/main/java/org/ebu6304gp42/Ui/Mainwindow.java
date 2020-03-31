@@ -50,11 +50,17 @@ public class Mainwindow extends Application {
         mangerEnter.setTextFill(Color.GRAY);
         BorderPane.setAlignment(mangerEnter, Pos.BOTTOM_CENTER);
         mangerEnter.setOnMouseClicked(event -> {
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setHeaderText(null);
-            alert.setContentText("Manager Function is under development.");
-            alert.initOwner(primaryStage);
-            alert.showAndWait();
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setHeaderText(null);
+//            alert.setContentText("Manager Function is under development.");
+//            alert.initOwner(primaryStage);
+//            alert.showAndWait();
+            Group root2 = new Group();
+            Scene scene = new Scene(root2,600, 300);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.show();
+            primaryStage.close();
         });
         topArea.setRight(mangerEnter);
 
