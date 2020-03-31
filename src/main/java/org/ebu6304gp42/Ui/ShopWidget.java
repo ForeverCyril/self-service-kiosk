@@ -90,12 +90,10 @@ public class ShopWidget extends VBox {
  * @author Dong Bo
  */
 class OrderedDishWidget extends VBox {
-    private OrderedDish orderedDish;
     final static double WIDTH = 120;
 
     public OrderedDishWidget(OrderedDish orderedDish) {
         this.setPadding(new Insets(3));
-        this.orderedDish = orderedDish;
         this.setPrefHeight(80);
         //this.setWidth();
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));

@@ -101,8 +101,7 @@ class DishWidget extends HBox {
         description.setFont(Font.font(null,11));
         description.setMaxHeight(HEIGHT);
         description.setAlignment(Pos.TOP_LEFT);
-        description.setWrapText(true);
-        VBox.setVgrow(description, Priority.ALWAYS); // Make it auto fill empty space of imformation_box
+        description.setWrapText(true); // Make it auto fill empty space of imformation_box
 
         // A layout contain the information of dish
         VBox imformation_box = new VBox();
@@ -111,7 +110,7 @@ class DishWidget extends HBox {
         imformation_box.setPadding(new Insets(5));
         imformation_box.setSpacing(8);
         imformation_box.setMaxWidth(HEIGHT*1.6);
-        imformation_box.getChildren().addAll(name,price, description);
+        imformation_box.getChildren().addAll(name,price,description);
 
         // Add image and imformation_box
         this.getChildren().addAll(image_view, imformation_box);

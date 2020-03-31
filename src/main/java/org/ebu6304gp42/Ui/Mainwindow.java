@@ -4,11 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
@@ -19,7 +16,6 @@ import javafx.stage.Stage;
 import org.ebu6304gp42.Config.GeneraConfig;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishOption;
-import org.ebu6304gp42.Data.OrderedDish;
 import org.ebu6304gp42.Event.MenuClickedEvent;
 
 import java.util.ArrayList;
@@ -28,15 +24,30 @@ import java.util.ArrayList;
  * Main window of this Application
  */
 public class Mainwindow extends Application {
-    ShopWidget cart = new ShopWidget();
+    private ManageStage manageStage;
+    private Stage shopStage;
+    MenuWidget menu = new MenuWidget();
+    private ShopWidget cart = new ShopWidget();
+    BorderPane root = new BorderPane();
+    HBox statusBar = new HBox();
+
     @Override
     public void start(Stage primaryStage) throws Exception {
-        primaryStage.setTitle("Self Service Kiosk");
-        primaryStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/pic/app.png")));
+        shopStage = primaryStage;
 
-        BorderPane root = new BorderPane();
+        shopStage.setTitle("Self Service Kiosk");
+        shopStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/pic/app.png")));
         root.setPadding(new Insets(5));
-        // Top Area
+        root.setTop(initTitle());
+        root.setCenter(initBuyArea());
+        root.setBottom(initStatusBar());
+
+        Scene scene = new Scene(root,900, 600);
+        shopStage.setScene(scene);
+        shopStage.show();
+    }
+
+    private Node initTitle(){// Top Area
         BorderPane topArea = new BorderPane();
         Label title = new Label(GeneraConfig.STORE_NAME);
         title.setFont(Font.font(null, FontWeight.BOLD, 36));
@@ -50,27 +61,18 @@ public class Mainwindow extends Application {
         mangerEnter.setTextFill(Color.GRAY);
         BorderPane.setAlignment(mangerEnter, Pos.BOTTOM_CENTER);
         mangerEnter.setOnMouseClicked(event -> {
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setHeaderText(null);
-//            alert.setContentText("Manager Function is under development.");
-//            alert.initOwner(primaryStage);
-//            alert.showAndWait();
-            Group root2 = new Group();
-            Scene scene = new Scene(root2,600, 300);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.show();
-            primaryStage.close();
+            manageStage = new ManageStage();
+            
+            manageStage.showAndWait();
+            shopStage.show();
         });
         topArea.setRight(mangerEnter);
-
-        root.setTop(topArea);
-
-        //Buy Area
+        return topArea;
+    }
+    private Node initBuyArea(){
         HBox buyArea = new HBox();
         buyArea.setSpacing(6);
         buyArea.prefWidthProperty().bind(root.widthProperty());
-        MenuWidget menu = new MenuWidget();
         ArrayList<Dish> dishes = new ArrayList<>();
         for(int i=0;i<5;i++){
             Dish dish = new Dish();
@@ -95,20 +97,13 @@ public class Mainwindow extends Application {
         HBox.setHgrow(menu, Priority.ALWAYS);
         buyArea.getChildren().add(menu);
 
-
         cart.prefHeightProperty().bind(buyArea.heightProperty());
         cart.setPrefWidth(250);
         buyArea.getChildren().add(cart);
-
-        root.setCenter(buyArea);
-
-        HBox statusBar = new HBox();
-        statusBar.getChildren().add(new Label("Status Bar"));
-
-        root.setBottom(statusBar);
-
-        Scene scene = new Scene(root,900, 600);
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        return buyArea;
+    }
+    private Node initStatusBar(){
+        statusBar.getChildren().add(new Label("Test Status Bar"));
+        return statusBar;
     }
 }
