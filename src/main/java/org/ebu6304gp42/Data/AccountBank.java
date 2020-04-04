@@ -40,7 +40,7 @@ public class AccountBank {
 
 
     private void save(Account saveAccount) {
-        File file = new File(PathConfig.ACCOUNT_FILE);
+        File file = new File(PathConfig.getAccountFile());
         FileOutputStream fileOutputStream = null;
         OutputStreamWriter outputStreamWriter = null;
 
@@ -88,7 +88,7 @@ public class AccountBank {
 
     public void changeInformation(Account saveAccount){
         load();
-        File file = new File(PathConfig.ACCOUNT_FILE);
+        File file = new File(PathConfig.getAccountFile());
         file.delete();
         Iterator iterator = list.iterator();
         while (iterator.hasNext()){
@@ -109,7 +109,7 @@ public class AccountBank {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             BufferedReader bufferedReader = new BufferedReader(
-                    new FileReader(PathConfig.ACCOUNT_FILE));
+                    new FileReader(PathConfig.getAccountFile()));
             String line = bufferedReader.readLine();
             while (line != null){
 

@@ -119,6 +119,9 @@ class OrderedDishWidget extends VBox {
         for(var option:orderedDish.getOptions()){
             data.append(option.getName()).append(": ").append(option.getSelected_option()).append("; ");
         }
+
+        Label price_label = new Label(String.format("%.2f$ * %d", orderedDish.getPrice(), orderedDish.getAmount()));
+
         Label description = new Label(data.toString());
         description.setMaxHeight(Double.MAX_VALUE);
         VBox.setVgrow(description, Priority.ALWAYS);
@@ -127,7 +130,7 @@ class OrderedDishWidget extends VBox {
         description.setFont(Font.font(null,FontWeight.BOLD, 10));
         description.setTextFill(Color.GRAY);
 
-        this.getChildren().addAll(imformation_box, description );
+        this.getChildren().addAll(imformation_box, price_label, description );
         DropShadow shadow = new DropShadow();
         shadow.setBlurType(BlurType.GAUSSIAN);
         shadow.setColor(Color.GRAY);

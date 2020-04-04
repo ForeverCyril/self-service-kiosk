@@ -3,10 +3,7 @@ package org.ebu6304gp42.Data;
 import com.google.gson.Gson;
 import org.ebu6304gp42.Config.PathConfig;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 
 public class DishBank {
@@ -23,7 +20,11 @@ public class DishBank {
         }
 
         try {
-            FileWriter out = new FileWriter(PathConfig.DISH_FILE);
+            File file = new File(PathConfig.getDishFile());
+            if(!file.exists()){
+                file.createNewFile();
+            }
+            FileWriter out = new FileWriter(file);
             out.write(data.toString());
             out.close();
         } catch (IOException e){
@@ -32,10 +33,12 @@ public class DishBank {
     }
 
     public void load(){
+        File file = new File(PathConfig.getDishFile());
+        if(!file.exists())return;
         Gson gson= new Gson();
         try {
-            FileReader file = new FileReader(PathConfig.DISH_FILE);
-            BufferedReader in = new BufferedReader(file);
+            FileReader file_reader = new FileReader(file);
+            BufferedReader in = new BufferedReader(file_reader);
             String line;
             while ((line = in.readLine()) != null){
                 Dish dish = gson.fromJson(line, Dish.class);
@@ -43,6 +46,7 @@ public class DishBank {
                     dishList.add(dish);
                 }
             }
+            in.close();
         } catch (IOException e){
             e.printStackTrace();
         }

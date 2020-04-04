@@ -62,7 +62,6 @@ class DishDialog extends Dialog<Dish>{
 
         VBox vBox = new VBox();
         vBox.getChildren().addAll(name,price);
-        
     }
 
 }

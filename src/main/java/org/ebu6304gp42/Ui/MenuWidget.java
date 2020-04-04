@@ -16,9 +16,7 @@ import org.ebu6304gp42.Config.PathConfig;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Event.MenuClickedEvent;
 
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.ArrayList;
 
 public class MenuWidget extends ScrollPane {
@@ -58,7 +56,7 @@ public class MenuWidget extends ScrollPane {
  * Widget To Display a Dish
  */
 class DishWidget extends HBox {
-    final static InputStream default_pic = DishWidget.class.getResourceAsStream(PathConfig.DEFAULT_PIC);
+    final static InputStream default_pic = DishWidget.class.getResourceAsStream(PathConfig.getDefaultPic());
     final static double HEIGHT = 120;
 
     private Dish dish;
@@ -68,15 +66,19 @@ class DishWidget extends HBox {
         ImageView image_view;
 
         this.setHeight(HEIGHT);
+        this.setPrefWidth(HEIGHT*2.5);
         this.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
 
         // Create Image for Dish
         Image image;
         try {
+            if(dish.getPic() == null || dish.getPic().isBlank()){
+                throw new FileNotFoundException();
+            }
             image = new Image(new FileInputStream(dish.getPic()));
         } catch (IOException e){
             //if no pic found or other IOException, use default pic
-            System.err.println(String.format("No picture found for %s, use default image.", dish.getName()));
+            System.err.println(String.format("No picture found for %s(pic file:%s) , use default image.", dish.getName(), dish.getPic()));
             image = new Image(default_pic);
         }
         image_view = new ImageView(image);

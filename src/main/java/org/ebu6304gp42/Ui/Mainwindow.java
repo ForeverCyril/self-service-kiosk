@@ -15,6 +15,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Config.GeneraConfig;
 import org.ebu6304gp42.Data.Dish;
+import org.ebu6304gp42.Data.DishBank;
 import org.ebu6304gp42.Data.DishOption;
 import org.ebu6304gp42.Event.MenuClickedEvent;
 
@@ -73,7 +74,7 @@ public class Mainwindow extends Application {
         HBox buyArea = new HBox();
         buyArea.setSpacing(6);
         buyArea.prefWidthProperty().bind(root.widthProperty());
-        ArrayList<Dish> dishes = new ArrayList<>();
+        /*ArrayList<Dish> dishes = new ArrayList<>();
         for(int i=0;i<5;i++){
             Dish dish = new Dish();
             dish.setName("Dish "+(i+1));
@@ -87,7 +88,10 @@ public class Mainwindow extends Application {
                 dish.addOption(option);
             }
             dishes.add(dish);
-        }
+        }*/
+        DishBank bank = new DishBank();
+        bank.load();
+        var dishes = bank.getDish();
         menu.load(dishes);
         menu.addEventHandler(MenuClickedEvent.MENU_CLICKED_EVENT, event -> {
             OptionDialog dialog = new OptionDialog(event.getDish());

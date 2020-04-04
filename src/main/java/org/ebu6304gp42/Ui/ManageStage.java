@@ -5,6 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
@@ -15,6 +16,8 @@ public class ManageStage extends Stage {
     private MenuTable meanuTable = new MenuTable();
     public ManageStage(){
         super();
+        setTitle("Self Service Kiosk");
+        getIcons().add(new Image(getClass().getResourceAsStream("/res/pic/app.png")));
         Scene scene = new Scene(tabPane, 900, 600);
         tabPane.setTabClosingPolicy(TabPane.TabClosingPolicy.UNAVAILABLE);
         tabPane.setTabDragPolicy(TabPane.TabDragPolicy.FIXED);

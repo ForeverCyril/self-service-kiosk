@@ -5,9 +5,8 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.ebu6304gp42.Config.PathConfig;
@@ -15,29 +14,48 @@ import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishOption;
 import org.ebu6304gp42.Data.OrderedDish;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class OptionDialog extends Dialog<OrderedDish> {
     public OptionDialog(Dish dish){
-        setTitle("Totoro Ramen");
+        setTitle(dish.getName());
         setHeaderText(null);
-        ImageView dish_image = new ImageView(new Image(getClass().getResourceAsStream(PathConfig.DEFAULT_PIC)));
 
         VBox graphic = new VBox();
-        graphic.setPrefWidth(60);
-        graphic.setPadding(new Insets(0,16,0,0));
-        dish_image.fitWidthProperty().bind(graphic.widthProperty().subtract(16));
+        Image image;
+        try {
+            if(dish.getPic() == null || dish.getPic().isBlank()){
+                throw new FileNotFoundException();
+            }
+            image = new Image(new FileInputStream(dish.getPic()));
+        } catch (IOException e){
+            //if no pic found or other IOException, use default pic
+            System.err.println(String.format("No picture found for %s(pic file:%s) , use default image.", dish.getName(), dish.getPic()));
+            image = new Image(getClass().getResourceAsStream(PathConfig.getDefaultPic()));
+        }
+        ImageView dish_image = new ImageView(image);
+        dish_image.setFitWidth(120);
         dish_image.preserveRatioProperty().setValue(true);
         Label name = new Label(dish.getName());
+        name.prefWidthProperty().bind(dish_image.fitWidthProperty());
         name.setFont(Font.font(null, FontWeight.BOLD, 16));
-        name.prefWidthProperty().bind(graphic.widthProperty().subtract(16));
         name.setAlignment(Pos.CENTER);
         graphic.getChildren().addAll(dish_image, name);
-        setGraphic(graphic);
+
+
         getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
         OptionWidget widget = new OptionWidget(dish);
-        getDialogPane().setContent(widget);
+
+        HBox hBox = new HBox();
+        //hBox.setBackground(new Background(new BackgroundFill(Color.WHITE, null, null)));
+        hBox.setSpacing(16);
+        hBox.getChildren().addAll(graphic, widget);
+        HBox.setHgrow(widget, Priority.ALWAYS);
+        getDialogPane().setContent(hBox);
         getDialogPane().setPadding(new Insets(6));
         setResultConverter(btn -> {
             if(btn == ButtonType.OK){
@@ -67,7 +85,7 @@ class OptionWidget extends ScrollPane {
 
         setContent(option_area);
         setPrefHeight(300);
-        setPrefWidth(400);
+        setPrefWidth(500);
     }
 
     public ArrayList<OrderedDish.SelectedOption> getOptions(){

@@ -18,7 +18,7 @@ public class OrderBank {
     }
     public void load(){
         try {
-            FileReader file = new FileReader(PathConfig.ORDER_FILE);
+            FileReader file = new FileReader(PathConfig.getOrderFile());
             BufferedReader in = new BufferedReader(file);
             String line;
             Gson gson = new Gson();
@@ -39,7 +39,7 @@ public class OrderBank {
         String data = gson.toJson(order);
         if(data != null){
             try {
-                FileWriter out = new FileWriter(PathConfig.ORDER_FILE, true);
+                FileWriter out = new FileWriter(PathConfig.getOrderFile(), true);
                 out.write(data+"\n");
                 out.flush();
                 out.close();
