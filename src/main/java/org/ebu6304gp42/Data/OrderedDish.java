@@ -1,7 +1,6 @@
 package org.ebu6304gp42.Data;
 
 import java.util.ArrayList;
-import javafx.util.Pair;
 
 public class OrderedDish {
     private String name;
@@ -34,8 +33,8 @@ public class OrderedDish {
         this.options = options;
     }
 
-    public void addOption(String option_name, String option_selected){
-        options.add(new SelectedOption(option_name, option_selected));
+    public void addOption(String option_name, String option_selected, double price){
+        options.add(new SelectedOption(option_name, option_selected, price));
     }
 
     public void addAllOption(ArrayList<SelectedOption> inputOptions){
@@ -51,7 +50,11 @@ public class OrderedDish {
     }
 
     public double getPrice() {
-        return price;
+        double sum = price;
+        for(var option:options) {
+            sum += option.getPrice();
+        }
+        return sum;
     }
 
     public void setPrice(double price) {
@@ -66,7 +69,46 @@ public class OrderedDish {
         this.amount = amount;
     }
 
-    public double getTotalPrice(){return price * amount;}
+    public double getTotalPrice(){return getPrice() * amount;}
+
+    public static class SelectedOption{
+        private String name;
+        private String selected_option;
+        private double price;
+
+        public SelectedOption(String name, String selected_option, double price) {
+            this.name = name;
+            this.selected_option = selected_option;
+            this.price = price;
+        }
+
+        public SelectedOption() {
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public String getSelected_option() {
+            return selected_option;
+        }
+
+        public void setSelected_option(String selected_option) {
+            this.selected_option = selected_option;
+        }
+    }
 }
 
 

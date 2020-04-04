@@ -40,7 +40,7 @@ public class DataTest {
                 dish.setPrice(1.89 * i);
                 dish.setAmount(i % 3);
                 dish.setNote("note from " + i + j);
-                dish.addOption("Op" + i+j, "SEL"+j);
+                dish.addOption("Op" + i+j, "SEL"+j, j*0.6);
                 order.addDish(dish);
                 order.setTime(new Date());
             }

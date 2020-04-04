@@ -10,16 +10,13 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.util.Pair;
 import org.ebu6304gp42.Config.PathConfig;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishOption;
 import org.ebu6304gp42.Data.OrderedDish;
-import org.ebu6304gp42.Data.SelectedOption;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
 public class OptionDialog extends Dialog<OrderedDish> {
     public OptionDialog(Dish dish){
@@ -73,8 +70,8 @@ class OptionWidget extends ScrollPane {
         setPrefWidth(400);
     }
 
-    public ArrayList<SelectedOption> getOptions(){
-        ArrayList<SelectedOption> options = new ArrayList<>();
+    public ArrayList<OrderedDish.SelectedOption> getOptions(){
+        ArrayList<OrderedDish.SelectedOption> options = new ArrayList<>();
         for(var group:optionGroups){
             options.add(group.getSelectedOption());
         }
@@ -94,7 +91,8 @@ class OptionWidget extends ScrollPane {
             options_box.setSpacing(8);
             boolean first = true;
             for(var option_content:option.getOptions()){
-                RadioButton button = new RadioButton(option_content);
+                RadioButton button = new RadioButton(option_content.toString());
+                button.setUserData(option_content.price);
                 button.setFont(Font.font(16));
                 button.setToggleGroup(group);
                 if(first){
@@ -105,10 +103,12 @@ class OptionWidget extends ScrollPane {
             }
         }
 
-        public SelectedOption getSelectedOption(){
-            return new SelectedOption(
+        public OrderedDish.SelectedOption getSelectedOption(){
+            var sel = (RadioButton)group.getSelectedToggle();
+            return new OrderedDish.SelectedOption(
                     name.getText(),
-                    ((RadioButton)group.getSelectedToggle()).getText()
+                    ((RadioButton)group.getSelectedToggle()).getText(),
+                    (Double) sel.getUserData()
             );
         }
 

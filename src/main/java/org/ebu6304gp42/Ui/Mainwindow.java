@@ -62,7 +62,7 @@ public class Mainwindow extends Application {
         BorderPane.setAlignment(mangerEnter, Pos.BOTTOM_CENTER);
         mangerEnter.setOnMouseClicked(event -> {
             manageStage = new ManageStage();
-            
+            shopStage.hide();
             manageStage.showAndWait();
             shopStage.show();
         });
@@ -83,7 +83,7 @@ public class Mainwindow extends Application {
             for(int j=0; j<=i%3; j++){
                 DishOption option = new DishOption("Op"+j);
                 for(int k=0;k<3;k++)
-                    option.addOption("Sel"+k);
+                    option.addOption("Sel"+k, k*0.5);
                 dish.addOption(option);
             }
             dishes.add(dish);

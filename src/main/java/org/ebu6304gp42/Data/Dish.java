@@ -23,6 +23,15 @@ public class Dish {
         this.price = price;
     }
 
+    public void copyFrom(Dish dish){
+        name = dish.name;
+        price = dish.price;
+        pic = dish.pic;
+        description = dish.description;
+        remain = dish.remain;
+        status = dish.status;
+    }
+
     public boolean isAvailable(){
         return status && (remain > 0);
     }

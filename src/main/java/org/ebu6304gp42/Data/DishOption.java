@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class DishOption {
     public String name;
-    ArrayList<String> options;
+    ArrayList<Option> options;
 
     public DishOption(){
         options = new ArrayList<>();
@@ -21,11 +21,29 @@ public class DishOption {
     public String getName() {
         return this.name;
     }
-    public void addOption(String name){
-        options.add(name);
+    public void addOption(String name, double price){
+        options.add(new Option(name, price));
+    }
+    public void addOption(String name){options.add(new Option(name, 0));}
+    public ArrayList<Option> getOptions() {
+        return options;
     }
 
-    public ArrayList<String> getOptions() {
-        return options;
+    static public class Option{
+        public String option;
+        public double price;
+
+        public Option(String option, double price){
+            this.option = option;
+            this.price = price;
+        }
+
+        @Override
+        public String toString() {
+            if(price == 0){
+                return option;
+            }
+            return String.format("%s (%.2f)", option, price);
+        }
     }
 }
