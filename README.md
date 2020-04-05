@@ -43,7 +43,7 @@ Screenshot:
 
 #### Notice
 
-- This software is devloped under openjdk 13.
+- This software is developed under OpenJdk 13.
 
 - If you are using windows, please use `.\gradlew.bat` instead of ` ./gradlew`.
 
