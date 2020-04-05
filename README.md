@@ -43,7 +43,9 @@ Screenshot:
 
 #### Notice
 
-- If you are using windows, please use `.\gradlew.bat` instead of ` ./gradlew`
+- This software is devloped under openjdk 13.
+
+- If you are using windows, please use `.\gradlew.bat` instead of ` ./gradlew`.
 
 - If you get error message like  `Permission denied`, please confirm you have the permission of execution for `gradlew` .(Below is the example of how to give permission in Linux)
 
@@ -53,6 +55,6 @@ Screenshot:
 
 ## Dependence
 
-- OpenJdk 13
+- Jdk (>=11)
 - JavaFx 14
 - com.google.code.gson (2.8.6)
