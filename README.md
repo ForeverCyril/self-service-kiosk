@@ -53,5 +53,6 @@ Screenshot:
 
 ## Dependence
 
+- OpenJdk 13
 - JavaFx 14
 - com.google.code.gson (2.8.6)
