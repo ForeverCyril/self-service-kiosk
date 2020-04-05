@@ -23,6 +23,8 @@ public class Main {
     public static void createDefaultDish(){
         DishBank bank = new DishBank();
         Dish dish = new Dish();
+        dish.setStatus(true);
+        dish.setRemain(10);
         dish.setName("Ramen");
         dish.setPrice(9.99);
         dish.setPic("./media/ramen.jfif");

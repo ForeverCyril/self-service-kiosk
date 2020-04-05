@@ -39,7 +39,11 @@ public class OrderBank {
         String data = gson.toJson(order);
         if(data != null){
             try {
-                FileWriter out = new FileWriter(PathConfig.getOrderFile(), true);
+                File file = new File(PathConfig.getOrderFile());
+                if(!file.exists()){
+                    file.createNewFile();
+                }
+                FileWriter out = new FileWriter(file, true);
                 out.write(data+"\n");
                 out.flush();
                 out.close();

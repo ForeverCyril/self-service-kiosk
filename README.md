@@ -7,6 +7,10 @@ Screenshot:
 
 ![Screenshot 2](https://github.com/ForeverCyril/self-service-kiosk/raw/master/readme_res/v1/screenshot2.png)
 
+![Screenshot 3](https://github.com/ForeverCyril/self-service-kiosk/raw/master/readme_res/v1/screenshot3.png)
+
+![Screenshot 4](https://github.com/ForeverCyril/self-service-kiosk/raw/master/readme_res/v1/screenshot4.png)
+
 
 
 ## How to build

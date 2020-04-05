@@ -68,74 +68,74 @@ public class OptionDialog extends Dialog<OrderedDish> {
             return null;
         });
     }
-}
 
-class OptionWidget extends ScrollPane {
-    private LinkedList<OptionGroup> optionGroups = new LinkedList<>();
+    static class OptionWidget extends ScrollPane {
+        private LinkedList<OptionGroup> optionGroups = new LinkedList<>();
 
-    public OptionWidget(Dish dish){
-        GridPane option_area = new GridPane();
-        option_area.setHgap(14);
-        option_area.setVgap(18);
-        for(var option:dish.getOptions()){
-            OptionGroup group = new OptionGroup(option);
-            option_area.addRow(option_area.getRowCount(), group.getLabel(),group.getOptions());
-            optionGroups.add(group);
-        }
-
-        setContent(option_area);
-        setPrefHeight(300);
-        setPrefWidth(500);
-    }
-
-    public ArrayList<OrderedDish.SelectedOption> getOptions(){
-        ArrayList<OrderedDish.SelectedOption> options = new ArrayList<>();
-        for(var group:optionGroups){
-            options.add(group.getSelectedOption());
-        }
-        return options;
-    }
-
-    static class OptionGroup{
-        private Label name;
-        private ToggleGroup group;
-        HBox options_box;
-
-        OptionGroup(DishOption option){
-            name = new Label(option.getName());
-            name.setFont(Font.font(null, FontWeight.BOLD, 16));
-            group = new ToggleGroup();
-            options_box = new HBox();
-            options_box.setSpacing(8);
-            boolean first = true;
-            for(var option_content:option.getOptions()){
-                RadioButton button = new RadioButton(option_content.toString());
-                button.setUserData(option_content.price);
-                button.setFont(Font.font(16));
-                button.setToggleGroup(group);
-                if(first){
-                    button.setSelected(true);
-                    first=false;
-                }
-                options_box.getChildren().add(button);
+        public OptionWidget(Dish dish){
+            GridPane option_area = new GridPane();
+            option_area.setHgap(14);
+            option_area.setVgap(18);
+            for(var option:dish.getOptions()){
+                OptionGroup group = new OptionGroup(option);
+                option_area.addRow(option_area.getRowCount(), group.getLabel(),group.getOptions());
+                optionGroups.add(group);
             }
+
+            setContent(option_area);
+            setPrefHeight(300);
+            setPrefWidth(500);
         }
 
-        public OrderedDish.SelectedOption getSelectedOption(){
-            var sel = (RadioButton)group.getSelectedToggle();
-            return new OrderedDish.SelectedOption(
-                    name.getText(),
-                    ((RadioButton)group.getSelectedToggle()).getText(),
-                    (Double) sel.getUserData()
-            );
+        public ArrayList<OrderedDish.SelectedOption> getOptions(){
+            ArrayList<OrderedDish.SelectedOption> options = new ArrayList<>();
+            for(var group:optionGroups){
+                options.add(group.getSelectedOption());
+            }
+            return options;
         }
 
-        public Label getLabel() {
-            return name;
-        }
+        static class OptionGroup{
+            private Label name;
+            private ToggleGroup group;
+            HBox options_box;
 
-        public HBox getOptions() {
-            return options_box;
+            OptionGroup(DishOption option){
+                name = new Label(option.getName());
+                name.setFont(Font.font(null, FontWeight.BOLD, 16));
+                group = new ToggleGroup();
+                options_box = new HBox();
+                options_box.setSpacing(8);
+                boolean first = true;
+                for(var option_content:option.getOptions()){
+                    RadioButton button = new RadioButton(option_content.toString());
+                    button.setUserData(option_content.price);
+                    button.setFont(Font.font(16));
+                    button.setToggleGroup(group);
+                    if(first){
+                        button.setSelected(true);
+                        first=false;
+                    }
+                    options_box.getChildren().add(button);
+                }
+            }
+
+            public OrderedDish.SelectedOption getSelectedOption(){
+                var sel = (RadioButton)group.getSelectedToggle();
+                return new OrderedDish.SelectedOption(
+                        name.getText(),
+                        ((RadioButton)group.getSelectedToggle()).getText(),
+                        (Double) sel.getUserData()
+                );
+            }
+
+            public Label getLabel() {
+                return name;
+            }
+
+            public HBox getOptions() {
+                return options_box;
+            }
         }
     }
 }

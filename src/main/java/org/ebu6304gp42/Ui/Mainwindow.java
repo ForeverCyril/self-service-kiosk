@@ -14,12 +14,8 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Config.GeneraConfig;
-import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishBank;
-import org.ebu6304gp42.Data.DishOption;
 import org.ebu6304gp42.Event.MenuClickedEvent;
-
-import java.util.ArrayList;
 
 /**
  * Main window of this Application
@@ -28,7 +24,7 @@ public class Mainwindow extends Application {
     private ManageStage manageStage;
     private Stage shopStage;
     MenuWidget menu = new MenuWidget();
-    private ShopWidget cart = new ShopWidget();
+    private CartWidget cart = new CartWidget();
     BorderPane root = new BorderPane();
     HBox statusBar = new HBox();
 
@@ -107,7 +103,7 @@ public class Mainwindow extends Application {
         return buyArea;
     }
     private Node initStatusBar(){
-        statusBar.getChildren().add(new Label("Test Status Bar"));
+        statusBar.getChildren().add(new Label("Test Status Bar (Current Unavailable)"));
         return statusBar;
     }
 }

@@ -51,17 +51,18 @@ public class MenuTable extends TableView<Dish> {
         col.setCellValueFactory(new PropertyValueFactory<>(property));
         this.getColumns().add(col);
     }
-}
 
-class DishDialog extends Dialog<Dish>{
-    TextField name = new TextField();
-    TextField price = new TextField();
-    public DishDialog() {
-        setHeaderText(null);
-        setGraphic(null);
+    static class DishDialog extends Dialog<Dish>{
+        TextField name = new TextField();
+        TextField price = new TextField();
+        public DishDialog() {
+            setHeaderText(null);
+            setGraphic(null);
 
-        VBox vBox = new VBox();
-        vBox.getChildren().addAll(name,price);
+            VBox vBox = new VBox();
+            vBox.getChildren().addAll(name,price);
+        }
     }
-
 }
+
+
