@@ -3,10 +3,7 @@ package org.ebu6304gp42.Ui;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TabPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
@@ -14,17 +11,18 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+import org.ebu6304gp42.Ui.MenuTable;
 
 public class ManageStage extends Stage {
     private TabPane tabPane = new TabPane();
     private Tab home = new Tab("Home");
     private MenuTable meanuTable = new MenuTable();
-    private HBox root = new HBox();
     private VBox btnArea = new VBox();
     public ManageStage(){
         super();
         setTitle("Self Service Kiosk");
         getIcons().add(new Image(getClass().getResourceAsStream("/res/pic/app.png")));
+        HBox root = new HBox();
         Scene scene = new Scene(root, 900, 600);
 
         root.getChildren().addAll(btnArea, tabPane);
@@ -41,6 +39,22 @@ public class ManageStage extends Stage {
         initHomePage();
 
         setScene(scene);
+
+        setOnCloseRequest(event -> {
+            if(meanuTable.isModified()){
+                Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                alert.setTitle("Save Data");
+                alert.setHeaderText("Data Has Changed!");
+                alert.setContentText("Do you want to quit without save?");
+
+                var res = alert.showAndWait();
+                res.ifPresent(buttonType -> {
+                    if(buttonType == ButtonType.CANCEL){
+                        event.consume();
+                    }
+                });
+            }
+        });
     }
 
     void initMenuManage(){
@@ -51,7 +65,8 @@ public class ManageStage extends Stage {
 
         Button addBtn = new Button("Add");
         addBtn.setOnMouseClicked(event -> {
-            System.out.println("Add");
+            var dish = (new EditDishDialog(null)).showAndWait();
+            dish.ifPresent(meanuTable::addDish);
         });
 
         Button saveBtn = new Button("Save");

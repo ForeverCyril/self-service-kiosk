@@ -41,6 +41,7 @@ public class MenuWidget extends ScrollPane {
      * @param dishes The list of Dish you want to add to Menu
      */
     public void load(ArrayList<Dish> dishes){
+        flowPane.getChildren().clear();
         for(var dish:dishes){
             DishWidget dishWidget = new DishWidget(dish);
             flowPane.getChildren().add(dishWidget);
