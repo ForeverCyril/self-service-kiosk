@@ -62,6 +62,9 @@ public class Mainwindow extends Application {
             shopStage.hide();
             manageStage.showAndWait();
             shopStage.show();
+            DishBank bank = new DishBank();
+            bank.load();
+            menu.load(bank.getDish());
         });
         topArea.setRight(mangerEnter);
         return topArea;
@@ -70,21 +73,6 @@ public class Mainwindow extends Application {
         HBox buyArea = new HBox();
         buyArea.setSpacing(6);
         buyArea.prefWidthProperty().bind(root.widthProperty());
-        /*ArrayList<Dish> dishes = new ArrayList<>();
-        for(int i=0;i<5;i++){
-            Dish dish = new Dish();
-            dish.setName("Dish "+(i+1));
-            dish.setDescription(String.format("This is the description for dish %d", i+1));
-            dish.setPrice(0.99 + (i+1));
-            dish.setPic("pic/dish/ramen.jfif");
-            for(int j=0; j<=i%3; j++){
-                DishOption option = new DishOption("Op"+j);
-                for(int k=0;k<3;k++)
-                    option.addOption("Sel"+k, k*0.5);
-                dish.addOption(option);
-            }
-            dishes.add(dish);
-        }*/
         DishBank bank = new DishBank();
         bank.load();
         var dishes = bank.getDish();

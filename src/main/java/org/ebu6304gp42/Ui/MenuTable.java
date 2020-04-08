@@ -11,7 +11,7 @@ import org.ebu6304gp42.Data.DishBank;
 
 public class MenuTable extends TableView<Dish> {
     private ObservableList<Dish> data;
-
+    private boolean modified = false;
     public MenuTable(){
         DishBank bank = new DishBank();
         bank.load();
@@ -30,11 +30,16 @@ public class MenuTable extends TableView<Dish> {
                 if (event.getClickCount() == 2 && (! row.isEmpty()) ) {
                     TableRow cur_row = (TableRow) event.getSource();
                     int index = cur_row.getIndex();
-                    System.out.println(index);
-                    System.out.println(data.get(index).getName());
+                    var dish = data.get(index);
+                    var res = (new EditDishDialog(dish)).showAndWait();
+                    res.ifPresent(newDish->{
+                        dish.copyFrom(newDish);
+                        modified = true;
+                    });
+                    refresh();
                 }
             });
-            return row ;
+            return row;
         });
     }
 
@@ -42,6 +47,14 @@ public class MenuTable extends TableView<Dish> {
         DishBank bank = new DishBank();
         data.forEach(bank::addDish);
         bank.save();
+        modified = false;
+    }
+
+    public void addDish(Dish dish){
+        if (dish==null)return;
+        data.add(dish);
+        refresh();
+        modified = true;
     }
 
 
@@ -52,16 +65,8 @@ public class MenuTable extends TableView<Dish> {
         this.getColumns().add(col);
     }
 
-    static class DishDialog extends Dialog<Dish>{
-        TextField name = new TextField();
-        TextField price = new TextField();
-        public DishDialog() {
-            setHeaderText(null);
-            setGraphic(null);
-
-            VBox vBox = new VBox();
-            vBox.getChildren().addAll(name,price);
-        }
+    public boolean isModified(){
+        return modified;
     }
 }
 

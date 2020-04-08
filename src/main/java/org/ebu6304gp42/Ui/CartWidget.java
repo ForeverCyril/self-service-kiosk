@@ -17,7 +17,7 @@ import org.ebu6304gp42.Data.OrderedDish;
 
 public class CartWidget extends VBox {
 
-    private VBox cart = new VBox();;
+    private VBox cart = new VBox();
     private Label price_num = new Label();
     private double total_price = 0;
     private Order order;
