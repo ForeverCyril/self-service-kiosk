@@ -30,6 +30,7 @@ public class Dish {
         description = dish.description;
         remain = dish.remain;
         status = dish.status;
+        options = dish.options;
     }
 
     public boolean isAvailable(){
@@ -85,7 +86,9 @@ public class Dish {
     public ArrayList<DishOption> getOptions() {
         return options;
     }
-
+    public void resetOptions(ArrayList<DishOption> list){
+        options = list;
+    }
     public String toString(){
         return "Name"+name+"Description"+description;
     }

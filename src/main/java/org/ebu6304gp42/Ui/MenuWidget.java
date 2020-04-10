@@ -1,5 +1,7 @@
 package org.ebu6304gp42.Ui;
 
+import javafx.event.Event;
+import javafx.event.EventType;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -14,7 +16,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.ebu6304gp42.Config.PathConfig;
 import org.ebu6304gp42.Data.Dish;
-import org.ebu6304gp42.Event.MenuClickedEvent;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -129,6 +130,28 @@ public class MenuWidget extends ScrollPane {
             this.setOnMouseExited(event -> {shadow.setSpread(0.1);});
         }
 
+        public Dish getDish() {
+            return dish;
+        }
+    }
+
+    /**
+     * Event which send by MenuWidget when a DishWidget Clicked
+     */
+    public static class MenuClickedEvent extends Event {
+        public static final EventType<MenuClickedEvent> MENU_CLICKED_EVENT = new EventType<>("Menu Clicked");
+
+        private Dish dish;
+
+        public MenuClickedEvent(EventType<? extends Event> eventType, Dish dish) {
+            super(eventType);
+            this.dish = dish;
+        }
+
+        /**
+         * Get Choose Dish
+         * @return Choose Dish
+         */
         public Dish getDish() {
             return dish;
         }

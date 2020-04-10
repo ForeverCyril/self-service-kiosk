@@ -15,7 +15,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Config.GeneraConfig;
 import org.ebu6304gp42.Data.DishBank;
-import org.ebu6304gp42.Event.MenuClickedEvent;
 
 /**
  * Main window of this Application
@@ -77,7 +76,7 @@ public class Mainwindow extends Application {
         bank.load();
         var dishes = bank.getDish();
         menu.load(dishes);
-        menu.addEventHandler(MenuClickedEvent.MENU_CLICKED_EVENT, event -> {
+        menu.addEventHandler(MenuWidget.MenuClickedEvent.MENU_CLICKED_EVENT, event -> {
             OptionDialog dialog = new OptionDialog(event.getDish());
             var res = dialog.showAndWait();
             res.ifPresent(orderedDish -> cart.addDish(orderedDish));
