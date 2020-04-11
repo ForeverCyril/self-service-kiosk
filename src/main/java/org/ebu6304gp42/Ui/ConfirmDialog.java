@@ -7,9 +7,16 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.ebu6304gp42.Data.Account;
+import org.ebu6304gp42.Data.AccountBank;
 import org.ebu6304gp42.Data.Order;
+import org.ebu6304gp42.Ui.AccoutDialog.*;
 
 public class ConfirmDialog extends Dialog<Boolean> {
+    AccountBank accountBank = new AccountBank();
+    Order order = new Order();
+    Account account = new Account();
+
     public ConfirmDialog(Order order) {
         setTitle("Order information");
         setHeaderText(null);
@@ -18,7 +25,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
         order_vBox.setPadding(new Insets(10,10,10,10));
         order_vBox.setSpacing(20);
 
-        Label order_label = new Label("订单详情");
+        Label order_label = new Label("Cart");
         order_label.setFont(Font.font(32));
 
         //订单里详细信息的排列格式
@@ -35,25 +42,59 @@ public class ConfirmDialog extends Dialog<Boolean> {
         order_area.setContent(container);
 
         for(var orderedDish:order.getDish()){
-            container.getChildren().add(new CartWidget.OrderedDishWidget(orderedDish));
+            //container.getChildren().add(new CartWidget.OrderedDishWidget(orderedDish));
         }
 
-        Label diningOptions_label = new Label("请选择就餐地点");
-        diningOptions_label.setFont(Font.font(24));
+        GridPane grid = new GridPane();
+        grid.setPadding(new Insets(10, 10, 10, 10));
+        grid.setAlignment(Pos.CENTER);
+        //grid.prefHeightProperty().bind(this.heightProperty());
+        grid.prefWidthProperty().bind(this.widthProperty());
+        grid.setVgap(18);
+        grid.setHgap(10);
 
-        GridPane dining_options = new GridPane();
-        dining_options.setAlignment(Pos.CENTER);
-        dining_options.minWidthProperty().bind(container.widthProperty());
-        dining_options.prefWidthProperty().bind(container.widthProperty());
-        Button eatIn_btn = new Button("Eat in");
-        Button takeAway_btn = new Button("Take away");
-        eatIn_btn.prefWidthProperty().bind(container.widthProperty().multiply(0.4));
-        takeAway_btn.prefWidthProperty().bind(container.widthProperty().multiply(0.4));
-        dining_options.addRow(0, eatIn_btn, takeAway_btn);
-        dining_options.setHgap(18);
-        dining_options.setVgap(6);
+        Label label = new Label("User ID : ");
+        label.setFont(Font.font(18));
+        GridPane.setConstraints(label, 0, 0);
+        grid.getChildren().add(label);
+
+        final TextField accNum = new TextField();
+        accNum.setPromptText("Enter your account number.");
+        GridPane.setConstraints(accNum, 1, 0);
+        grid.getChildren().add(accNum);
+
+        Button confirm = new Button("CONFIRM");
+        GridPane.setConstraints(confirm, 1, 1);
+        confirm.prefWidthProperty().bind(order_area.widthProperty().multiply(0.4));
+        grid.getChildren().add(confirm);
+        confirm.setOnMouseClicked(event -> {
+        });
+
+        Button register_btn = new Button("REGISTER");
+        GridPane.setConstraints(register_btn, 0, 1);
+        register_btn.prefWidthProperty().bind(order_area.widthProperty().multiply(0.4));
+        grid.getChildren().add(register_btn);
+        register_btn.setOnMouseClicked(event -> {
+            RegisterDialog dialog = new RegisterDialog();
+            var res = dialog.showAndWait();
+        });
+
+
+        Button pay = new Button("Pay");
+        pay.prefWidthProperty().bind(order_area.widthProperty().multiply(0.4));
+        pay.setOnMouseClicked(event -> {
+            // EatDialog eatDialog = new EatDialog(order,account);
+            //var res = eatDialog.showAndWait();
+        });
+
+
+        Button cancel = new Button("Cancel");
+        cancel.prefWidthProperty().bind(order_area.widthProperty().multiply(0.4));
+        grid.addRow(2, pay, cancel);
+
         //添加各种元素进入vBox
-        order_vBox.getChildren().addAll(order_label,order_area,diningOptions_label,dining_options);
+        order_vBox.getChildren().addAll(order_label,order_area,grid);
+
 
         //设置dialog的确定取消按钮
         getDialogPane().getButtonTypes().addAll(ButtonType.OK, ButtonType.CANCEL);
@@ -64,10 +105,10 @@ public class ConfirmDialog extends Dialog<Boolean> {
             if(btn == ButtonType.CANCEL){
                 return false;
             } else {
-                PaymentDialog paymentDialog = new PaymentDialog();
-                var res = paymentDialog.showAndWait();
-                return res.isPresent() && res.get();
+                return null;
             }
         });
-        }
+    }
+
+
 }

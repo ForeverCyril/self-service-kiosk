@@ -11,14 +11,16 @@ public class Account {
     private String email;
     private int count = 0;
     private String ID;
+    private boolean receive;
     public final static int freenum = 10;//可以免费的邮票数
 
-    public Account(String first_name, String last_name, String phone, String email, String ID) {
+    public Account(String first_name, String last_name, String phone, String email, String ID,boolean receive) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
         this.email = email;
         this.ID = ID;
+        this.receive=receive;
     }
 
     public Account() {
@@ -65,6 +67,14 @@ public class Account {
         return ID;
     }
 
+    public boolean getReceive() {
+        return receive;
+    }
+
+    public void setReceive(boolean first_name) {
+        this.receive = receive;
+    }
+
     public void setID(String ID) {
         this.ID = ID;
     }
@@ -73,25 +83,29 @@ public class Account {
         count ++;
     }
 
-    boolean useCount(){
+    public boolean useCount(){
         if (count >= freenum){
             count -= freenum;
             return true;
         }
         else
             System.out.println("You do not have enough stamps");
-            return false;
+        return false;
+    }
+
+    public void setCount(int count){
+        this.count = count;
     }
 
     @Override
     public String toString() {
         return "Account{" +
-                "first_name='" + first_name + '\'' +
-                ", last_name='" + last_name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", email='" + email + '\'' +
-                ", count=" + count +
-                ", ID='" + ID + '\'' +
-                '}';
+               "first_name='" + first_name + '\'' +
+               ", last_name='" + last_name + '\'' +
+               ", phone='" + phone + '\'' +
+               ", email='" + email + '\'' +
+               ", count=" + count +
+               ", ID='" + ID + '\'' +
+               '}';
     }
 }

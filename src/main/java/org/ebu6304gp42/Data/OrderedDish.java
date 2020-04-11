@@ -8,6 +8,7 @@ public class OrderedDish {
     private String note;
     private double price;
     private int amount;
+    private Dish dish;
 
     public OrderedDish(String name){
         this.name = name;
@@ -61,6 +62,14 @@ public class OrderedDish {
         this.price = price;
     }
 
+    public Dish getDish() {
+        return dish;
+    }
+
+    public void setDish(Dish dish) {
+        this.dish = dish;
+    }
+
     public int getAmount() {
         return amount;
     }
@@ -107,6 +116,15 @@ public class OrderedDish {
 
         public void setSelected_option(String selected_option) {
             this.selected_option = selected_option;
+        }
+
+        @Override
+        public String toString() {
+            if(price == 0){
+                return String.format("%s: %s", name, selected_option);
+            } else {
+                return String.format("%s: %s(%.2f)", name, selected_option, price);
+            }
         }
     }
 }
