@@ -43,4 +43,9 @@ public class MenuController implements Initializable{
     public ObservableList<Dish> getModel(){
         return dishes;
     }
+
+    public void clear(){
+        dishes.clear();
+        dishPane.getChildren().clear();
+    }
 }

@@ -49,12 +49,7 @@ public class ShopController implements Initializable {
         } catch (IOException e){
             e.printStackTrace();
         }
-
-        DishBank bank = new DishBank();
-        bank.load();
-
-        menuController.getModel().addAll(bank.getDish());
-
+        refresh();
         menu.addEventHandler(DishClickedEvent.DISH_CLICKED_EVENT, event -> {
             var res = (new OptionDialog(event.getDish())).showAndWait();
             res.ifPresent(orderedDish -> {
@@ -67,6 +62,13 @@ public class ShopController implements Initializable {
     public void enterManage(MouseEvent event){
         if(event.getButton() == MouseButton.PRIMARY){
             root.fireEvent(new EnterManageEvent(EnterManageEvent.ENTER_MANAGE_EVENT));
+        }
     }
+
+    public void refresh(){
+        DishBank bank = new DishBank();
+        bank.load();
+        menuController.clear();
+        menuController.getModel().addAll(bank.getDish());
     }
 }

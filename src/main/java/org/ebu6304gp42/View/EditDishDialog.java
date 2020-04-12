@@ -1,4 +1,4 @@
-package org.ebu6304gp42.Ui;
+package org.ebu6304gp42.View;
 
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -17,6 +17,7 @@ import javafx.scene.text.FontWeight;
 import org.ebu6304gp42.Config.PathConfig;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishOption;
+import org.ebu6304gp42.Ui.Spacer;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

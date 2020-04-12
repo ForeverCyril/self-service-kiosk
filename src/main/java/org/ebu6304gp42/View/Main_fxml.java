@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Controller.Shopping.EnterManageEvent;
+import org.ebu6304gp42.Controller.Shopping.ShopController;
 import org.ebu6304gp42.Data.DishBank;
 import org.ebu6304gp42.Controller.Shopping.menu.MenuController;
 import org.ebu6304gp42.Controller.Shopping.menu.DishClickedEvent;
@@ -12,12 +13,14 @@ import org.ebu6304gp42.Controller.Shopping.menu.DishClickedEvent;
 import java.io.IOException;
 
 public class Main_fxml extends Application {
+    private ShopController shopController;
 
     @Override
     public void start(Stage shoppingStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Shop.fxml"));
         loader.load();
         Scene scene = new Scene(loader.getRoot());
+        shopController = loader.getController();
         shoppingStage.setScene(scene);
         shoppingStage.show();
 
@@ -32,6 +35,7 @@ public class Main_fxml extends Application {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            shopController.refresh();
             shoppingStage.show();
         });
     }
