@@ -4,6 +4,6 @@
 }
 
 .clickable-widget-shadow:hover{
-    -fx-effect: dropshadow(three-pass-box, GRAY, 15.0,0, 0, 0);
+    -fx-effect: dropshadow(three-pass-box, GRAY, 20.0,0, 0, 0);
     -fx-cursor: hand;
 }

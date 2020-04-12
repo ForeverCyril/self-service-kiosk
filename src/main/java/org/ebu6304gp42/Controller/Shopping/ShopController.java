@@ -20,6 +20,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class ShopController implements Initializable {
+
+    @FXML
+    private Node root;
     @FXML
     private Node menu;
     @FXML
@@ -63,7 +66,7 @@ public class ShopController implements Initializable {
     @FXML
     public void enterManage(MouseEvent event){
         if(event.getButton() == MouseButton.PRIMARY){
-            System.out.println("Manage");
-        }
+            root.fireEvent(new EnterManageEvent(EnterManageEvent.ENTER_MANAGE_EVENT));
+    }
     }
 }

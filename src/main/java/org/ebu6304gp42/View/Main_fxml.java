@@ -4,23 +4,35 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import org.ebu6304gp42.Controller.Shopping.EnterManageEvent;
 import org.ebu6304gp42.Data.DishBank;
 import org.ebu6304gp42.Controller.Shopping.menu.MenuController;
 import org.ebu6304gp42.Controller.Shopping.menu.DishClickedEvent;
 
+import java.io.IOException;
+
 public class Main_fxml extends Application {
+
     @Override
-    public void start(Stage primaryStage) throws Exception {
+    public void start(Stage shoppingStage) throws Exception {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Shop.fxml"));
         loader.load();
+        Scene scene = new Scene(loader.getRoot());
+        shoppingStage.setScene(scene);
+        shoppingStage.show();
 
-        primaryStage.setScene(new Scene(loader.getRoot()));
-        /*DishBank bank = new DishBank();
-        bank.load();
-        primaryStage.addEventHandler(DishClickedEvent.DISH_CLICKED_EVENT, event -> {
-            System.out.println(event.getDish().getName());
+        scene.addEventHandler(EnterManageEvent.ENTER_MANAGE_EVENT, event -> {
+            shoppingStage.hide();
+            FXMLLoader manage = new FXMLLoader(getClass().getResource("/FXML/Manage.fxml"));
+            try {
+                manage.load();
+                Stage manageStage = new Stage();
+                manageStage.setScene(new Scene(manage.getRoot()));
+                manageStage.showAndWait();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            shoppingStage.show();
         });
-        ((MenuController) loader.getController()).getModel().addAll(bank.getDish());*/
-        primaryStage.show();
     }
 }

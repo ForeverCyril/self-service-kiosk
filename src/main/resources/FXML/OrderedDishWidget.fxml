@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -35,7 +36,13 @@
                </font>
             </Label>
          </children>
+         <padding>
+            <Insets bottom="3.0" left="6.0" right="6.0" top="3.0" />
+         </padding>
       </HBox>
-      <Label fx:id="opt_label" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" textFill="gray" prefHeight="100.0" prefWidth="220.0" text="Dish Option" wrapText="true" VBox.vgrow="ALWAYS" />
+      <Label fx:id="opt_label" alignment="BOTTOM_LEFT" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="220.0" text="Dish Option" textFill="gray" wrapText="true" VBox.vgrow="ALWAYS">
+         <padding>
+            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+         </padding></Label>
    </children>
 </VBox>

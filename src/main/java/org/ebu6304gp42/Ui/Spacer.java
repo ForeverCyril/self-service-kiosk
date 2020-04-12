@@ -20,7 +20,7 @@ public class Spacer extends Region {
         }
     }
 
-    static Spacer HSpacer(){
+    public static Spacer HSpacer(){
         return new Spacer(Type.Horizon);
     }
     static Spacer VSpacer(){
