@@ -3,7 +3,6 @@ import org.ebu6304gp42.Config.PathConfig;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishBank;
 import org.ebu6304gp42.Data.DishOption;
-import org.ebu6304gp42.View.Main_fxml;
 
 
 import java.io.File;
@@ -17,7 +16,7 @@ public class Main {
         File file = new File(PathConfig.getDishFile());
         if(!file.exists())
             createDefaultDish(); // create default dish, just for test.
-        Application.launch(Main_fxml.class);
+        Application.launch(org.ebu6304gp42.View.Main.class);
     }
 
     // Only for Debug and Test

@@ -10,8 +10,10 @@ public class OrderedDish {
     private int amount;
     private Dish dish;
 
-    public OrderedDish(String name){
-        this.name = name;
+    public OrderedDish(Dish dish){
+        this.dish = dish;
+        price = dish.getPrice();
+        name = dish.getName();
         options = new ArrayList<>();
     }
     public OrderedDish(){
