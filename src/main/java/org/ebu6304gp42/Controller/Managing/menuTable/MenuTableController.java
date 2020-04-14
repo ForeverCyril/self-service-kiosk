@@ -1,7 +1,6 @@
 package org.ebu6304gp42.Controller.Managing.menuTable;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableArray;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -10,7 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import org.ebu6304gp42.Data.Dish;
-import org.ebu6304gp42.Data.DishBank;
+import org.ebu6304gp42.Data.DishManager;
 import org.ebu6304gp42.View.EditDishDialog;
 
 import java.net.URL;
@@ -26,9 +25,8 @@ public class MenuTableController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         table.setRowFactory(menuRowFactory);
-        DishBank bank = new DishBank();
-        bank.load();
-        data = FXCollections.observableArrayList(bank.getDish());
+        DishManager dishManager = DishManager.getInstance();
+        data = FXCollections.observableArrayList(dishManager.getDish());
         table.setItems(data);
     }
 
@@ -61,9 +59,9 @@ public class MenuTableController implements Initializable {
     }
 
     public void save(){
-        DishBank bank = new DishBank();
-        data.forEach(bank::addDish);
-        bank.save();
+        DishManager dishManager = DishManager.getInstance();
+        data.forEach(dishManager::addDish);
+        dishManager.save();
         modified = false;
     }
 
