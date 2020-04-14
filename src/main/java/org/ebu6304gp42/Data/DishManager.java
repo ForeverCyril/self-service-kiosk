@@ -6,9 +6,18 @@ import org.ebu6304gp42.Config.PathConfig;
 import java.io.*;
 import java.util.ArrayList;
 
-public class DishBank {
+public class DishManager {
+    private static DishManager instance;
     ArrayList<Dish> dishList = new ArrayList<Dish>();
-    public DishBank(){}
+
+    public static DishManager getInstance(){
+        if(instance == null){
+            instance = new DishManager();
+        }
+        return instance;
+    }
+
+    private DishManager(){load();}
 
     public void save(){
         Gson gson= new Gson();

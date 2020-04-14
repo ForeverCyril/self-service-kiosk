@@ -6,14 +6,22 @@ import org.ebu6304gp42.Config.PathConfig;
 import java.io.*;
 import java.util.ArrayList;
 
-public class OrderBank {
+public class OrderManager {
+    private static OrderManager instance;
     private ArrayList<Order> orders;
 
     public ArrayList<Order> getOrders() {
         return orders;
     }
 
-    public OrderBank(){
+    public static OrderManager getInstance() {
+        if(instance == null){
+            instance = new OrderManager();
+        }
+        return instance;
+    }
+
+    private OrderManager(){
         orders = new ArrayList<>();
     }
     public void load(){
@@ -34,9 +42,11 @@ public class OrderBank {
             e.printStackTrace();
         }
     }
+
     public void addOrder(Order order){
         Gson gson = new Gson();
         String data = gson.toJson(order);
+
         if(data != null){
             try {
                 File file = new File(PathConfig.getOrderFile());

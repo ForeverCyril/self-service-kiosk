@@ -10,21 +10,24 @@ public class Account {
     private String phone;
     private String email;
     private int count = 0;
-    private String ID;
-    private boolean receive;
-    public final static int freenum = 10;//可以免费的邮票数
+    private int id;
+    public final static int FREENUM = 10;//可以免费的邮票数
 
-    public Account(String first_name, String last_name, String phone, String email, String ID,boolean receive) {
+    public Account(String first_name, String last_name, String phone, String email, int id) {
         this.first_name = first_name;
         this.last_name = last_name;
         this.phone = phone;
         this.email = email;
-        this.ID = ID;
-        this.receive=receive;
+        this.id = id;
     }
 
-    public Account() {
-
+    public void copyFrom(Account account){
+        first_name = account.first_name;
+        last_name = account.last_name;
+        phone = account.phone;
+        email = account.email;
+        count = account.count;
+        id = account.id;
     }
 
     public String getFirst_name() {
@@ -63,29 +66,21 @@ public class Account {
         return count;
     }
 
-    public String getID() {
-        return ID;
+    public int getId() {
+        return id;
     }
 
-    public boolean getReceive() {
-        return receive;
-    }
-
-    public void setReceive(boolean first_name) {
-        this.receive = receive;
-    }
-
-    public void setID(String ID) {
-        this.ID = ID;
+    public void setId(int id) {
+        this.id = id;
     }
 
     void addCount(){
-        count ++;
+        count++;
     }
 
     public boolean useCount(){
-        if (count >= freenum){
-            count -= freenum;
+        if (count >= FREENUM){
+            count -= FREENUM;
             return true;
         }
         else
@@ -105,7 +100,7 @@ public class Account {
                ", phone='" + phone + '\'' +
                ", email='" + email + '\'' +
                ", count=" + count +
-               ", ID='" + ID + '\'' +
+               ", ID='" + id + '\'' +
                '}';
     }
 }

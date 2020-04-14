@@ -30,7 +30,7 @@ public class DataTest {
         PathConfig.ORDER_FILE = "Test/" + PathConfig.ORDER_FILE;
         clearFile(PathConfig.ORDER_FILE);
 
-        OrderBank bank = new OrderBank();
+        OrderManager bank = new OrderManager();
 
         for(int i=0;i<5;i++){
             Order order = new Order();
@@ -48,7 +48,7 @@ public class DataTest {
             bank.addOrder(order);
         }
 
-        OrderBank bank_load = new OrderBank();
+        OrderManager bank_load = new OrderManager();
         bank_load.load();
         for(int i =0; i<5; i++){
             Order order = bank_load.getOrders().get(i);
@@ -62,12 +62,12 @@ public class DataTest {
         PathConfig.ACCOUNT_FILE = "Test/" + PathConfig.ACCOUNT_FILE;
         clearFile(PathConfig.ACCOUNT_FILE);
 
-        AccountBank bank = new AccountBank();
+        AccountManager bank = new AccountManager();
         for(int i = 0; i <10; i++){
             bank.register("Test"+i, "Test"+i, "phone+"+i,"email"+i);
         }
 
-        AccountBank bank_load = new AccountBank();
+        AccountManager bank_load = new AccountManager();
         var acc = bank_load.seek("00000001");
         assertEquals(acc.getFirst_name(), "Test0");
     }
@@ -75,7 +75,7 @@ public class DataTest {
     @Test
     public void testDish(){
         PathConfig.DISH_FILE = "Test/" + PathConfig.DISH_FILE;
-        DishBank dishBank = new DishBank();
+        DishManager dishManager = new DishManager();
 
         for(int i=0;i<5;i++){
             Dish dish = new Dish();
@@ -91,11 +91,11 @@ public class DataTest {
                 }
                 dish.addOption(option);
             }
-            dishBank.addDish(dish);
+            dishManager.addDish(dish);
         }
-        dishBank.save();
+        dishManager.save();
 
-        DishBank bank = new DishBank();
+        DishManager bank = new DishManager();
         bank.load();
         for(int i=0;i<5;i++){
             Dish dish = bank.getDish().get(i);
