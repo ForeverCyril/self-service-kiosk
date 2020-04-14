@@ -34,10 +34,14 @@ public class AccountManager {
     public Account register(String first_name,String last_name,String phone,String email) {
         int id = list.size()+1;
 
-        if(validateName(first_name) && validateName(last_name) && validateName(email) && validateMobilePhone(phone)) {
+        if(validateName(first_name) && validateName(last_name) &&
+           ((!email.isBlank() && validateEmail(email)) || (!phone.isBlank() && validateMobilePhone(phone)))
+        ){
             Account account = new Account(first_name, last_name, phone, email, id);
             list.add(account);
             return account;
+        } else {
+            System.out.println("Information Error");
         }
         return null;
     }

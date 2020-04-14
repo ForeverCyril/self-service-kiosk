@@ -25,6 +25,7 @@ public class OrderManager {
         orders = new ArrayList<>();
     }
     public void load(){
+        orders.clear();
         try {
             FileReader file = new FileReader(PathConfig.getOrderFile());
             BufferedReader in = new BufferedReader(file);

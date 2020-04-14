@@ -28,9 +28,10 @@ public class DataTest {
     @Test
     public void testOrderBank(){
         PathConfig.ORDER_FILE = "Test/" + PathConfig.ORDER_FILE;
+        PathConfig.prefix="./";
         clearFile(PathConfig.ORDER_FILE);
 
-        OrderManager bank = new OrderManager();
+        OrderManager bank = OrderManager.getInstance();
 
         for(int i=0;i<5;i++){
             Order order = new Order();
@@ -48,8 +49,9 @@ public class DataTest {
             bank.addOrder(order);
         }
 
-        OrderManager bank_load = new OrderManager();
+        OrderManager bank_load = OrderManager.getInstance();
         bank_load.load();
+
         for(int i =0; i<5; i++){
             Order order = bank_load.getOrders().get(i);
             assertEquals(order.getDish().get(0).getName(),String.format("Dish %d-%d", i,0) );
@@ -59,23 +61,27 @@ public class DataTest {
 
     @Test
     public void testAccount(){
+
+        PathConfig.prefix="./";
         PathConfig.ACCOUNT_FILE = "Test/" + PathConfig.ACCOUNT_FILE;
         clearFile(PathConfig.ACCOUNT_FILE);
 
-        AccountManager bank = new AccountManager();
+        AccountManager bank = AccountManager.getInstance();
         for(int i = 0; i <10; i++){
-            bank.register("Test"+i, "Test"+i, "phone+"+i,"email"+i);
+            bank.register("Test"+(char)((int)'a' + i), "Test"+(char)((int)'a' + i), "1231234123"+i%10,"");
         }
-
-        AccountManager bank_load = new AccountManager();
-        var acc = bank_load.seek("00000001");
-        assertEquals(acc.getFirst_name(), "Test0");
+        bank.save();
+        AccountManager bank_load = AccountManager.getInstance();
+        var acc = bank_load.seek(1);
+        assertEquals(acc.getFirst_name(), "Testa");
     }
 
     @Test
     public void testDish(){
+
+        PathConfig.prefix="./";
         PathConfig.DISH_FILE = "Test/" + PathConfig.DISH_FILE;
-        DishManager dishManager = new DishManager();
+        DishManager dishManager = DishManager.getInstance();
 
         for(int i=0;i<5;i++){
             Dish dish = new Dish();
@@ -95,7 +101,7 @@ public class DataTest {
         }
         dishManager.save();
 
-        DishManager bank = new DishManager();
+        DishManager bank = DishManager.getInstance();
         bank.load();
         for(int i=0;i<5;i++){
             Dish dish = bank.getDish().get(i);

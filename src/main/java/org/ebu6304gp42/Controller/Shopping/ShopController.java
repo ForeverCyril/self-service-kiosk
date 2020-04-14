@@ -65,9 +65,7 @@ public class ShopController implements Initializable {
     }
 
     public void refresh(){
-        DishManager bank = new DishManager();
-        bank.load();
         menuController.clear();
-        menuController.getModel().addAll(bank.getDish());
+        menuController.getModel().addAll(DishManager.getInstance().getDish());
     }
 }
