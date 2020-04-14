@@ -11,8 +11,7 @@ import org.ebu6304gp42.Config.GeneraConfig;
 import org.ebu6304gp42.Controller.Shopping.cart.CartController;
 import org.ebu6304gp42.Controller.Shopping.menu.DishClickedEvent;
 import org.ebu6304gp42.Controller.Shopping.menu.MenuController;
-import org.ebu6304gp42.Data.DishBank;
-import org.ebu6304gp42.Data.OrderedDish;
+import org.ebu6304gp42.Data.DishManager;
 import org.ebu6304gp42.View.OptionDialog;
 
 import java.io.IOException;
@@ -66,7 +65,7 @@ public class ShopController implements Initializable {
     }
 
     public void refresh(){
-        DishBank bank = new DishBank();
+        DishManager bank = new DishManager();
         bank.load();
         menuController.clear();
         menuController.getModel().addAll(bank.getDish());

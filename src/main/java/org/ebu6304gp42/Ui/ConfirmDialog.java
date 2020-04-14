@@ -8,12 +8,12 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import org.ebu6304gp42.Data.Account;
-import org.ebu6304gp42.Data.AccountBank;
+import org.ebu6304gp42.Data.AccountManager;
 import org.ebu6304gp42.Data.Order;
 import org.ebu6304gp42.Ui.AccoutDialog.*;
 
 public class ConfirmDialog extends Dialog<Boolean> {
-    AccountBank accountBank = new AccountBank();
+    AccountManager accountManager = new AccountManager();
     Order order = new Order();
     Account account = new Account();
 

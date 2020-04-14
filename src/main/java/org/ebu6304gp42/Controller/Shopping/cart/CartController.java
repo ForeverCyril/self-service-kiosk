@@ -13,6 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import org.ebu6304gp42.Data.Order;
 import org.ebu6304gp42.Data.OrderedDish;
+import org.ebu6304gp42.View.ConfirmDialog;
 
 import java.io.IOException;
 import java.net.URL;
@@ -33,6 +34,11 @@ public class CartController implements Initializable {
     private void submit(MouseEvent event){
         Order order = new Order();
         orderedDishes.iterator().forEachRemaining(order::addDish);
+        ConfirmDialog confirmDialog = new ConfirmDialog(order);
+        var res = confirmDialog.showAndWait();
+        res.ifPresent(result -> {
+            if(result) clear(null);
+        });
     }
 
     @FXML
@@ -45,6 +51,7 @@ public class CartController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         orderedDishes.addListener(this::onChanged);
     }
+
 
     private void addWidget(OrderedDish orderedDish){
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/OrderedDishWidget.fxml"));

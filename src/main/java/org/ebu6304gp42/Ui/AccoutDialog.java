@@ -5,7 +5,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import org.ebu6304gp42.Data.Account;
-import org.ebu6304gp42.Data.AccountBank;
+import org.ebu6304gp42.Data.AccountManager;
 
 public class AccoutDialog {
     static class RegisterDialog extends Dialog<Account> {
@@ -56,7 +56,7 @@ public class AccoutDialog {
 
             setResultConverter(dialogButton -> {
                 if (dialogButton == ButtonType.OK) {
-                    AccountBank acc = new AccountBank();
+                    AccountManager acc = new AccountManager();
                     acc.register(
                             first_name.getText(),
                             last_name.getText(),

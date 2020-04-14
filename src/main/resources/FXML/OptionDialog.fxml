@@ -26,7 +26,7 @@
             <HBox alignment="CENTER" prefWidth="200.0">
                <children>
                   <Label prefHeight="15.0" prefWidth="68.0" text="Amount: " />
-                   <Spinner editable="true" prefHeight="23.0" prefWidth="62.0">
+                   <Spinner fx:id="amount" editable="true" prefHeight="23.0" prefWidth="62.0">
                        <valueFactory>
                            <SpinnerValueFactory.IntegerSpinnerValueFactory max="10" min="1" />
                        </valueFactory>
