@@ -3,6 +3,7 @@ package org.ebu6304gp42.Controller.Payment;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleButton;
@@ -10,8 +11,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
 import org.ebu6304gp42.Controller.Shopping.cart.OrderedDishController;
+import org.ebu6304gp42.Data.Account;
+import org.ebu6304gp42.Data.AccountManager;
 import org.ebu6304gp42.Data.Order;
 import org.ebu6304gp42.Data.OrderedDish;
+import org.ebu6304gp42.View.RegisterDialog;
 
 import java.io.IOException;
 
@@ -35,23 +39,70 @@ public class ConfirmController {
     @FXML
     private Node acc_login;
 
+    private Account loginAccount;
+
     @FXML
     private void onLogin(MouseEvent event){
-        acc_not_login.setVisible(false);
-        acc_login.toFront();
-        acc_login.setVisible(true);
+        int id;
+        try {
+            id = Integer.parseInt(userID.getText());
+        } catch (NumberFormatException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("User ID input Error");
+            alert.showAndWait();
+            return;
+        }
+        var acc = AccountManager.getInstance().seek(id);
+        if(acc == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setContentText("User ID Error");
+            alert.showAndWait();
+        } else {
+            setAccount(acc);
+            acc_not_login.setVisible(false);
+            acc_login.toFront();
+            acc_login.setVisible(true);
+        }
     }
     @FXML
     private void onLogout(MouseEvent event){
         acc_login.setVisible(false);
+        useStamp.setDisable(true);
         acc_not_login.toFront();
         acc_not_login.setVisible(true);
+        loginAccount = null;
     }
 
+    @FXML
+    private void onRegister(MouseEvent event){
+        var res = (new RegisterDialog()).showAndWait();
+        res.ifPresent(account -> {
+            setAccount(account);
+            onLogin(null);
+        });
+    }
+
+    private void setAccount(Account account){
+        loginAccount = account;
+        user_name.setText(String.format("Welcom %s", account.getName()));
+        stamp_amount.setText(String.format("Now you have %d/10 stamp.", account.getCount()));
+
+        if(loginAccount.getCount() >=10){
+            useStamp.setDisable(false);
+        }
+    }
 
     public void setOrder(Order order){
         order.getDish().iterator().forEachRemaining(this::addOrderedDish);
         price.setText(String.format("%.2f", order.getPrice()));
+    }
+
+    public Account getLoginAccount(){
+        return loginAccount;
+    }
+
+    public boolean isUseStamp(){
+        return useStamp.isSelected();
     }
 
     private void addOrderedDish(OrderedDish dish){
@@ -64,4 +115,5 @@ public class ConfirmController {
         ((OrderedDishController)loader.getController()).setOrderedDish(dish);
         order_area.getChildren().add(loader.getRoot());
     }
+
 }

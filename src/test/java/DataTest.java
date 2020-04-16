@@ -68,7 +68,7 @@ public class DataTest {
 
         AccountManager bank = AccountManager.getInstance();
         for(int i = 0; i <10; i++){
-            bank.register("Test"+(char)((int)'a' + i), "Test"+(char)((int)'a' + i), "1231234123"+i%10,"");
+            bank.register("Test"+(char)((int)'a' + i), "Test"+(char)((int)'a' + i), "1231234123"+i%10,"", false);
         }
         bank.save();
         AccountManager bank_load = AccountManager.getInstance();

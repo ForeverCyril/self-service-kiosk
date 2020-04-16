@@ -28,12 +28,12 @@
                <children>
                      <VBox prefHeight="61.0" prefWidth="379.0" spacing="6.0">
                      <children>
-                        <Label text="Welcome ">
+                        <Label fx:id="user_name" text="Welcome ">
                            <font>
                               <Font size="14.0" />
                            </font>
                         </Label>
-                        <Label text="Now you have 0/10 stamp.">
+                        <Label fx:id="stamp_amount" text="Now you have 0/10 stamp.">
                            <font>
                               <Font size="14.0" />
                            </font>
@@ -42,7 +42,7 @@
                   </VBox>
                   <VBox alignment="CENTER">
                      <children>
-                        <ToggleButton contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefWidth="200.0" text="Use Stamp" />
+                        <ToggleButton fx:id="useStamp" contentDisplay="CENTER" disable="true" mnemonicParsing="false" prefWidth="200.0" text="Use Stamp" />
                         <Hyperlink onMouseClicked="#onLogout" text="Log out" underline="true" />
                      </children>
                   </VBox>
@@ -53,7 +53,7 @@
                        <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="6.0">
                            <children>
                                <Label text="Account: " />
-                               <TextField promptText="Input your Account ID" HBox.hgrow="ALWAYS" />
+                               <TextField fx:id="userID" promptText="Input your Account ID" HBox.hgrow="ALWAYS" />
                                <Button mnemonicParsing="false" onMouseClicked="#onLogin" text="Login" />
                            </children>
                            <VBox.margin>
@@ -63,7 +63,7 @@
                        <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="346.0">
                            <children>
                                <Label text="Does not have an account?" />
-                               <Hyperlink text="Register" />
+                               <Hyperlink onMouseClicked="#onRegister" text="Register" />
                            </children>
                        </HBox>
                    </children>

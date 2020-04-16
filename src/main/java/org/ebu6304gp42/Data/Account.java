@@ -11,7 +11,17 @@ public class Account {
     private String email;
     private int count = 0;
     private int id;
+    private boolean accept_rec;
     public final static int FREENUM = 10;//可以免费的邮票数
+
+    public Account(String first_name, String last_name, String phone, String email, int id, boolean accept_rec) {
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone = phone;
+        this.email = email;
+        this.id = id;
+        this.accept_rec = accept_rec;
+    }
 
     public Account(String first_name, String last_name, String phone, String email, int id) {
         this.first_name = first_name;
@@ -19,6 +29,7 @@ public class Account {
         this.phone = phone;
         this.email = email;
         this.id = id;
+        accept_rec = false;
     }
 
     public void copyFrom(Account account){
@@ -28,6 +39,10 @@ public class Account {
         email = account.email;
         count = account.count;
         id = account.id;
+    }
+
+    public String getName(){
+        return first_name + " " + last_name;
     }
 
     public String getFirst_name() {
@@ -74,7 +89,7 @@ public class Account {
         this.id = id;
     }
 
-    void addCount(){
+    public void addCount(){
         count++;
     }
 

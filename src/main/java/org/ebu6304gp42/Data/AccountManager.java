@@ -31,13 +31,13 @@ public class AccountManager {
 
     private AccountManager(){load();}
 
-    public Account register(String first_name,String last_name,String phone,String email) {
+    public Account register(String first_name,String last_name,String phone,String email, boolean rec) {
         int id = list.size()+1;
 
         if(validateName(first_name) && validateName(last_name) &&
            ((!email.isBlank() && validateEmail(email)) || (!phone.isBlank() && validateMobilePhone(phone)))
         ){
-            Account account = new Account(first_name, last_name, phone, email, id);
+            Account account = new Account(first_name, last_name, phone, email, id, rec);
             list.add(account);
             return account;
         } else {
@@ -54,7 +54,13 @@ public class AccountManager {
             data.append(gson.toJson(acc));
             data.append('\n');
         }
-
+        if(!file.exists()){
+            try {
+                file.createNewFile();
+            } catch (IOException e){
+                e.printStackTrace();
+            }
+        }
         try (FileWriter out = new FileWriter(file)) {
             out.write(data.toString());
         } catch (IOException e){
@@ -93,7 +99,7 @@ public class AccountManager {
             GsonBuilder builder = new GsonBuilder();
             Gson gson = builder.create();
             BufferedReader bufferedReader = new BufferedReader(
-                    new FileReader(PathConfig.ACCOUNT_FILE));
+                    new FileReader(PathConfig.getAccountFile()));
             String line = bufferedReader.readLine();
             while (line != null) {
                 Account account = gson.fromJson(line, Account.class);
