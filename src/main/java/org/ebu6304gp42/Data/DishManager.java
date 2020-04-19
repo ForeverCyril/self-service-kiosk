@@ -64,7 +64,7 @@ public class DishManager {
     public void addDish(Dish dish){
         dishList.add(dish);
     }
-
+    public void clear(){dishList.clear();}
     public ArrayList<Dish> getDish(){
         return dishList;
     }

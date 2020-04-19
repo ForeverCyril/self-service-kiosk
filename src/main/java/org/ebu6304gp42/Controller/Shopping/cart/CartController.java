@@ -46,6 +46,8 @@ public class CartController implements Initializable {
     private void clear(MouseEvent event){
         orderedDishes.clear();
         orderedDishPane.getChildren().clear();
+        order_price = 0;
+        updatePrice();
     }
 
     @Override
