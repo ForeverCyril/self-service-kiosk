@@ -79,13 +79,15 @@ public class ConfirmController {
         var res = (new RegisterDialog()).showAndWait();
         res.ifPresent(account -> {
             setAccount(account);
-            onLogin(null);
+            acc_not_login.setVisible(false);
+            acc_login.toFront();
+            acc_login.setVisible(true);
         });
     }
 
     private void setAccount(Account account){
         loginAccount = account;
-        user_name.setText(String.format("Welcom %s", account.getName()));
+        user_name.setText(String.format("Welcome %s", account.getName()));
         stamp_amount.setText(String.format("Now you have %d/10 stamp.", account.getCount()));
 
         if(loginAccount.getCount() >=10){

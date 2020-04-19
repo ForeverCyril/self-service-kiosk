@@ -60,6 +60,7 @@ public class MenuTableController implements Initializable {
 
     public void save(){
         DishManager dishManager = DishManager.getInstance();
+        dishManager.clear();
         data.forEach(dishManager::addDish);
         dishManager.save();
         modified = false;
