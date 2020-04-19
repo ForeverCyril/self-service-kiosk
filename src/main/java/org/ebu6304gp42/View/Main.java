@@ -13,8 +13,6 @@ import org.ebu6304gp42.Controller.Shopping.EnterManageEvent;
 import org.ebu6304gp42.Controller.Shopping.ShopController;
 import org.ebu6304gp42.Data.AccountManager;
 import org.ebu6304gp42.Data.DishManager;
-import org.ebu6304gp42.Data.Order;
-import org.ebu6304gp42.Data.OrderManager;
 
 import java.io.IOException;
 import java.util.Arrays;

@@ -19,6 +19,11 @@
                   <Font size="16.0" />
                </font>
             </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#switchToAcc" prefWidth="100.0" text="Account">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
          </children>
          <padding>
             <Insets top="18.0" />

@@ -1,12 +1,10 @@
 package org.ebu6304gp42.Controller.Payment;
 
+import com.google.gson.internal.$Gson$Types;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleButton;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
@@ -38,6 +36,9 @@ public class ConfirmController {
     private Node acc_not_login;
     @FXML
     private Node acc_login;
+    @FXML
+    private ToggleGroup typeGroup;
+
 
     private Account loginAccount;
 
@@ -116,4 +117,7 @@ public class ConfirmController {
         order_area.getChildren().add(loader.getRoot());
     }
 
+    public String getType(){
+        return typeGroup.getSelectedToggle().getUserData().toString();
+    }
 }

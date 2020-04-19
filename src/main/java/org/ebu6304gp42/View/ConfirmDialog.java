@@ -13,6 +13,7 @@ import org.ebu6304gp42.Data.Order;
 import org.ebu6304gp42.Data.OrderManager;
 
 import java.io.IOException;
+import java.util.Date;
 
 public class ConfirmDialog extends Dialog<Boolean> {
     private Order order;
@@ -59,6 +60,15 @@ public class ConfirmDialog extends Dialog<Boolean> {
                     account.addCount();
                 }
             }
+        }
+        order.setTime(new Date());
+        if(controller.getType().equals("eat-in")){
+            order.setType(Order.TYPE.EAT_IN);
+        } else if(controller.getType().equals("take-out")) {
+            order.setType(Order.TYPE.TAKE_AWAY);
+        } else {
+            order.setType(Order.TYPE.EAT_IN);
+            System.out.println("Error Type: " + controller.getType());
         }
         OrderManager.getInstance().addOrder(order);
     };

@@ -3,9 +3,14 @@ package org.ebu6304gp42.Controller.Managing;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.io.IOException;
 import java.net.URL;
@@ -16,6 +21,7 @@ public class MagaeController implements Initializable {
     private Tab menuTab;
     private Tab dataTab;
     private Tab homeTab;
+    private Tab accTab;
 
     @FXML
     private TabPane tabPane;
@@ -25,22 +31,31 @@ public class MagaeController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //init home tab
         homeTab = new Tab("Home");
+        var l = new Label("Welcome!");
+        l.setFont(Font.font(null, FontWeight.BOLD, 20));
+        VBox v = new VBox();
+        v.setAlignment(Pos.CENTER);
+        v.getChildren().addAll(l);
+        homeTab.setContent(v);
         setCloseEventForTab(homeTab);
         tabPane.getTabs().add(homeTab);
 
         //Init menu tab
         menuTab = new Tab("Menu");
-        FXMLLoader menuTableLoader = new FXMLLoader(getClass().getResource("/FXML/MenuTable.fxml"));
-        try {
-            menuTableLoader.load();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        FXMLLoader menuTableLoader = loadFXML("/FXML/MenuTable.fxml");
         menuTab.setContent(menuTableLoader.getRoot());
 
         //init data tab
         dataTab = new Tab("Data");
         setCloseEventForTab(dataTab);
+        var dataLoader = loadFXML("/FXML/Data.fxml");
+        dataTab.setContent(dataLoader.getRoot());
+
+        // init account tab;
+        accTab = new Tab("Account");
+        setCloseEventForTab(accTab);
+        var accTableLoader = loadFXML("/FXML/AccountTable.fxml");
+        accTab.setContent(accTableLoader.getRoot());
     }
 
     @FXML
@@ -52,6 +67,9 @@ public class MagaeController implements Initializable {
     private void switchToData(MouseEvent event){
         switchToTab(dataTab);
     }
+
+    @FXML
+    private void switchToAcc(MouseEvent event) {switchToTab(accTab);}
 
     private void switchToTab(Tab tab){
         if(!tabPane.getTabs().contains(tab)){
@@ -67,5 +85,15 @@ public class MagaeController implements Initializable {
                 tabPane.getSelectionModel().select(homeTab);
             }
         });
+    }
+
+    private FXMLLoader loadFXML(String file){
+        FXMLLoader loader = new FXMLLoader(getClass().getResource(file));
+        try {
+            loader.load();
+        } catch (IOException e){
+            e.printStackTrace();
+        }
+        return loader;
     }
 }

@@ -32,7 +32,9 @@ public class OrderManager {
             String line;
             Gson gson = new Gson();
             while ((line = in.readLine()) != null){
+                System.out.println(line);
                 Order order = gson.fromJson(line, Order.class);
+                System.out.println(order.getDish().get(0).getName());
                 if(order != null){
                     orders.add(order);
                 }
