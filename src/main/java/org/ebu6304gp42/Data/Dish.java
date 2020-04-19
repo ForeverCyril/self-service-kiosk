@@ -9,6 +9,7 @@ public class Dish {
     private String description;
     private int remain;
     private boolean status;
+    private String recomend;
 
     ArrayList<DishOption> options = new ArrayList<DishOption>();
 
@@ -30,6 +31,8 @@ public class Dish {
         description = dish.description;
         remain = dish.remain;
         status = dish.status;
+        options = dish.options;
+        recomend = dish.recomend;
     }
 
     public boolean isAvailable(){
@@ -82,10 +85,20 @@ public class Dish {
         this.pic = pic;
     }
 
+    public String getRecomend() {
+        return recomend;
+    }
+
+    public void setRecomend(String recomend) {
+        this.recomend = recomend;
+    }
+
     public ArrayList<DishOption> getOptions() {
         return options;
     }
-
+    public void resetOptions(ArrayList<DishOption> list){
+        options = list;
+    }
     public String toString(){
         return "Name"+name+"Description"+description;
     }

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<HBox prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.Controller.Managing.MagaeController">
+   <children>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="150.0" spacing="18.0">
+         <children>
+            <Button mnemonicParsing="false" onMouseClicked="#switchToMenu" prefWidth="100.0" text="Menu">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#switchToData" prefWidth="100.0" text="Data">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onMouseClicked="#switchToAcc" prefWidth="100.0" text="Account">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets top="18.0" />
+         </padding></VBox>
+      <TabPane fx:id="tabPane" prefHeight="200.0" prefWidth="200.0" tabClosingPolicy="ALL_TABS" HBox.hgrow="ALWAYS">
+
+      </TabPane>
+   </children>
+</HBox>

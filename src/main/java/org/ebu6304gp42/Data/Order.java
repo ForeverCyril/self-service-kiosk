@@ -3,10 +3,20 @@ package org.ebu6304gp42.Data;
 import java.util.Date;
 import java.util.ArrayList;
 public class Order {
+    static public enum TYPE{TAKE_AWAY, EAT_IN }
     Date time;
     double price;
     ArrayList<OrderedDish> dish;
     String note;
+    TYPE type;
+
+    public TYPE getType() {
+        return type;
+    }
+
+    public void setType(TYPE type) {
+        this.type = type;
+    }
 
     public Order(){
         price = 0;
