@@ -1,4 +1,4 @@
-package org.ebu6304gp42.Ui;
+package org.ebu6304gp42.View;
 
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
