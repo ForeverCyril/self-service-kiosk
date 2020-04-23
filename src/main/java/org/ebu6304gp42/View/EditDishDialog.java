@@ -14,6 +14,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.ebu6304gp42.Component.Spacer;
 import org.ebu6304gp42.Config.PathConfig;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishOption;
