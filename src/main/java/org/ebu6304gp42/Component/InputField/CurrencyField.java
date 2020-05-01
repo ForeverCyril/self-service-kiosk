@@ -70,4 +70,8 @@ public class CurrencyField extends AbstractNumberInputField {
     public BigDecimal getValue() {
         return getCurrencyValue();
     }
+
+    public double getDoubleValue(){
+        return getValue()!=null?getValue().doubleValue():0.0;
+    }
 }
