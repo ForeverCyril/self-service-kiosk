@@ -11,6 +11,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import org.ebu6304gp42.Controller.Managing.menuTable.MenuTableController;
 
 import java.io.IOException;
 import java.net.URL;
@@ -25,6 +26,8 @@ public class MagaeController implements Initializable {
 
     @FXML
     private TabPane tabPane;
+
+    private MenuTableController menuTableController;
 
 
     @Override
@@ -42,19 +45,20 @@ public class MagaeController implements Initializable {
 
         //Init menu tab
         menuTab = new Tab("Menu");
-        FXMLLoader menuTableLoader = loadFXML("/FXML/MenuTable.fxml");
+        FXMLLoader menuTableLoader = loadFXML("/fxml/Manage/MenuTable.fxml");
+        menuTableController = menuTableLoader.getController();
         menuTab.setContent(menuTableLoader.getRoot());
 
         //init data tab
         dataTab = new Tab("Data");
         setCloseEventForTab(dataTab);
-        var dataLoader = loadFXML("/FXML/Data.fxml");
+        var dataLoader = loadFXML("/fxml/Manage/Data.fxml");
         dataTab.setContent(dataLoader.getRoot());
 
         // init account tab;
         accTab = new Tab("Account");
         setCloseEventForTab(accTab);
-        var accTableLoader = loadFXML("/FXML/AccountTable.fxml");
+        var accTableLoader = loadFXML("/fxml/Manage/AccountTable.fxml");
         accTab.setContent(accTableLoader.getRoot());
     }
 
@@ -95,5 +99,12 @@ public class MagaeController implements Initializable {
             e.printStackTrace();
         }
         return loader;
+    }
+
+    public boolean dataChanged(){
+        return menuTableController.changed();
+    }
+    public void saveMenu(){
+        menuTableController.save();
     }
 }

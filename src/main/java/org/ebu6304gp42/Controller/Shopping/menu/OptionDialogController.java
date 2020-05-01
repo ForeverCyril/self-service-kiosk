@@ -3,6 +3,7 @@ package org.ebu6304gp42.Controller.Shopping.menu;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -14,13 +15,16 @@ import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishOption;
 import org.ebu6304gp42.Data.OrderedDish;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
 public class OptionDialogController{
     private Dish dish;
     @FXML
-    private ImageView imageView;
+    private ImageView image;
     @FXML
     private Label dish_name;
     @FXML
@@ -35,9 +39,10 @@ public class OptionDialogController{
 
     public void setDish(Dish dish){
         this.dish = dish;
+        dish.setImageTo(image);
         dish_name.setText(dish.getName());
-       optionWidget = new OptionWidget(dish);
-       opt_area.setContent(optionWidget);
+        optionWidget = new OptionWidget(dish);
+        opt_area.setContent(optionWidget);
     }
 
     public OrderedDish getOrderedDish(){

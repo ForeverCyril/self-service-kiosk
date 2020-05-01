@@ -22,9 +22,9 @@ public class DataController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         OrderManager.getInstance().load();
-        loadFXML(timeChart, "/FXML/TimeChart.fxml");
-        loadFXML(methodChart, "/FXML/EatWayChart.fxml");
-        loadFXML(orderTable, "/FXML/OrderTable.fxml");
+        loadFXML(timeChart, "/fxml/Manage/TimeChart.fxml");
+        loadFXML(methodChart, "/fxml/Manage/EatWayChart.fxml");
+        loadFXML(orderTable, "/fxml/Manage/OrderTable.fxml");
     }
 
     private FXMLLoader loadFXML(Node root, String file){

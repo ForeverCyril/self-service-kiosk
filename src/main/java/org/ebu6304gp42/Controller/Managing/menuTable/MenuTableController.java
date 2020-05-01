@@ -10,10 +10,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.util.Callback;
 import org.ebu6304gp42.Data.Dish;
 import org.ebu6304gp42.Data.DishManager;
+import org.ebu6304gp42.View.DishStaticDialog;
 import org.ebu6304gp42.View.EditDishDialog;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+
+import static org.ebu6304gp42.View.DishStaticDialog.EditButtonType;
 
 public class MenuTableController implements Initializable {
     private ObservableList<Dish> data;
@@ -37,12 +40,17 @@ public class MenuTableController implements Initializable {
                 TableRow cur_row = (TableRow) event.getSource();
                 int index = cur_row.getIndex();
                 var dish = data.get(index);
-                var res = (new EditDishDialog(dish)).showAndWait();
-                res.ifPresent(newDish->{
-                    dish.copyFrom(newDish);
-                    modified = true;
+                var res = (new DishStaticDialog(dish)).showAndWait();
+                res.ifPresent(buttonType -> {
+                    if(buttonType == EditButtonType){
+                        var res_edit = (new EditDishDialog(dish)).showAndWait();
+                        res_edit.ifPresent(newDish->{
+                            dish.copyFrom(newDish);
+                            modified = true;
+                        });
+                        tv.refresh();
+                    }
                 });
-                tv.refresh();
             }
         });
         return row;
@@ -71,5 +79,9 @@ public class MenuTableController implements Initializable {
         data.add(dish);
         table.refresh();
         modified = true;
+    }
+
+    public boolean changed(){
+        return modified;
     }
 }

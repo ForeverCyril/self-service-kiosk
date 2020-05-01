@@ -35,8 +35,8 @@ public class ShopController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         title.setText(GeneraConfig.STORE_NAME);
-        FXMLLoader menu_loader = new FXMLLoader(getClass().getResource("/FXML/Menu.fxml"));
-        FXMLLoader cart_loader = new FXMLLoader(getClass().getResource("/FXML/Cart.fxml"));
+        FXMLLoader menu_loader = new FXMLLoader(getClass().getResource("/fxml/Shop/Menu.fxml"));
+        FXMLLoader cart_loader = new FXMLLoader(getClass().getResource("/fxml/Shop/Cart.fxml"));
         try {
             menu_loader.setRoot(menu);
             cart_loader.setRoot(cart);

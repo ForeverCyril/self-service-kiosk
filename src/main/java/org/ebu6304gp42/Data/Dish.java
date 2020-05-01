@@ -1,5 +1,11 @@
 package org.ebu6304gp42.Data;
 
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Dish {
@@ -9,7 +15,7 @@ public class Dish {
     private String description;
     private int remain;
     private boolean status;
-    private String recomend;
+    private String recommend;
 
     ArrayList<DishOption> options = new ArrayList<DishOption>();
 
@@ -32,7 +38,7 @@ public class Dish {
         remain = dish.remain;
         status = dish.status;
         options = dish.options;
-        recomend = dish.recomend;
+        recommend = dish.recommend;
     }
 
     public boolean isAvailable(){
@@ -85,12 +91,12 @@ public class Dish {
         this.pic = pic;
     }
 
-    public String getRecomend() {
-        return recomend;
+    public String getRecommend() {
+        return recommend;
     }
 
-    public void setRecomend(String recomend) {
-        this.recomend = recomend;
+    public void setRecommend(String recommend) {
+        this.recommend = recommend;
     }
 
     public ArrayList<DishOption> getOptions() {
@@ -101,5 +107,48 @@ public class Dish {
     }
     public String toString(){
         return "Name"+name+"Description"+description;
+    }
+
+    public void setImageTo(ImageView container, boolean checkStatus){
+        if(checkStatus && !isAvailable()){
+            setSoldOutImage(container);
+            return;
+        }
+        if(pic!=null && !pic.isBlank()){
+            File picFile = new File(pic);
+            if (!picFile.exists()){
+                pic = null;
+            }
+        }
+        setImageTo(container, pic);
+    }
+
+    public void setImageTo(ImageView container){
+        if(pic!=null && !pic.isBlank()){
+            File picFile = new File(pic);
+            if (!picFile.exists()){
+                pic = null;
+            }
+        }
+        setImageTo(container, pic);
+    }
+
+    static public void setImageTo(ImageView container, String pic){
+        if(pic!=null && !pic.isBlank()){
+            File picFile = new File(pic);
+            if(picFile.exists()){
+                try(FileInputStream picStream = new FileInputStream(picFile)) {
+                    Image picImg = new Image(picStream, container.getFitWidth(), container.getFitHeight(), true, true);
+                    container.setImage(picImg);
+                } catch (IOException e){
+                    System.out.println(String.format("Error When Deal with Dish Pic:%s", e.getLocalizedMessage()));
+                }
+            }
+        }
+    }
+    static public void setSoldOutImage(ImageView container){
+        Image image = new Image(Dish.class.getResourceAsStream("/res/pic/soldout.png"),
+                container.getFitWidth(), container.getFitHeight(), true, true);
+        container.setImage(image);
     }
 }

@@ -8,9 +8,14 @@ import java.util.ArrayList;
 
 public class OrderManager {
     private static OrderManager instance;
-    private ArrayList<Order> orders;
+    private boolean changed = true;
+    private final ArrayList<Order> orders;
 
     public ArrayList<Order> getOrders() {
+        if(changed){
+            load();
+            changed = false;
+        }
         return orders;
     }
 
@@ -32,9 +37,7 @@ public class OrderManager {
             String line;
             Gson gson = new Gson();
             while ((line = in.readLine()) != null){
-                System.out.println(line);
                 Order order = gson.fromJson(line, Order.class);
-                System.out.println(order.getDish().get(0).getName());
                 if(order != null){
                     orders.add(order);
                 }
@@ -49,12 +52,18 @@ public class OrderManager {
     public void addOrder(Order order){
         Gson gson = new Gson();
         String data = gson.toJson(order);
-
+        changed = true;
         if(data != null){
             try {
                 File file = new File(PathConfig.getOrderFile());
                 if(!file.exists()){
-                    file.createNewFile();
+                    System.out.println("Order File Not Exist! Try to Create");
+                    var res = file.createNewFile();
+                    if(res){
+                        System.out.println("Create Successfully!");
+                    } else {
+                        System.out.println("Create Failed!");
+                    }
                 }
                 FileWriter out = new FileWriter(file, true);
                 out.write(data+"\n");

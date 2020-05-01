@@ -6,8 +6,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -57,7 +55,7 @@ public class CartController implements Initializable {
 
 
     private void addWidget(OrderedDish orderedDish){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/OrderedDishWidget.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/OrderedDishWidget.fxml"));
         try {
             loader.load();
             ((OrderedDishController)loader.getController()).setOrderedDish(orderedDish);
