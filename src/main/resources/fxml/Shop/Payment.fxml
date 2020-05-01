@@ -20,7 +20,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <GridPane alignment="CENTER" hgap="18.0" stylesheets="@/style.css" vgap="3.0">
+            <GridPane alignment="CENTER" hgap="18.0" stylesheets="@/css/style.css" vgap="3.0">
                <columnConstraints>
                   <ColumnConstraints halignment="CENTER" />
                   <ColumnConstraints halignment="CENTER" />

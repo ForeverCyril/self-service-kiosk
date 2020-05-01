@@ -11,7 +11,7 @@
          <children>
             <VBox alignment="CENTER" prefWidth="300.0">
                <children>
-                  <ImageView fx:id="imageView" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                  <ImageView fx:id="image" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                      <image>
                         <Image url="@/res/pic/default_pic.png" />
                      </image>

@@ -7,3 +7,13 @@
     -fx-effect: dropshadow(three-pass-box, GRAY, 20.0,0, 0, 0);
     -fx-cursor: hand;
 }
+
+.selectable-item:hover{
+    -fx-cursor: hand;
+    -fx-background-color: deepskyblue;
+}
+.selectable-item:selected{
+    -fx-border-color: cornflowerblue;
+    -fx-border-radius: 2;
+    -fx-border-width: 1;
+}
