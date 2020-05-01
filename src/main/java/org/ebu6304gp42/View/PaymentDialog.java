@@ -10,7 +10,7 @@ import java.io.IOException;
 
 public class PaymentDialog extends Dialog<Boolean> {
     public PaymentDialog(double price){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Payment.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/Payment.fxml"));
         try {
             loader.load();
         } catch (IOException e){
