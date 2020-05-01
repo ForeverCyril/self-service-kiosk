@@ -6,11 +6,13 @@ public class PathConfig {
     public static String DISH_FILE = "Data"+ File.separator +"dish.json";
     public static String ACCOUNT_FILE = "Data"+ File.separator +"account.json";
     public static String ORDER_FILE = "Data"+ File.separator +"order.json";
+    public static String PIC_DIR = "Pic" + File.separator;
     public static String  DEFAULT_PIC = "/res/pic/default_pic.png";
     public static String prefix = System.getProperties().getProperty("user.home") + File.separator +".config/kiosk";
 
     public static void checkFolder(){
-        checkFolder(prefix + "/Data");
+        checkFolder(prefix + File.separator + "Data");
+        checkFolder(prefix + File.separator + "Pic");
     }
 
 
@@ -30,6 +32,7 @@ public class PathConfig {
         return DEFAULT_PIC;
     }
 
+    public static String getPicDir(){return prefix + File.separator + PIC_DIR;}
 
     public static void checkFolder(String name){
         File folder = new File(name);
