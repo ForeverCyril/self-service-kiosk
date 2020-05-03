@@ -27,14 +27,17 @@ public class DishWidgetController {
 
     @FXML
     private void mouseClicked(MouseEvent event){
-        root.fireEvent(new DishClickedEvent(DishClickedEvent.DISH_CLICKED_EVENT, dish));
+        if(dish.isAvailable()){
+            root.fireEvent(new DishClickedEvent(DishClickedEvent.DISH_CLICKED_EVENT, dish));
+        }
     }
 
     public void setDish(Dish dish){
         this.dish = dish;
+        dish.setImageTo(image, true);
         name.setText(dish.getName());
         price.setText(String.format("£ %.2f", dish.getPrice()));
         desc.setText(dish.getDescription());
-        recommend.setText(dish.getRecomend());
+        recommend.setText(dish.getRecommend());
     }
 }

@@ -5,12 +5,9 @@
 
 <VBox prefHeight="400.0" prefWidth="600.0" spacing="3.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.Controller.Managing.data.DataController">
    <children>
-      <HBox prefWidth="200.0">
-         <children>
-            <VBox fx:id="timeChart" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
-            <VBox fx:id="methodChart" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS" />
-         </children>
-      </HBox>
+      <StackPane fx:id="chart_area">
+
+      </StackPane>
       <VBox fx:id="orderTable" prefHeight="246.0" prefWidth="600.0" VBox.vgrow="ALWAYS" />
    </children>
    <padding>

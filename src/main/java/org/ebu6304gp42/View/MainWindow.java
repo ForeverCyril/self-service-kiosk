@@ -1,14 +1,19 @@
 package org.ebu6304gp42.View;
 
+import com.sun.javafx.application.PlatformImpl;
+import com.sun.javafx.css.StyleManager;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import org.ebu6304gp42.Config.GeneraConfig;
+import org.ebu6304gp42.Controller.Managing.MagaeController;
 import org.ebu6304gp42.Controller.Shopping.EnterManageEvent;
 import org.ebu6304gp42.Controller.Shopping.ShopController;
 import org.ebu6304gp42.Data.AccountManager;
@@ -17,7 +22,7 @@ import org.ebu6304gp42.Data.DishManager;
 import java.io.IOException;
 import java.util.Arrays;
 
-public class Main extends Application {
+public class MainWindow extends Application {
     private ShopController shopController;
     private Parent shop;
     private Stage shopStage;
@@ -45,7 +50,7 @@ public class Main extends Application {
      */
     private void initShoppingInterface(){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Shop.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/Shop.fxml"));
             loader.load();
             shop = loader.getRoot();
             shopController = loader.getController();
@@ -67,11 +72,32 @@ public class Main extends Application {
         @Override
         public void handle(EnterManageEvent event) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Manage.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Manage/Manage.fxml"));
                 loader.load();
                 Stage manageStage = new Stage();
                 manageStage.initOwner(shopStage);
                 manageStage.setScene(new Scene(loader.getRoot()));
+                manageStage.setOnCloseRequest(closeEvent->{
+                    if(((MagaeController)loader.getController()).dataChanged()){
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setHeaderText("Dish Changed!");
+                        alert.setContentText("Are you want to exit with out saving?");
+                        alert.getButtonTypes().clear();
+                        alert.getButtonTypes().addAll(ButtonType.CANCEL, ButtonType.APPLY, ButtonType.YES);
+                        ((Button)alert.getDialogPane().lookupButton(ButtonType.APPLY)).setText("Save");
+                        var res= alert.showAndWait();
+                        if(res.isPresent()){
+                            if(res.get() == ButtonType.APPLY){
+                                ((MagaeController)loader.getController()).saveMenu();
+                            } else if (res.get() == ButtonType.CANCEL){
+                                    closeEvent.consume();
+                            }
+                        } else {
+                            closeEvent.consume();
+                        }
+                    }
+                });
+
                 shopStage.hide();
                 manageStage.showAndWait();
                 shopStage.show();

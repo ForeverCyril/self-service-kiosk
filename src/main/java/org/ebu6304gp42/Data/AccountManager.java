@@ -3,11 +3,10 @@ package org.ebu6304gp42.Data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.ebu6304gp42.Config.PathConfig;
+import org.ebu6304gp42.Exception.Account.IllegalInputException;
 
 import java.io.*;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -31,19 +30,29 @@ public class AccountManager {
 
     private AccountManager(){load();}
 
-    public Account register(String first_name,String last_name,String phone,String email, boolean rec) {
+    public Account register(String first_name,String last_name,String phone,String email, boolean rec) throws IllegalInputException {
         int id = list.size()+1;
 
-        if(validateName(first_name) && validateName(last_name) &&
-           ((!email.isBlank() && validateEmail(email)) || (!phone.isBlank() && validateMobilePhone(phone)))
-        ){
-            Account account = new Account(first_name, last_name, phone, email, id, rec);
-            list.add(account);
-            return account;
-        } else {
-            System.out.println("Information Error");
+        if(!validateName(first_name)){
+            throw new IllegalInputException("First Name Invalid");
         }
-        return null;
+        if(!validateName(last_name)){
+            throw new IllegalInputException("Last Name Invalid");
+        }
+        if((email==null||email.isBlank()) && (phone==null||phone.isBlank())){
+            throw new IllegalInputException("Email and Phone Can Not Be empty Together");
+        }
+
+        if(email!= null && !validateEmail(email)){
+            throw new IllegalInputException("Email Invalid");
+        }
+        if(phone!=null && !validateMobilePhone(phone)){
+            throw new IllegalInputException("Phone Invalid");
+        }
+
+        Account account = new Account(first_name, last_name, phone, email, id, rec);
+        list.add(account);
+        return account;
     }
 
     public void save() {
@@ -83,13 +92,14 @@ public class AccountManager {
 
         File file = new File(PathConfig.getAccountFile());
         try {
-            if (!file.exists()) {
-                boolean hasFile = file.createNewFile();
-                if (hasFile) {
-                    System.out.println("file not exists, create new file");
+            if(!file.exists()){
+                System.out.print("Account File Not Exist. Try to Create");
+                var res = file.createNewFile();
+                if(res){
+                    System.out.println("Create Account File Successfully.");
+                } else {
+                    System.out.println("Create Account File Failed!");
                 }
-            } else {
-                System.out.println("file exists");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -118,16 +128,6 @@ public class AccountManager {
         return list;
     }
 
-
-    public void printInformation() {
-        load();
-        Iterator it1 = list.iterator();
-        while (it1.hasNext()) {
-            System.out.println(it1.next());
-        }
-    }
-
-
     //根据ID返回对象
     public Account seek(int id){
         for (Account account : list) {
@@ -141,29 +141,21 @@ public class AccountManager {
     }
 
     public static boolean validateMobilePhone(String phone) {
-        if(phone.equals(""))
-            return true;
-        else {
-            Pattern pattern = Pattern.compile("^[1]\\d{10}$");
-            return pattern.matcher(phone).matches();
-        }
+        Pattern pattern = Pattern.compile("^[1]\\d{10}$");
+        return pattern.matcher(phone).matches();
     }
 
     public static boolean validateEmail(String email) {
-        if(email.equals(""))
-            return true;
-        else {
-            boolean flag = false;
-            try {
-                String check = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
-                Pattern regex = Pattern.compile(check);
-                Matcher matcher = regex.matcher(email);
-                flag = matcher.matches();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return flag;
+        boolean flag = false;
+        try {
+            String check = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
+            Pattern regex = Pattern.compile(check);
+            Matcher matcher = regex.matcher(email);
+            flag = matcher.matches();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return flag;
     }
 
     public static Boolean validateName(String name) {

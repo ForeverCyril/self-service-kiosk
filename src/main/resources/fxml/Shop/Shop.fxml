@@ -27,7 +27,7 @@
    <bottom>
       <HBox BorderPane.alignment="CENTER">
          <children>
-            <Label text="Status Bar" />
+            <Label fx:id="time" text="$TIME" />
             <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
             <Hyperlink onMouseClicked="#enterManage" text="Manage" />
          </children>

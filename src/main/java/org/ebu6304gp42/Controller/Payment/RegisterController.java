@@ -7,8 +7,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
+import org.ebu6304gp42.Component.InputField.PhoneField;
 import org.ebu6304gp42.Data.Account;
 import org.ebu6304gp42.Data.AccountManager;
+import org.ebu6304gp42.Exception.Account.IllegalInputException;
 
 public class RegisterController {
     @FXML
@@ -18,7 +20,7 @@ public class RegisterController {
     @FXML
     private TextField email;
     @FXML
-    private TextField phone;
+    private PhoneField phone;
     @FXML
     private CheckBox accept;
     @FXML
@@ -37,11 +39,11 @@ public class RegisterController {
         return accept.selectedProperty();
     }
 
-    public Account getAccount(){
+    public Account getAccount() throws IllegalInputException {
         return AccountManager.getInstance().register(
                 first_name.getText(),
                 last_name.getText(),
-                phone.getText(),
+                phone.getValue(),
                 email.getText(),
                 accept_rec.isSelected()
         );

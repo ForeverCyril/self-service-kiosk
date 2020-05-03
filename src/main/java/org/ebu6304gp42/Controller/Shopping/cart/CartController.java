@@ -6,8 +6,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.input.MouseEvent;
@@ -53,11 +52,20 @@ public class CartController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         orderedDishes.addListener(this::onChanged);
+        orderedDishPane.addEventHandler(OrderedDishDeleteEvent.DISH_DELETE_EVENT, event -> {
+            Node source = (Node)event.getTarget();
+            System.out.println("Delete Event: " + source);
+            if(source != null){
+                orderedDishPane.getChildren().remove(source);
+                orderedDishes.remove(event.getOrderedDish());
+                updatePrice(-event.getOrderedDish().getPrice());
+            }
+        });
     }
 
 
     private void addWidget(OrderedDish orderedDish){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/OrderedDishWidget.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/OrderedDishWidget.fxml"));
         try {
             loader.load();
             ((OrderedDishController)loader.getController()).setOrderedDish(orderedDish);

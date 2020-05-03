@@ -3,7 +3,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
+<?import org.ebu6304gp42.Component.InputField.*?>
 <VBox prefHeight="158.0" prefWidth="325.0" spacing="8.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.Controller.Payment.RegisterController">
    <children>
       <GridPane>
@@ -27,7 +27,7 @@
                </children>
             </HBox>
             <TextField fx:id="email" prefHeight="23.0" prefWidth="224.0" promptText="Input your email" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="phone" promptText="Input your phone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <PhoneField fx:id="phone" promptText="Input your phone" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <CheckBox fx:id="accept" contentDisplay="RIGHT" mnemonicParsing="false" text="Accept User Agreement">

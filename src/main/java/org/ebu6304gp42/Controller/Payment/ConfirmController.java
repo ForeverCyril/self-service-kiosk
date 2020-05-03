@@ -1,6 +1,5 @@
 package org.ebu6304gp42.Controller.Payment;
 
-import com.google.gson.internal.$Gson$Types;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -109,7 +108,7 @@ public class ConfirmController {
     }
 
     private void addOrderedDish(OrderedDish dish){
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/OrderedDishWidget.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/OrderedDishWidget.fxml"));
         try {
             loader.load();
         } catch (IOException e){

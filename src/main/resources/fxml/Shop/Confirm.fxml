@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox prefHeight="494.0" prefWidth="379.0" xmlns="http://javafx.com/javafx/10.0.2-internal"
+      xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.Controller.Payment.ConfirmController">
+    <fx:define>
+        <ToggleGroup fx:id="typeGroup"/>
+    </fx:define>
+    <Label alignment="CENTER" prefWidth="400.0" text="Order Confirm">
+        <font>
+         <Font name="System Bold" size="24.0"/>
+        </font>
+        <padding>
+         <Insets bottom="6.0" top="6.0"/>
+        </padding>
+    </Label>
+    <ScrollPane prefHeight="344.0" prefWidth="368.0">
+        <VBox fx:id="order_area" prefWidth="340.0" spacing="8.0">
+            <padding>
+                <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+            </padding>
+        </VBox>
+    </ScrollPane>
+    <StackPane fx:id="acc_area" prefHeight="60.0" prefWidth="300.0">
+        <children>
+         <HBox fx:id="acc_login" alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" visible="false">
+             <children>
+                 <VBox prefHeight="61.0" prefWidth="379.0" spacing="6.0">
+                     <children>
+                         <Label fx:id="user_name" text="Welcome ">
+                             <font>
+                                 <Font size="14.0"/>
+                             </font>
+                         </Label>
+                         <Label fx:id="stamp_amount" text="Now you have 0/10 stamp.">
+                             <font>
+                                 <Font size="14.0"/>
+                             </font>
+                         </Label>
+                     </children>
+                 </VBox>
+                 <VBox alignment="CENTER">
+                     <children>
+                         <ToggleButton fx:id="useStamp" contentDisplay="CENTER" disable="true"
+                                       mnemonicParsing="false" prefWidth="200.0" text="Use Stamp"/>
+                         <Hyperlink onMouseClicked="#onLogout" text="Log out" underline="true"/>
+                     </children>
+                 </VBox>
+             </children>
+         </HBox>
+         <VBox fx:id="acc_not_login" prefHeight="200.0" prefWidth="100.0">
+             <children>
+                 <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="6.0">
+                     <children>
+                         <Label text="Account: "/>
+                         <TextField fx:id="userID" promptText="Input your Account ID" HBox.hgrow="ALWAYS"/>
+                         <Button mnemonicParsing="false" onMouseClicked="#onLogin" text="Login"/>
+                     </children>
+                     <VBox.margin>
+                         <Insets/>
+                     </VBox.margin>
+                 </HBox>
+                 <HBox alignment="CENTER_LEFT" prefHeight="32.0" prefWidth="346.0">
+                     <children>
+                         <Label text="Does not have an account?"/>
+                         <Hyperlink onMouseClicked="#onRegister" text="Register"/>
+                     </children>
+                 </HBox>
+             </children>
+         </VBox>
+        </children>
+        <padding>
+         <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+        </padding>
+    </StackPane>
+    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="6.0">
+        <children>
+          <Label text="Type: "/>
+            <RadioButton mnemonicParsing="false" selected="true" text="Eat-In" toggleGroup="$typeGroup"
+                         userData="eat-in"/>
+          <RadioButton mnemonicParsing="false" text="Take-Out" toggleGroup="$typeGroup" userData="take-out"/>
+        </children>
+        <padding>
+          <Insets bottom="12.0" left="6.0" right="6.0" top="6.0"/>
+        </padding>
+    </HBox>
+    <HBox prefWidth="100.0" spacing="6.0">
+        <children>
+          <Label text="Total Price:">
+              <font>
+                  <Font size="16.0"/>
+              </font>
+          </Label>
+          <Label fx:id="price" text="0.00">
+              <font>
+                  <Font size="16.0"/>
+              </font>
+          </Label>
+          <Label text="£">
+              <font>
+                  <Font size="16.0"/>
+              </font>
+          </Label>
+        </children>
+        <VBox.margin>
+          <Insets bottom="6.0" left="6.0" right="6.0" top="6.0"/>
+        </VBox.margin>
+    </HBox>
+</VBox>

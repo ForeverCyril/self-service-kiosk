@@ -31,7 +31,13 @@ public class DishManager {
         try {
             File file = new File(PathConfig.getDishFile());
             if(!file.exists()){
-                file.createNewFile();
+                System.out.print("Dish File Not Exist. Try to Create");
+                var res = file.createNewFile();
+                if(res){
+                    System.out.println("Create Successfully!");
+                } else {
+                    System.out.println("Create Failed!");
+                }
             }
             FileWriter out = new FileWriter(file);
             out.write(data.toString());

@@ -22,7 +22,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
     public ConfirmDialog(Order order){
         this.order = order;
         setTitle("Confirm Order");
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/Confirm.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/Confirm.fxml"));
         try {
             loader.load();
         } catch (IOException e){

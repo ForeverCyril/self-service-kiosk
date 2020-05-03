@@ -25,7 +25,7 @@ public class MenuController implements Initializable{
             while (c.next()){
                 if(c.wasAdded()){
                     for(Dish dish:c.getAddedSubList()){
-                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/FXML/DishWidget.fxml"));
+                        FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/Shop/DishWidget.fxml"));
                         try {
                             loader.load();
                             ((DishWidgetController)loader.getController()).setDish(dish);
