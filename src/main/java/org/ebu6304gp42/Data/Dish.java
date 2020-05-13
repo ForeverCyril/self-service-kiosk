@@ -91,8 +91,11 @@ public class Dish {
         this.pic = pic;
     }
 
-    public String getRecommend() {
-        return recommend;
+    public String[] getRecommend() {
+        if (recommend == null){
+            return null;
+        }
+        return recommend.split(";");
     }
 
     public void setRecommend(String recommend) {

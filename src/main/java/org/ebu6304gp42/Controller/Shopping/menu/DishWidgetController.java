@@ -3,9 +3,11 @@ package org.ebu6304gp42.Controller.Shopping.menu;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
 import org.ebu6304gp42.Data.Dish;
 
 
@@ -23,7 +25,7 @@ public class DishWidgetController {
     @FXML
     private Label desc;
     @FXML
-    private Label recommend;
+    private HBox rec_area;
 
     @FXML
     private void mouseClicked(MouseEvent event){
@@ -38,6 +40,32 @@ public class DishWidgetController {
         name.setText(dish.getName());
         price.setText(String.format("£ %.2f", dish.getPrice()));
         desc.setText(dish.getDescription());
-        recommend.setText(dish.getRecommend());
+
+        var recommend_list = dish.getRecommend();
+        if (recommend_list !=null){
+            for(var rec:recommend_list){
+                var icon = getRecommendIcon(rec);
+                if (icon != null){
+                    rec_area.getChildren().add(icon);
+                }
+            }
+        }
+    }
+
+    public static ImageView getRecommendIcon(String recommend){
+        switch (recommend){
+            case "hot": return getHotIcon();
+            case "new": return getNewIcon();
+            default: return null;
+        }
+    }
+
+    public static ImageView getHotIcon(){
+        Image image = new Image(DishWidgetController.class.getResourceAsStream("/res/pic/hot.png"));
+        return new ImageView(image);
+    }
+    public static ImageView getNewIcon(){
+        Image image = new Image(DishWidgetController.class.getResourceAsStream("/res/pic/new.png"));
+        return new ImageView(image);
     }
 }
