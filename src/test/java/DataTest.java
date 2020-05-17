@@ -1,5 +1,5 @@
-import org.ebu6304gp42.Config.PathConfig;
-import org.ebu6304gp42.Data.*;
+import org.ebu6304gp42.config.PathConfig;
+import org.ebu6304gp42.data.*;
 
 import org.junit.Test;
 import static org.junit.Assert.*;

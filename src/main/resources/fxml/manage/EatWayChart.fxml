@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root prefHeight="400.0" prefWidth="600.0" type="StackPane" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.controller.managing.data.EatWayChartController">
+   <children>
+      <PieChart fx:id="EatWayChart" prefHeight="400.0" prefWidth="490.0" title="EatWay" />
+   </children>
+</fx:root>
