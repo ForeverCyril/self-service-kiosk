@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.layout.*?>
+
+<fx:root fx:id="root" type="StackPane" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.controller.managing.data.TimeChartController">
+   <children>
+      <LineChart fx:id="TimeChart" layoutX="50.0" legendSide="RIGHT" legendVisible="false" prefWidth="600.0" title="Time Data">
+        <xAxis>
+          <CategoryAxis endMargin="25.0" prefHeight="24.0" prefWidth="365.0" side="BOTTOM" startMargin="0.0" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis prefHeight="316.0" prefWidth="36.0" side="LEFT" tickLabelGap="6.0" tickLength="5.0" />
+        </yAxis>
+      </LineChart>
+   </children>
+</fx:root>

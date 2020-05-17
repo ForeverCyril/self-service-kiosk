@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane fx:id="root" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.controller.shopping.ShopController">
+   <top>
+      <Label fx:id="title" text="Title" BorderPane.alignment="CENTER">
+         <font>
+            <Font size="36.0" />
+         </font>
+         <BorderPane.margin>
+            <Insets top="3.0" />
+         </BorderPane.margin>
+      </Label>
+   </top>
+   <center>
+      <SplitPane dividerPositions="0.7182628062360802" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+         <items>
+            <ScrollPane fx:id="menu" prefHeight="200.0" prefWidth="200.0" />
+            <VBox fx:id="cart" prefHeight="533.0" prefWidth="246.0" />
+         </items>
+      </SplitPane>
+   </center>
+   <bottom>
+      <HBox BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="time" text="$TIME" />
+            <Separator prefWidth="200.0" HBox.hgrow="ALWAYS" />
+            <Hyperlink onMouseClicked="#enterManage" text="Manage" />
+         </children>
+         <BorderPane.margin>
+            <Insets left="3.0" right="3.0" />
+         </BorderPane.margin>
+      </HBox>
+   </bottom>
+</BorderPane>
