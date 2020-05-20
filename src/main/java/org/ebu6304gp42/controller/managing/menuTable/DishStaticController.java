@@ -33,7 +33,9 @@ public class DishStaticController {
                 setChartData(chartData);
             }
         });
-        ((SimpleToggle)optionList.getChildren().get(0)).setSelect(true);
+        if(!optionList.getChildren().isEmpty()) {
+            ((SimpleToggle) optionList.getChildren().get(0)).setSelect(true);
+        }
     }
 
     private final Map<String, OptionData> data = new HashMap<>();

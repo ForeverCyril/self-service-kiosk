@@ -15,6 +15,7 @@ import org.ebu6304gp42.controller.shopping.cart.CartController;
 import org.ebu6304gp42.controller.shopping.menu.DishClickedEvent;
 import org.ebu6304gp42.controller.shopping.menu.MenuController;
 import org.ebu6304gp42.data.DishManager;
+import org.ebu6304gp42.data.DishStatistic;
 import org.ebu6304gp42.view.OptionDialog;
 
 import java.io.IOException;
@@ -77,6 +78,7 @@ public class ShopController implements Initializable {
 
     public void refresh(){
         menuController.clear();
+        DishStatistic.statisticDish();
         menuController.getModel().addAll(DishManager.getInstance().getDish());
     }
 }
