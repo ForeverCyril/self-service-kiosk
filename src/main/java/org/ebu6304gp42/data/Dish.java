@@ -112,7 +112,7 @@ public class Dish {
         options = list;
     }
     public String toString(){
-        return "Name"+name+"Description"+description;
+        return "Dish(" + getName() +")";
     }
 
     public void setImageTo(ImageView container, boolean checkStatus){
@@ -156,5 +156,16 @@ public class Dish {
         Image image = new Image(Dish.class.getResourceAsStream("/res/pic/soldout.png"),
                 container.getFitWidth(), container.getFitHeight(), true, true);
         container.setImage(image);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(!(obj instanceof Dish)) return false;
+        return ((Dish) obj).getName().equals(getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return name.hashCode();
     }
 }
