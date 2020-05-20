@@ -45,7 +45,7 @@ public class PhoneField extends AbstractNumberInputField {
 
     @Override
     public String getValue() {
-        return String.valueOf(getDecimalValue());
+        return getDecimalValue()==null?null:String.valueOf(getDecimalValue());
     }
 
     private BigDecimal getDecimalValue(){

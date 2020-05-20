@@ -137,10 +137,10 @@ public class AccountManager {
             throw new IllegalInputException("Email and Phone Can Not Be empty Together");
         }
 
-        if(email!= null && !validateEmail(email)){
+        if(email!= null && !email.isBlank() && !validateEmail(email)){
             throw new IllegalInputException("Email Invalid");
         }
-        if(phone!=null && !validateMobilePhone(phone)){
+        if(phone!=null && !phone.isBlank() && !validateMobilePhone(phone)){
             throw new IllegalInputException("Phone Invalid");
         }
     }
