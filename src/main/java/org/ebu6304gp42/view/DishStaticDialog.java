@@ -19,7 +19,8 @@ public class DishStaticDialog extends Dialog<ButtonType> {
         } catch (IOException e){
             e.printStackTrace();
             System.exit(-1);
-        }getDialogPane().getButtonTypes().addAll(EditButtonType, ButtonType.CLOSE);
+        }
+        getDialogPane().getButtonTypes().addAll(EditButtonType, ButtonType.CLOSE);
         ((DishStaticController)loader.getController()).setDish(dish);
         getDialogPane().setContent(loader.getRoot());
         setResultConverter(btn->{return btn;});

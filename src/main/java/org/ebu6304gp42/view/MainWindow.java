@@ -53,6 +53,7 @@ public class MainWindow extends Application {
             shop = loader.getRoot();
             shopController = loader.getController();
         } catch (IOException e){
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setHeaderText(e.getLocalizedMessage());
             alert.setContentText(Arrays.toString(e.getStackTrace()));
