@@ -97,6 +97,9 @@ public class Dish {
         }
         return recommend.split(";");
     }
+    public String getRecommendString() {
+        return recommend;
+    }
 
     public void setRecommend(String recommend) {
         this.recommend = recommend;

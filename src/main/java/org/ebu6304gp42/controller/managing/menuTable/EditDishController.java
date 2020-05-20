@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
 
 public class EditDishController implements Initializable {
     @FXML
+    private TextField rec;
+    @FXML
     private ImageView image;
     @FXML
     private TextField name;
@@ -92,6 +94,7 @@ public class EditDishController implements Initializable {
             disableBtn.setSelected(true);
         }
         desc.setText(dish.getDescription());
+        rec.setText(dish.getRecommendString());
         optionEditor = new OptionEditor(dish.getOptions());
         optionArea.getChildren().add(0,optionEditor);
     }
@@ -111,6 +114,7 @@ public class EditDishController implements Initializable {
         dish.setRemain(remain.getValue());
         dish.setDescription(desc.getText());
         dish.resetOptions(optionEditor.getOptions());
+        dish.setRecommend(rec.getText());
         return dish;
     }
 }

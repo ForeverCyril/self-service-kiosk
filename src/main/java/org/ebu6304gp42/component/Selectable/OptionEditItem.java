@@ -13,6 +13,7 @@ public class OptionEditItem extends SelectableItem{
     public OptionEditItem(DishOption opt){
         super();
         content.setAlignment(Pos.CENTER_LEFT);
+        content.setSpacing(8);
         setUserData(opt);
         update(opt);
         getChildren().add(content);
