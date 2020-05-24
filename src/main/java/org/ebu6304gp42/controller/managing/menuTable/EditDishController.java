@@ -8,10 +8,10 @@ import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.stage.FileChooser;
-import org.ebu6304gp42.component.InputField.CurrencyField;
+import org.ebu6304gp42.component.inputField.CurrencyField;
 import org.ebu6304gp42.config.PathConfig;
 import org.ebu6304gp42.data.Dish;
-import org.ebu6304gp42.component.OptionEditor;
+import org.ebu6304gp42.component.optioneditor.OptionEditor;
 import org.ebu6304gp42.view.ShowAlert;
 
 import java.io.File;
@@ -71,6 +71,9 @@ public class EditDishController implements Initializable {
         });
     }
 
+    /**
+     * Call when add button click, show {@link org.ebu6304gp42.component.optioneditor.OptionEditDialog}
+     */
     @FXML
     private void addOption(ActionEvent event){
         optionEditor.add();
@@ -80,9 +83,13 @@ public class EditDishController implements Initializable {
         optionEditor.remove();
     }
 
+    /**
+     * Set edited dish
+     * @param dish dish need edition
+     */
     public void setDish(Dish dish){
         pic_name = dish.getPic();
-        dish.setImageTo(image);
+        dish.setImageTo(image, false);
         name.setText(dish.getName());
         price.setText(String.valueOf(dish.getPrice()));
         remain.getValueFactory().setValue(dish.getRemain());
@@ -95,6 +102,11 @@ public class EditDishController implements Initializable {
         optionEditor = new OptionEditor(dish.getOptions());
         optionArea.getChildren().add(0,optionEditor);
     }
+
+    /**
+     * validate input
+     * @return Whether it's valid
+     */
     public boolean valid(){
         if (name.getText() == null || name.getText().isBlank()){
             ShowAlert.error("Input Error", "Dish Name Can Not Be Empty");
@@ -102,6 +114,11 @@ public class EditDishController implements Initializable {
         }
         return true;
     }
+
+    /**
+     * Get Dish from the input
+     * @return dish
+     */
     public Dish getDish(){
         Dish dish = new Dish();
         dish.setName(name.getText());

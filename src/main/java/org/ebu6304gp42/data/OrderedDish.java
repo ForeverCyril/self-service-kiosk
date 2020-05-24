@@ -2,6 +2,9 @@ package org.ebu6304gp42.data;
 
 import java.util.ArrayList;
 
+/**
+ * Data of ordered Dish
+ */
 public class OrderedDish {
     private String name;
     private ArrayList<SelectedOption> options;

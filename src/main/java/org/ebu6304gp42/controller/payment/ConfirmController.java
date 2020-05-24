@@ -12,8 +12,9 @@ import org.ebu6304gp42.data.Account;
 import org.ebu6304gp42.data.AccountManager;
 import org.ebu6304gp42.data.Order;
 import org.ebu6304gp42.data.OrderedDish;
-import org.ebu6304gp42.exception.account.IllegalInputException;
+import org.ebu6304gp42.exception.AccountException;
 import org.ebu6304gp42.view.RegisterDialog;
+import org.ebu6304gp42.view.ShowAlert;
 import org.ebu6304gp42.view.UpdateAccountDialog;
 
 import java.io.IOException;
@@ -61,10 +62,8 @@ public class ConfirmController {
             acc_not_login.setVisible(false);
             acc_login.toFront();
             acc_login.setVisible(true);
-        } catch (IllegalInputException e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setContentText("User ID Error");
-            alert.showAndWait();
+        } catch (AccountException e) {
+            ShowAlert.error("Account Error", e.getMessage());
         }
     }
     @FXML
@@ -108,15 +107,27 @@ public class ConfirmController {
         }
     }
 
+    /**
+     * Set Order
+     * @param order order
+     */
     public void setOrder(Order order){
         order.getDish().iterator().forEachRemaining(this::addOrderedDish);
         price.setText(String.format("%.2f", order.getPrice()));
     }
 
+    /**
+     * Get Login Account
+     * @return
+     */
     public Account getLoginAccount(){
         return loginAccount;
     }
 
+    /**
+     * Return check status of use stamp
+     * @return whether use stamp
+     */
     public boolean isUseStamp(){
         return useStamp.isSelected();
     }
@@ -132,6 +143,10 @@ public class ConfirmController {
         order_area.getChildren().add(loader.getRoot());
     }
 
+    /**
+     * Get Order Type
+     * @return order type
+     */
     public String getType(){
         return typeGroup.getSelectedToggle().getUserData().toString();
     }

@@ -6,6 +6,9 @@ import org.ebu6304gp42.config.PathConfig;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Manager Dish Data
+ */
 public class DishManager {
     private static DishManager instance;
     ArrayList<Dish> dishList = new ArrayList<Dish>();
@@ -19,6 +22,9 @@ public class DishManager {
 
     private DishManager(){load();}
 
+    /**
+     * Save Data into file that config in {@link PathConfig}
+     */
     public void save(){
         Gson gson= new Gson();
 
@@ -47,6 +53,9 @@ public class DishManager {
         }
     }
 
+    /**
+     * Load Data from file, it will auto load when the class creating.
+     */
     public void load(){
         File file = new File(PathConfig.getDishFile());
         if(!file.exists())return;
@@ -67,10 +76,23 @@ public class DishManager {
         }
     }
 
+    /**
+     * Add a new dish
+     * @param dish new dish
+     */
     public void addDish(Dish dish){
         dishList.add(dish);
     }
+
+    /**
+     * Clear All dish
+     */
     public void clear(){dishList.clear();}
+
+    /**
+     * Get All dish
+     * @return dish arraylist
+     */
     public ArrayList<Dish> getDish(){
         return dishList;
     }

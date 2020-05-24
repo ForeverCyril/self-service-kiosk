@@ -1,12 +1,20 @@
-package org.ebu6304gp42.component.InputField;
+package org.ebu6304gp42.component.inputField;
 
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 
+/**
+ * A Currency Input Field. Can Show unit and the separator. (eg. 1,234.34 £)
+ */
 public class CurrencyField extends AbstractNumberInputField {
-    private static final String CurrencySymbol = "$";
+    private static final String CurrencySymbol = "£";
     private final static int decimalScale = 2;
 
+    /**
+     * Control input data, only allowed number.
+     * @param value String need to determinate.
+     * @return Is valid?
+     */
     @Override
     protected boolean isValid(String value) {
         if(value == null || value.isBlank()){
@@ -20,11 +28,19 @@ public class CurrencyField extends AbstractNumberInputField {
         }
     }
 
+    /**
+     * Get currency value of the text
+     * @return text value
+     */
     protected BigDecimal getCurrencyValue() {
         return getDecimalValue('.');
     }
 
-
+    /**
+     * Get value as decimal
+     * @param separator separator used in text
+     * @return value of the text
+     */
     private BigDecimal getDecimalValue(final char separator){
         if(getText() == null || getText().isBlank()){
             return null;
@@ -43,6 +59,11 @@ public class CurrencyField extends AbstractNumberInputField {
         return new BigDecimal(value_str);
     }
 
+    /**
+     * Format text as currency.
+     * @param pattern Pattern for format
+     * @return text after format
+     */
     @Override
     protected String formatValue(String pattern) {
         if(getText() != null && !getText().isBlank()){
@@ -60,17 +81,28 @@ public class CurrencyField extends AbstractNumberInputField {
     }
 
 
-
+    /**
+     * Get text formatter
+     * @return text formatter
+     */
     @Override
     protected String getFormatter() {
         return String.format("%s%s%s", CurrencySymbol, BASE_PATTERN, ".##");
     }
 
+    /**
+     * Get text value
+     * @return value of the text
+     */
     @Override
     public BigDecimal getValue() {
         return getCurrencyValue();
     }
 
+    /**
+     * Get value as double
+     * @return double value
+     */
     public double getDoubleValue(){
         return getValue()!=null?getValue().doubleValue():0.0;
     }

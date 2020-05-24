@@ -3,9 +3,9 @@ package org.ebu6304gp42.controller.managing.menuTable;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.layout.VBox;
-import org.ebu6304gp42.component.Selectable.OptionStaticItem;
-import org.ebu6304gp42.component.SimpleToggle.SimpleToggle;
-import org.ebu6304gp42.component.SimpleToggle.SimpleToggleGroup;
+import org.ebu6304gp42.component.selectable.OptionStaticItem;
+import org.ebu6304gp42.component.simpleToggle.SimpleToggle;
+import org.ebu6304gp42.component.simpleToggle.SimpleToggleGroup;
 import org.ebu6304gp42.data.*;
 
 import java.util.ArrayList;
@@ -37,6 +37,11 @@ public class DishStaticController {
     }
 
     private final Map<String, OptionData> data = new HashMap<>();
+
+    /**
+     * Static option data for given dish
+     * @param dish dish need to static
+     */
     private void staticData(Dish dish){
         String dishName = dish.getName();
         for(var option:dish.getOptions()){
@@ -66,6 +71,7 @@ public class DishStaticController {
     }
 
     private final SimpleToggleGroup group = new SimpleToggleGroup();
+
     private void initOptionList(){
         for(var item:data.entrySet()){
             OptionStaticItem widget = new OptionStaticItem(item.getKey());
@@ -85,6 +91,9 @@ public class DishStaticController {
         }
     }
 
+    /**
+     * Store the static for an option.
+     */
     static class OptionData{
         Map<String, Integer> data = new HashMap<>();
         public OptionData(){}

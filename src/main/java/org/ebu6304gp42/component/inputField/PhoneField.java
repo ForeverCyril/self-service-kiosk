@@ -1,14 +1,26 @@
-package org.ebu6304gp42.component.InputField;
+package org.ebu6304gp42.component.inputField;
 
 import java.math.BigDecimal;
 
+/**
+ * A text input filed to input phone number. Can auto format text(eg, 123-1234-1234)
+ */
 public class PhoneField extends AbstractNumberInputField {
 
+    /**
+     * No used in this case.
+     * @return empty string
+     */
     @Override
     protected String getFormatter() {
-        return ",###";
+        return "";
     }
 
+    /**
+     * Control input data, only allowed number.
+     * @param value String need to determinate.
+     * @return Is valid?
+     */
     @Override
     protected boolean isValid(String value) {
         if(value == null || value.isEmpty()){
@@ -22,6 +34,11 @@ public class PhoneField extends AbstractNumberInputField {
         }
     }
 
+    /**
+     * Format text as phone number.
+     * @param pattern Pattern for format
+     * @return text after format
+     */
     @Override
     protected String formatValue(String pattern) {
         if(getText() != null && !getText().isBlank()){
@@ -43,11 +60,19 @@ public class PhoneField extends AbstractNumberInputField {
         return null;
     }
 
+    /**
+     * Get Phone number
+     * @return phone number as string.
+     */
     @Override
     public String getValue() {
         return String.valueOf(getDecimalValue());
     }
 
+    /**
+     * Value of the text
+     * @return value of the text
+     */
     private BigDecimal getDecimalValue(){
         if(getText() == null || getText().isBlank()){
             return null;

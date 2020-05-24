@@ -3,7 +3,7 @@ package org.ebu6304gp42.data;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.ebu6304gp42.config.PathConfig;
-import org.ebu6304gp42.exception.account.IllegalInputException;
+import org.ebu6304gp42.exception.AccountException;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -12,8 +12,8 @@ import java.util.regex.Pattern;
 
 
 /**
- * @author Dong Bo
- * @author Liu Yingying
+ * Used to manager account data. Please use getInstance instead of manually new one.
+ * You should only create account by this class for the {@link Account} do not have data validator.
  */
 
 public class AccountManager {
@@ -21,6 +21,10 @@ public class AccountManager {
 
     ArrayList<Account> list = new ArrayList<>();
 
+    /**
+     * Get the instance of the class. There is only one instance during running.
+     * @return Class instance.
+     */
     public static AccountManager getInstance(){
         if(instance == null){
             instance = new AccountManager();
@@ -30,7 +34,17 @@ public class AccountManager {
 
     private AccountManager(){load();}
 
-    public Account register(String first_name,String last_name,String phone,String email, boolean rec) throws IllegalInputException {
+    /**
+     * Register an account, phone and email can not be both empty.
+     * @param first_name Account first name
+     * @param last_name Account last name
+     * @param phone Account phone
+     * @param email Account email
+     * @param rec Want to receive news
+     * @return Registered Account
+     * @throws AccountException throw when given param is invalid.
+     */
+    public Account register(String first_name,String last_name,String phone,String email, boolean rec) throws AccountException {
         int id = list.size()+1;
         validate(first_name, last_name, phone, email);
         Account account = new Account(first_name, last_name, phone, email, id, rec);
@@ -38,6 +52,9 @@ public class AccountManager {
         return account;
     }
 
+    /**
+     * Save data into file, which is config in {@link PathConfig}
+     */
     public void save() {
         File file = new File(PathConfig.getAccountFile());
         Gson gson = new Gson();
@@ -60,9 +77,18 @@ public class AccountManager {
         }
     }
 
-
+    /**
+     * Update information by account id.
+     * @param id Id of account which need update
+     * @param first_name New first name
+     * @param last_name New Last name
+     * @param phone New phone
+     * @param email New email
+     * @param rec New receive status
+     * @throws AccountException throw when param is invalid.
+     */
     public void updateInformation(int id, String first_name,String last_name,String phone,String email, boolean rec)
-            throws IllegalInputException{
+            throws AccountException {
         var acc = seek(id);
         validate(first_name, last_name, phone, email);
         acc.setFirst_name(first_name);
@@ -72,7 +98,9 @@ public class AccountManager {
         acc.setAccept_rec(rec);
     }
 
-
+    /**
+     * Load data from file. It will automatic load when the class is creating.
+     */
     public void load() {
         int num = 0;
         list.clear();
@@ -115,41 +143,64 @@ public class AccountManager {
         return list;
     }
 
-    //根据ID返回对象
-    public Account seek(int id) throws IllegalInputException {
+    /**
+     * Get Account by id
+     * @param id Account id
+     * @return Account
+     * @throws AccountException throw when Account not found.
+     */
+    public Account seek(int id) throws AccountException {
         for (Account account : list) {
             if (account.getId() == id) {
                 System.out.println(account);
                 return account;
             }
         }
-        throw new IllegalInputException(String.format("ID:%08d is not found", id));
+        throw new AccountException(String.format("ID:%08d is not found", id));
     }
 
-    public void validate(String first_name,String last_name,String phone,String email) throws IllegalInputException {
+    /**
+     * Validate whether data is meet the requirement.
+     * @param first_name first name
+     * @param last_name last name
+     * @param phone phone
+     * @param email email
+     * @throws AccountException throw when param is invalid, the reason is stored in exception message.
+     */
+    public void validate(String first_name,String last_name,String phone,String email) throws AccountException {
         if(!validateName(first_name)){
-            throw new IllegalInputException("First Name Invalid");
+            throw new AccountException("First Name Invalid");
         }
         if(!validateName(last_name)){
-            throw new IllegalInputException("Last Name Invalid");
+            throw new AccountException("Last Name Invalid");
         }
         if((email==null||email.isBlank()) && (phone==null||phone.isBlank())){
-            throw new IllegalInputException("Email and Phone Can Not Be empty Together");
+            throw new AccountException("Email and Phone Can Not Be empty Together");
         }
 
         if(email!= null && !validateEmail(email)){
-            throw new IllegalInputException("Email Invalid");
+            throw new AccountException("Email Invalid");
         }
         if(phone!=null && !validateMobilePhone(phone)){
-            throw new IllegalInputException("Phone Invalid");
+            throw new AccountException("Phone Invalid");
         }
     }
 
+    /**
+     * Validate phone format
+     * @param phone phone number
+     * @return Whether it's valid
+     */
     public static boolean validateMobilePhone(String phone) {
         Pattern pattern = Pattern.compile("^[1]\\d{10}$");
         return pattern.matcher(phone).matches();
     }
 
+    /**
+     * Valid email format
+     * @param email email
+     * @return Whether it's valid.
+     */
     public static boolean validateEmail(String email) {
         boolean flag = false;
         try {
@@ -163,6 +214,11 @@ public class AccountManager {
         return flag;
     }
 
+    /**
+     * Validate name
+     * @param name name
+     * @return Whether it's valid
+     */
     public static Boolean validateName(String name) {
         //also include chinese character
         return name.matches("^([\\\\u4e00-\\\\u9fa5]{1,20}|[a-zA-Z\\\\.\\\\s]{1,20})$");

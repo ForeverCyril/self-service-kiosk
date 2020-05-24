@@ -23,9 +23,7 @@ public class EatWayChartController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        statisticsTime();
-        System.out.println(eatIn_Num);
-        System.out.println(takeAway_Num);
+        statistics();
         ObservableList<PieChart.Data> eatWayData = FXCollections.observableArrayList();
         eatWayData.addAll(new PieChart.Data("EAT_IN",eatIn_Num),new PieChart.Data("TAKE_AWAY",takeAway_Num));
         EatWayChart.setData(eatWayData);
@@ -33,7 +31,10 @@ public class EatWayChartController implements Initializable {
         EatWayChart.setLabelLineLength(30);
     }
 
-    public void statisticsTime(){
+    /**
+     * Static information of orders
+     */
+    public void statistics(){
         for(Order order:OrderManager.getInstance().getOrders()){
             if(order.getType()== EAT_IN){
                 eatIn_Num++;

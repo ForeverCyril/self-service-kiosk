@@ -82,6 +82,9 @@ public class MagaeController implements Initializable {
         tabPane.getSelectionModel().select(tab);
     }
 
+    /**
+     * When all tab close show homepage tab.
+     */
     private void setCloseEventForTab(Tab tab){
         tab.setOnClosed(event -> {
             if(tabPane.getTabs().isEmpty()){
@@ -101,9 +104,16 @@ public class MagaeController implements Initializable {
         return loader;
     }
 
+    /**
+     * @return Whether data changed
+     */
     public boolean dataChanged(){
         return menuTableController.changed();
     }
+
+    /**
+     * Save data
+     */
     public void saveMenu(){
         menuTableController.save();
     }

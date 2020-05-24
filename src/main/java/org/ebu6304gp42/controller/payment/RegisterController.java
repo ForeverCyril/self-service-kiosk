@@ -7,10 +7,10 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.web.WebView;
-import org.ebu6304gp42.component.InputField.PhoneField;
+import org.ebu6304gp42.component.inputField.PhoneField;
 import org.ebu6304gp42.data.Account;
 import org.ebu6304gp42.data.AccountManager;
-import org.ebu6304gp42.exception.account.IllegalInputException;
+import org.ebu6304gp42.exception.AccountException;
 
 public class RegisterController {
     @FXML
@@ -35,11 +35,20 @@ public class RegisterController {
         alert.showAndWait();
     }
 
+    /**
+     * Check status of accept user agreement.
+     * @return check status of accept user agreement.
+     */
     public ReadOnlyBooleanProperty getAcceptProperty(){
         return accept.selectedProperty();
     }
 
-    public Account getAccount() throws IllegalInputException {
+    /**
+     * Registered Account
+     * @return new Account
+     * @throws AccountException input information error
+     */
+    public Account getAccount() throws AccountException {
         return AccountManager.getInstance().register(
                 first_name.getText(),
                 last_name.getText(),
@@ -49,7 +58,12 @@ public class RegisterController {
         );
     }
 
-    public void updateData(int id) throws IllegalInputException {
+    /**
+     * Update information for account with id.
+     * @param id account id
+     * @throws AccountException input error
+     */
+    public void updateData(int id) throws AccountException {
         AccountManager.getInstance().updateInformation(id,
                 first_name.getText(),
                 last_name.getText(),
