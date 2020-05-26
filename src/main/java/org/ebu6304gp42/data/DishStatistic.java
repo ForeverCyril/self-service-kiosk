@@ -30,7 +30,7 @@ public class DishStatistic{
             return b.getValue()-a.getValue();
         });
         ArrayList<Dish> hotDish = new ArrayList<>();
-        for(int i=0;i<3;i++){
+        for(int i=0;i<3 && i < list.size();i++){
             hotDish.add(list.get(i).getKey());
         }
         for (int i = 3;i<list.size() && list.get(i).getValue().equals(list.get(i - 1).getValue()); i++) {

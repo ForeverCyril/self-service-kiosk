@@ -1,8 +1,9 @@
 import org.ebu6304gp42.config.PathConfig;
 import org.ebu6304gp42.data.*;
 
-import org.junit.Test;
-import static org.junit.Assert.*;
+import org.ebu6304gp42.exception.AccountException;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -26,7 +27,7 @@ public class DataTest {
     }
     
     @Test
-    public void testOrderBank(){
+    public void testOrderManager(){
         PathConfig.ORDER_FILE = "Test/" + PathConfig.ORDER_FILE;
         PathConfig.prefix="./";
         clearFile(PathConfig.ORDER_FILE);
@@ -68,11 +69,24 @@ public class DataTest {
 
         AccountManager bank = AccountManager.getInstance();
         for(int i = 0; i <10; i++){
-            bank.register("Test"+(char)((int)'a' + i), "Test"+(char)((int)'a' + i), "1231234123"+i%10,"", false);
+            try {
+                bank.register("Test"+(char)((int)'a' + i), "Test"+(char)((int)'a' + i),
+                        "1231234123"+i%10,
+                        "",
+                        false);
+            } catch (AccountException e) {
+                e.printStackTrace();
+            }
         }
         bank.save();
         AccountManager bank_load = AccountManager.getInstance();
-        var acc = bank_load.seek(1);
+        Account acc = null;
+        try {
+            acc = bank_load.seek(1);
+        } catch (AccountException e) {
+            e.printStackTrace();
+        }
+        assert acc != null;
         assertEquals(acc.getFirst_name(), "Testa");
     }
 

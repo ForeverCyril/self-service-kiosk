@@ -72,4 +72,18 @@ public class RegisterController {
                 accept_rec.isSelected()
         );
     }
+
+    /**
+     * Set Account Information, used for modify information.
+     * @param account account
+     */
+    public void setAccount(Account account){
+        first_name.setText(account.getFirst_name());
+        last_name.setText(account.getLast_name());
+        phone.setText(account.getPhone());
+        email.setText(account.getEmail());
+        accept.setSelected(true);
+        accept.setDisable(true);
+        accept_rec.setSelected(account.isAccept_rec());
+    }
 }
