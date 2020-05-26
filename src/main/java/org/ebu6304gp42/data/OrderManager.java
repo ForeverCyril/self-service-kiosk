@@ -6,11 +6,18 @@ import org.ebu6304gp42.config.PathConfig;
 import java.io.*;
 import java.util.ArrayList;
 
+/**
+ * Order manger. Please use getInstance instead of manually new one.
+ */
 public class OrderManager {
     private static OrderManager instance;
     private boolean changed = true;
     private final ArrayList<Order> orders;
 
+    /**
+     * It will auto load data from file when data changed
+     * @return order list
+     */
     public ArrayList<Order> getOrders() {
         if(changed){
             load();
@@ -29,6 +36,10 @@ public class OrderManager {
     private OrderManager(){
         orders = new ArrayList<>();
     }
+
+    /**
+     * Load data from file
+     */
     public void load(){
         orders.clear();
         try {
@@ -49,6 +60,10 @@ public class OrderManager {
         }
     }
 
+    /**
+     * Add order. It will write data in a new line at the end of the file
+     * @param order new order
+     */
     public void addOrder(Order order){
         Gson gson = new Gson();
         String data = gson.toJson(order);

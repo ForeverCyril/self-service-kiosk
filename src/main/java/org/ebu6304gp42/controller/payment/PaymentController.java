@@ -28,6 +28,10 @@ public class PaymentController {
         paidProperty.setValue(true);
     }
 
+    /**
+     * Set Price
+     * @param price price
+     */
     public void setPrice(double price){
         priceTag.setText(String.format("You need pay %.2f £", price));
     }

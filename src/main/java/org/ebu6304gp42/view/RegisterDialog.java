@@ -7,7 +7,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
 import org.ebu6304gp42.controller.payment.RegisterController;
 import org.ebu6304gp42.data.Account;
-import org.ebu6304gp42.exception.account.IllegalInputException;
+import org.ebu6304gp42.exception.AccountException;
 
 import java.io.IOException;
 
@@ -29,8 +29,8 @@ public class RegisterDialog extends Dialog<Account> {
         applyBtn.addEventFilter(ActionEvent.ACTION, event -> {
             try {
                 result = controller.getAccount();
-            } catch (IllegalInputException e){
-                ShowAlert.error("Information Error", e.getReason());
+            } catch (AccountException e){
+                ShowAlert.error("Information Error", e.getMessage());
                 result = null;
                 event.consume();
             }

@@ -11,6 +11,7 @@ import org.ebu6304gp42.controller.payment.ConfirmController;
 import org.ebu6304gp42.data.Account;
 import org.ebu6304gp42.data.Order;
 import org.ebu6304gp42.data.OrderManager;
+import org.ebu6304gp42.exception.AccountException;
 
 import java.io.IOException;
 import java.util.Date;
@@ -52,8 +53,16 @@ public class ConfirmDialog extends Dialog<Boolean> {
         } else {
             if(controller.isUseStamp()){
                 var res = showPayment(0);
-                if(!res){ event.consume();}
-                else {account.useCount();}
+                if(!res){
+                    event.consume();
+                } else {
+                    try {
+                        account.useCount();
+                    } catch (AccountException e) {
+                        ShowAlert.error("Use Count Error", e.getMessage());
+                        event.consume();
+                    }
+                }
             } else {
                 var res = showPayment(order.getPrice());
                 if(!res){ event.consume();} else {

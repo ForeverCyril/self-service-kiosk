@@ -2,8 +2,15 @@ package org.ebu6304gp42.data;
 
 import java.util.Date;
 import java.util.ArrayList;
+
+/**
+ * Order data.
+ */
 public class Order {
-    static public enum TYPE{TAKE_AWAY, EAT_IN }
+    /**
+     * Order Type.
+     */
+    public enum TYPE{TAKE_AWAY, EAT_IN }
     Date time;
     double price;
     ArrayList<OrderedDish> dish;
@@ -23,16 +30,21 @@ public class Order {
         dish = new ArrayList<>();
     }
 
+    /**
+     * Get ordered dish
+     * @return array list of ordered dish
+     */
     public ArrayList<OrderedDish> getDish() {
         return dish;
     }
+
+    /**
+     * Add ordered dish
+     * @param ordered_dish new ordered dish
+     */
     public void addDish(OrderedDish ordered_dish) {
         price += ordered_dish.getTotalPrice();
         this.dish.add(ordered_dish);
-    }
-    public void deleteDish(int index) {
-        price -= dish.get(index).getTotalPrice();
-        this.dish.remove(index);
     }
 
     public Date getTime() {

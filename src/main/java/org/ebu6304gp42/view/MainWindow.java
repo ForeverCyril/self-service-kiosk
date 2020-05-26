@@ -10,7 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
-import org.ebu6304gp42.config.GeneraConfig;
+import org.ebu6304gp42.config.GeneralConfig;
 import org.ebu6304gp42.controller.managing.MagaeController;
 import org.ebu6304gp42.controller.shopping.EnterManageEvent;
 import org.ebu6304gp42.controller.shopping.ShopController;
@@ -31,7 +31,7 @@ public class MainWindow extends Application {
         shopStage = primaryStage;
         Scene scene = new Scene(shop);
         shopStage.setScene(scene);
-        shopStage.setTitle(GeneraConfig.STORE_NAME);
+        shopStage.setTitle(GeneralConfig.STORE_NAME);
         shopStage.getIcons().add(new Image(getClass().getResourceAsStream("/res/pic/app.png")));
 
         shopStage.show();

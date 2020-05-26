@@ -4,9 +4,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
-import javafx.scene.input.MouseEvent;
 import org.ebu6304gp42.controller.payment.RegisterController;
-import org.ebu6304gp42.exception.account.IllegalInputException;
+import org.ebu6304gp42.exception.AccountException;
 
 import java.io.IOException;
 
@@ -24,8 +23,8 @@ public class UpdateAccountDialog extends Dialog<Boolean> {
             event -> {
                 try {
                     ((RegisterController)loader.getController()).updateData(id);
-                } catch (IllegalInputException e) {
-                    ShowAlert.error("Information Error", e.getReason());
+                } catch (AccountException e) {
+                    ShowAlert.error("Information Error", e.getLocalizedMessage());
                     event.consume();
                 }
             }

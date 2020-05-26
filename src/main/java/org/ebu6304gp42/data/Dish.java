@@ -8,6 +8,10 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+
+/**
+ * Store Dish data
+ */
 public class Dish {
     private String name;
     private double price;
@@ -115,6 +119,11 @@ public class Dish {
         return "Dish(" + getName() +")";
     }
 
+    /**
+     * Set Image to a Image View
+     * @param container image container
+     * @param checkStatus when it's true, it will set sold out picture when the dish is available.
+     */
     public void setImageTo(ImageView container, boolean checkStatus){
         if(checkStatus && !isAvailable()){
             setSoldOutImage(container);
@@ -129,16 +138,11 @@ public class Dish {
         setImageTo(container, pic);
     }
 
-    public void setImageTo(ImageView container){
-        if(pic!=null && !pic.isBlank()){
-            File picFile = new File(pic);
-            if (!picFile.exists()){
-                pic = null;
-            }
-        }
-        setImageTo(container, pic);
-    }
-
+    /**
+     * Set image to container
+     * @param container image container
+     * @param pic filename
+     */
     static public void setImageTo(ImageView container, String pic){
         if(pic!=null && !pic.isBlank()){
             File picFile = new File(pic);
@@ -152,6 +156,11 @@ public class Dish {
             }
         }
     }
+
+    /**
+     * Set sold out picture in imageview
+     * @param container imageview that contain the image.
+     */
     static public void setSoldOutImage(ImageView container){
         Image image = new Image(Dish.class.getResourceAsStream("/res/pic/soldout.png"),
                 container.getFitWidth(), container.getFitHeight(), true, true);

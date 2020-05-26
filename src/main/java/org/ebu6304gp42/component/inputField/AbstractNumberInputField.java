@@ -1,4 +1,4 @@
-package org.ebu6304gp42.component.InputField;
+package org.ebu6304gp42.component.inputField;
 
 import javafx.application.Platform;
 import javafx.scene.control.TextField;
@@ -6,6 +6,9 @@ import javafx.scene.input.KeyEvent;
 
 import java.text.DecimalFormatSymbols;
 
+/**
+ * Abstract NumberInputField. Can control Display format and limit input.
+ */
 public abstract class AbstractNumberInputField extends TextField {
     protected final static String BASE_PATTERN = ",###";
     private final static DecimalFormatSymbols symbols = new DecimalFormatSymbols();
@@ -35,10 +38,31 @@ public abstract class AbstractNumberInputField extends TextField {
         });
     }
 
+    /**
+     * Get Formatter
+     * @return The text Formatter.
+     */
     protected String getFormatter(){
         return BASE_PATTERN;
     }
+
+    /**
+     * Determinate whether a string is valid. Override it to limit the input.
+     * @param value String need to determinate.
+     * @return Is is valid.
+     */
     protected abstract boolean isValid(String value);
+
+    /**
+     * Format the text by the given pattern. Override it to control text format.
+     * @param pattern Pattern for format
+     * @return Formated text
+     */
     protected abstract String formatValue(String pattern);
+
+    /**
+     * Get the value of the text. Override it to fit your situation.
+     * @return value of the text
+     */
     public abstract Object getValue();
 }

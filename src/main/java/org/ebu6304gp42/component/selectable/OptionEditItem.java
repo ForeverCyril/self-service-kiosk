@@ -1,4 +1,4 @@
-package org.ebu6304gp42.component.Selectable;
+package org.ebu6304gp42.component.selectable;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
@@ -7,7 +7,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import org.ebu6304gp42.data.DishOption;
 
-
+/**
+ * A selected control used in {@link org.ebu6304gp42.component.optioneditor.OptionEditor}. Show Dish Option
+ */
 public class OptionEditItem extends SelectableItem{
     HBox content = new HBox();
     public OptionEditItem(DishOption opt){

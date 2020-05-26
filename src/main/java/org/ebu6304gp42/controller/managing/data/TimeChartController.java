@@ -29,7 +29,7 @@ public class TimeChartController implements Initializable{
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        statisticsWay();
+        statistics();
         LineChart.Series<String,Integer> timeChart = new LineChart.Series<String,Integer>();
         timeChart.setName("Time Distribution");
         timeChart.getData().add(new XYChart.Data<String, Integer>("Breakfast",breakfast_Num));
@@ -42,7 +42,10 @@ public class TimeChartController implements Initializable{
     
     }
 
-    public void statisticsWay(){
+    /**
+     * Static information of orders
+     */
+    public void statistics(){
         for(Order orders: OrderManager.getInstance().getOrders()){
             cal.setTime(orders.getTime());
             if(cal.get(Calendar.HOUR_OF_DAY)>=6 && cal.get(Calendar.HOUR_OF_DAY)<9){

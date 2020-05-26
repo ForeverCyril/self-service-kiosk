@@ -10,7 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.util.Duration;
-import org.ebu6304gp42.config.GeneraConfig;
+import org.ebu6304gp42.config.GeneralConfig;
 import org.ebu6304gp42.controller.shopping.cart.CartController;
 import org.ebu6304gp42.controller.shopping.menu.DishClickedEvent;
 import org.ebu6304gp42.controller.shopping.menu.MenuController;
@@ -40,7 +40,7 @@ public class ShopController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        title.setText(GeneraConfig.STORE_NAME);
+        title.setText(GeneralConfig.STORE_NAME);
         FXMLLoader menu_loader = new FXMLLoader(getClass().getResource("/fxml/shop/Menu.fxml"));
         FXMLLoader cart_loader = new FXMLLoader(getClass().getResource("/fxml/shop/Cart.fxml"));
         try {

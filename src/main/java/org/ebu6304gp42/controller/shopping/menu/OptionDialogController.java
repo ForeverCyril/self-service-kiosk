@@ -32,7 +32,7 @@ public class OptionDialogController{
 
     public void setDish(Dish dish){
         this.dish = dish;
-        dish.setImageTo(image);
+        dish.setImageTo(image, false);
         dish_name.setText(dish.getName());
         optionWidget = new OptionWidget(dish);
         opt_area.setContent(optionWidget);

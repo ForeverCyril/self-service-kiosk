@@ -66,6 +66,9 @@ public class MenuTableController implements Initializable {
         save();
     }
 
+    /**
+     * Save Dish to dish manager
+     */
     public void save(){
         DishManager dishManager = DishManager.getInstance();
         dishManager.clear();
@@ -74,6 +77,10 @@ public class MenuTableController implements Initializable {
         modified = false;
     }
 
+    /**
+     * Add dish to the table
+     * @param dish
+     */
     public void addDish(Dish dish){
         if (dish==null)return;
         data.add(dish);
@@ -81,6 +88,9 @@ public class MenuTableController implements Initializable {
         modified = true;
     }
 
+    /**
+     * @return whether menu changed.
+     */
     public boolean changed(){
         return modified;
     }

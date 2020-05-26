@@ -1,8 +1,10 @@
 package org.ebu6304gp42.data;
 
+import org.ebu6304gp42.exception.AccountException;
+
 /**
- * @author Dong Bo
- * @author Liu Yingying
+ * Class that represent an account.
+ * You should create Account by Account Manager due to there is no data valid inside this class.
  */
 public class Account {
     private String first_name;
@@ -12,7 +14,8 @@ public class Account {
     private int count = 0;
     private int id;
     private boolean accept_rec;
-    public final static int FREENUM = 10;//可以免费的邮票数
+    public final static int
+            FREE_NUM = 10;//可以免费的邮票数
 
     public Account(String first_name, String last_name, String phone, String email, int id, boolean accept_rec) {
         this.first_name = first_name;
@@ -32,6 +35,10 @@ public class Account {
         accept_rec = false;
     }
 
+    /**
+     *Deep copy from another Account
+     * @param account resource
+     */
     public void copyFrom(Account account){
         first_name = account.first_name;
         last_name = account.last_name;
@@ -89,18 +96,22 @@ public class Account {
         this.id = id;
     }
 
+    /**
+     * Make Account stamp count increase one.
+     */
     public void addCount(){
         count++;
     }
 
-    public boolean useCount(){
-        if (count >= FREENUM){
-            count -= FREENUM;
-            return true;
+    /**
+     * Use Stamp Count, count will decrease FREE_NUM
+     * @throws AccountException throw when count no enough.
+     */
+    public void useCount() throws AccountException{
+        if(count < FREE_NUM){
+            throw new AccountException("Count Not Enough.");
         }
-        else
-            System.out.println("You do not have enough stamps");
-        return false;
+        count -= FREE_NUM;
     }
 
     public boolean isAccept_rec() {

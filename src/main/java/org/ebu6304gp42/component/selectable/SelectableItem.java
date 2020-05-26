@@ -1,13 +1,16 @@
-package org.ebu6304gp42.component.Selectable;
+package org.ebu6304gp42.component.selectable;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.css.PseudoClass;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
-import org.ebu6304gp42.component.SimpleToggle.SimpleToggle;
-import org.ebu6304gp42.component.SimpleToggle.SimpleToggleGroup;
+import org.ebu6304gp42.component.simpleToggle.SimpleToggle;
+import org.ebu6304gp42.component.simpleToggle.SimpleToggleGroup;
 
+/**
+ * A Control that can be selected by click.
+ */
 public class SelectableItem extends Pane implements SimpleToggle{
     private static final PseudoClass PSEUDO_CLASS_SELECTED =
             PseudoClass.getPseudoClass("selected");
