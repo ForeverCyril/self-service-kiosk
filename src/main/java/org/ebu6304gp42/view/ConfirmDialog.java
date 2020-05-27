@@ -11,6 +11,7 @@ import org.ebu6304gp42.controller.payment.ConfirmController;
 import org.ebu6304gp42.data.Account;
 import org.ebu6304gp42.data.Order;
 import org.ebu6304gp42.data.OrderManager;
+import org.ebu6304gp42.component.output.PrintInfo;
 import org.ebu6304gp42.exception.AccountException;
 
 import java.io.IOException;
@@ -69,6 +70,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
                     account.addCount();
                 }
             }
+            PrintInfo.printEmail(account);
         }
         order.setTime(new Date());
         if(controller.getType().equals("eat-in")){
@@ -80,6 +82,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
             System.out.println("Error Type: " + controller.getType());
         }
         OrderManager.getInstance().addOrder(order);
+        PrintInfo.printTicket(order);
     };
 
     private boolean showPayment(double price){

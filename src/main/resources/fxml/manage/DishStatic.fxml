@@ -4,13 +4,30 @@
 <?import javafx.scene.chart.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <HBox prefHeight="428.0" prefWidth="759.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.ebu6304gp42.controller.managing.menuTable.DishStaticController">
-   <PieChart fx:id="chart" labelLineLength="10.0" prefHeight="400.0" prefWidth="344.0" scaleShape="false">
-      <padding>
-         <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
-      </padding>
-   </PieChart>
+   <VBox prefHeight="428.0" prefWidth="345.0">
+      <children>
+         <HBox prefHeight="100.0" prefWidth="200.0" spacing="6.0">
+            <children>
+               <Label prefHeight="30.0" text="Last Week Sale Data:">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font></Label>
+               <Label fx:id="dishNum" prefHeight="30.0" prefWidth="95.0" text="Label">
+                  <font>
+                     <Font name="System Bold" size="18.0" />
+                  </font></Label>
+            </children>
+         </HBox>
+         <PieChart fx:id="chart" labelLineLength="10.0" prefHeight="444.0" prefWidth="346.0" scaleShape="false">
+            <padding>
+               <Insets bottom="3.0" left="3.0" right="3.0" top="3.0" />
+            </padding>
+         </PieChart>
+      </children>
+   </VBox>
    <TitledPane animated="false" collapsible="false" prefHeight="1000.0" prefWidth="200.0" text="Options" HBox.hgrow="ALWAYS">
       <ScrollPane prefHeight="376.0" prefWidth="396.0">
          <content>

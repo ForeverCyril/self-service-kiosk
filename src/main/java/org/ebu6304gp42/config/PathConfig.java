@@ -11,6 +11,8 @@ public class PathConfig {
     public static String ACCOUNT_FILE = "Data"+ File.separator +"account.json";
     public static String ORDER_FILE = "Data"+ File.separator +"order.json";
     public static String PIC_DIR = "Pic" + File.separator;
+    public static String EMAIL_DIR = "Email" + File.separator;
+    public static String TICKET_DIR = "Ticket" + File.separator;
     public static String  DEFAULT_PIC = "/res/pic/default_pic.png";
     public static String prefix = System.getProperties().getProperty("user.home") + File.separator +".config/kiosk";
 
@@ -20,6 +22,8 @@ public class PathConfig {
     public static void checkFolder(){
         checkFolder(prefix + File.separator + "Data");
         checkFolder(prefix + File.separator + "Pic");
+        checkFolder(prefix + File.separator + "Email");
+        checkFolder(prefix + File.separator + "Ticket");
     }
 
     /**
@@ -59,6 +63,18 @@ public class PathConfig {
      * @return Path of picture folder
      */
     public static String getPicDir(){return prefix + File.separator + PIC_DIR;}
+
+    /**
+     * Get folder path which store emails.
+     * @return Path of email folder
+     */
+    public static String getEmailDir(){return prefix + File.separator + EMAIL_DIR;}
+
+    /**
+     * Get folder path which store ticket.
+     * @return Path of ticket folder
+     */
+    public static String getTicketDir(){return prefix + File.separator + TICKET_DIR;}
 
     /**
      * Check if a folder is exist under the data path, and will create if not.
