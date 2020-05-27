@@ -14,7 +14,7 @@ public class PathConfig {
     public static String EMAIL_DIR = "Email" + File.separator;
     public static String TICKET_DIR = "Ticket" + File.separator;
     public static String  DEFAULT_PIC = "/res/pic/default_pic.png";
-    public static String prefix = System.getProperties().getProperty("user.home") + File.separator +".config/kiosk";
+    public static String prefix = "./Data/";
 
     /**
      * Check the status of the data path, it will create the folder if not exist..

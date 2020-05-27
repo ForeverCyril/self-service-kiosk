@@ -24,6 +24,7 @@ public class DishStatistic{
 
     private void dishRecommend(){
         loadData();
+        if(data.isEmpty()) return;
         ArrayList<Map.Entry<Dish, Integer>> list = new ArrayList<>(data.entrySet());
         System.out.println(data);
         Collections.sort(list, (a, b)->{
