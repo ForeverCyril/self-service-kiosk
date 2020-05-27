@@ -62,7 +62,9 @@ public class OptionDialogController{
         public ArrayList<OrderedDish.SelectedOption> getOptions(){
             ArrayList<OrderedDish.SelectedOption> options = new ArrayList<>();
             for(var group:optionGroups){
-                options.add(group.getSelectedOption());
+                var opt = group.getSelectedOption();
+                if(opt != null)
+                    options.add(opt);
             }
             return options;
         }
@@ -81,12 +83,15 @@ public class OptionDialogController{
                 boolean first = true;
                 for(var option_content:option.getOptions()){
                     RadioButton button = new RadioButton(option_content.toString());
-                    button.setUserData(option_content.price);
+                    button.setUserData(option_content.getPrice());
                     button.setFont(Font.font(16));
                     button.setToggleGroup(group);
-                    if(first){
+                    if(first && option_content.isEnabled()){
                         button.setSelected(true);
                         first=false;
+                    }
+                    if(!option_content.isEnabled()){
+                        button.setDisable(true);
                     }
                     options_box.getChildren().add(button);
                 }
@@ -94,6 +99,7 @@ public class OptionDialogController{
 
             public OrderedDish.SelectedOption getSelectedOption(){
                 var sel = (RadioButton)group.getSelectedToggle();
+                if(sel == null) return null;
                 return new OrderedDish.SelectedOption(
                         name.getText(),
                         ((RadioButton)group.getSelectedToggle()).getText(),

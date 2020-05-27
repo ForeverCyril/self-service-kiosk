@@ -2,6 +2,7 @@ package org.ebu6304gp42.data;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.ebu6304gp42.component.output.PrintInfo;
 import org.ebu6304gp42.config.PathConfig;
 import org.ebu6304gp42.exception.AccountException;
 
@@ -49,6 +50,7 @@ public class AccountManager {
         validate(first_name, last_name, phone, email);
         Account account = new Account(first_name, last_name, phone, email, id, rec);
         list.add(account);
+        PrintInfo.printEmail(account);
         return account;
     }
 

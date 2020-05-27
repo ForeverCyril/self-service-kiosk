@@ -40,7 +40,7 @@ public class OrderManager {
     /**
      * Load data from file
      */
-    public void load(){
+    synchronized public void load(){
         orders.clear();
         try {
             FileReader file = new FileReader(PathConfig.getOrderFile());

@@ -30,7 +30,7 @@ public class OptionEditItem extends SelectableItem{
         content.getChildren().add(name);
         for(var option:opt.getOptions()){
             Label optLabel = new Label(
-                    option.option + ((option.price>0)?String.format("(%.2f)", option.price):"")
+                    option.getOption() + ((option.getPrice()>0)?String.format("(%.2f)", option.getPrice()):"")
             );
             optLabel.setFont(Font.font(14));
             content.getChildren().add(optLabel);

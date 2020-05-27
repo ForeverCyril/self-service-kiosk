@@ -27,10 +27,13 @@ public class DishOption {
     public String getName() {
         return this.name;
     }
-    public void addOption(String name, double price){
-        options.add(new Option(name, price));
+    public void addOption(String name, double price, boolean enabled){
+        options.add(new Option(name, price, enabled));
     }
-    public void addOption(String name){options.add(new Option(name, 0));}
+    public void addOption(String name, double price){
+        options.add(new Option(name, price, true));
+    }
+    public void addOption(String name){options.add(new Option(name, 0, true));}
     public ArrayList<Option> getOptions() {
         return options;
     }
@@ -39,16 +42,42 @@ public class DishOption {
      * Select option for dish option
      */
     static public class Option{
-        public String option;
-        public double price;
+        private String option;
+        private double price;
+        private boolean enabled;
 
         /**
          * @param option name
          * @param price price
          */
-        public Option(String option, double price){
+        public Option(String option, double price, boolean enabled){
             this.option = option;
             this.price = price;
+            this.enabled = enabled;
+        }
+
+        public String getOption() {
+            return option;
+        }
+
+        public void setOption(String option) {
+            this.option = option;
+        }
+
+        public double getPrice() {
+            return price;
+        }
+
+        public void setPrice(double price) {
+            this.price = price;
+        }
+
+        public boolean isEnabled() {
+            return enabled;
+        }
+
+        public void setEnabled(boolean enabled) {
+            this.enabled = enabled;
         }
 
         @Override

@@ -35,7 +35,7 @@ public class OrderedDishController implements Initializable {
     public void setOrderedDish(OrderedDish orderedDish) {
         this.orderedDish = orderedDish;
         name_label.setText(String.valueOf(orderedDish.getName()));
-        price_label.setText(String.valueOf(orderedDish.getPrice()));
+        price_label.setText(String.format("%.2f",orderedDish.getPrice()));
         num_label.setText(String.valueOf(orderedDish.getAmount()));
         StringBuilder opt_data = new StringBuilder();
         for(var option: orderedDish.getOptions()){
@@ -47,13 +47,12 @@ public class OrderedDishController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ContextMenu menu = new ContextMenu();
-        MenuItem mod_item = new MenuItem("Modify");
         MenuItem del_item = new MenuItem("Delete");
         del_item.setOnAction(event -> {
             root.fireEvent(new OrderedDishDeleteEvent(OrderedDishDeleteEvent.DISH_DELETE_EVENT, orderedDish));
         });
 
-        menu.getItems().addAll(mod_item, del_item);
+        menu.getItems().addAll(del_item);
         root.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             // Show menu when right click or click + ctrl
             if(event.getButton() == MouseButton.SECONDARY || event.isControlDown()){

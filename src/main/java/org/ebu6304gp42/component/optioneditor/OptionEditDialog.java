@@ -72,7 +72,9 @@ class OptionEditDialog extends Dialog<DishOption> {
             } else {
                 DishOption dishOption = new DishOption(nameInput.getText());
                 for(var opt:opt_area.getChildren()){
-                    dishOption.addOption(((OptionEditWidget)opt).getName(), ((OptionEditWidget)opt).getPrice());
+                    dishOption.addOption(((OptionEditWidget)opt).getName()
+                            , ((OptionEditWidget)opt).getPrice()
+                            , ((OptionEditWidget)opt).getEnabled());
                 }
                 return dishOption;
             }
