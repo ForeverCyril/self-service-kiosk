@@ -50,7 +50,13 @@ public class AccountManager {
         validate(first_name, last_name, phone, email);
         Account account = new Account(first_name, last_name, phone, email, id, rec);
         list.add(account);
-        PrintInfo.customerNotice(account);
+        String content = "Account Created!"+
+                         "\nID: " + String.format("%08d",id) +
+                         "\nName: " + first_name + " " +last_name +
+                         "\nPhone: " + phone +
+                         "\nEmail: " + email;
+        PrintInfo.sendEmailSMS(account, content);
+        PrintInfo.printTicket("Register", content);
         return account;
     }
 

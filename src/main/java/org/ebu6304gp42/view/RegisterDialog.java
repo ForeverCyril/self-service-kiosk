@@ -2,6 +2,7 @@ package org.ebu6304gp42.view;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Dialog;
@@ -29,6 +30,10 @@ public class RegisterDialog extends Dialog<Account> {
         applyBtn.addEventFilter(ActionEvent.ACTION, event -> {
             try {
                 result = controller.getAccount();
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setContentText(String.format("Account ID: %08d", result.getId()));
+                alert.showAndWait();
             } catch (AccountException e){
                 ShowAlert.error("Information Error", e.getMessage());
                 result = null;

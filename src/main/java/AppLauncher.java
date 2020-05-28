@@ -18,6 +18,8 @@ public class AppLauncher {
     public static void beforeStart(String[] args){
         RecommenderSystem recommenderSystem = new RecommenderSystem();
         recommenderSystem.hotRecommend(); // set hot dish.
-        recommenderSystem.sendRecommendEmail();
+        if(Calendar.getInstance().get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
+            recommenderSystem.sendRecommendEmail();
+        }
     }
 }
