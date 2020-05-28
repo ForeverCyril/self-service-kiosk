@@ -42,6 +42,9 @@ public class EditDishController implements Initializable {
     private TextArea desc;
     @FXML
     private VBox optionArea;
+    @FXML
+    private Label dish_name_label;
+
     private OptionEditor optionEditor;
     private String pic_name;
 
@@ -66,9 +69,10 @@ public class EditDishController implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-                if(newFile.exists());
-                pic_name = newFile.toPath().toString();
-                Dish.setImageTo(image, newFile.toPath().toString());
+                if(newFile.exists()) {
+                    pic_name = newFile.toPath().toString();
+                    Dish.setImageTo(image, newFile.toPath().toString());
+                }
             }
         });
     }
@@ -92,6 +96,7 @@ public class EditDishController implements Initializable {
     public void setDish(Dish dish){
         pic_name = dish.getPic();
         dish.setImageTo(image, false);
+        dish_name_label.textProperty().bind(name.textProperty());
         name.setText(dish.getName());
         price.setText(String.valueOf(dish.getPrice()));
         remain.getValueFactory().setValue(dish.getRemain());
