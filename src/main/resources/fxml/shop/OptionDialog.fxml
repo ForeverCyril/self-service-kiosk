@@ -28,7 +28,7 @@
                   <Label prefHeight="15.0" prefWidth="68.0" text="Amount: " />
                    <Spinner fx:id="amount" editable="true" prefHeight="23.0" prefWidth="62.0">
                        <valueFactory>
-                           <SpinnerValueFactory.IntegerSpinnerValueFactory max="10" min="1" />
+                           <SpinnerValueFactory.IntegerSpinnerValueFactory max="999" min="1" />
                        </valueFactory>
                    </Spinner>
                </children>
