@@ -59,6 +59,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
                 } else {
                     try {
                         account.useCount();
+                        PrintInfo.customerNotice(account);
                     } catch (AccountException e) {
                         ShowAlert.error("Use Count Error", e.getMessage());
                         event.consume();
@@ -66,11 +67,13 @@ public class ConfirmDialog extends Dialog<Boolean> {
                 }
             } else {
                 var res = showPayment(order.getPrice());
-                if(!res){ event.consume();} else {
+                if(!res){
+                    event.consume();
+                } else {
                     account.addCount();
+                    PrintInfo.customerNotice(account);
                 }
             }
-            PrintInfo.customerNotice(account);
         }
         order.setTime(new Date());
         if(controller.getType().equals("eat-in")){
