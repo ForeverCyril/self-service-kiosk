@@ -12,6 +12,7 @@ import java.util.Date;
 
 public class DataTest {
     private void clearFile(String fileName){
+
         File file =new File(fileName);
         try {
             if(!file.exists()) {
@@ -28,8 +29,8 @@ public class DataTest {
     
     @Test
     public void testOrderManager(){
-        PathConfig.ORDER_FILE = "Test/" + PathConfig.ORDER_FILE;
-        PathConfig.prefix="./";
+        PathConfig.prefix="./Test";
+        PathConfig.checkFolder();
         clearFile(PathConfig.ORDER_FILE);
 
         OrderManager bank = OrderManager.getInstance();
@@ -63,8 +64,8 @@ public class DataTest {
     @Test
     public void testAccount(){
 
-        PathConfig.prefix="./";
-        PathConfig.ACCOUNT_FILE = "Test/" + PathConfig.ACCOUNT_FILE;
+        PathConfig.prefix="./Test";
+        PathConfig.checkFolder();
         clearFile(PathConfig.ACCOUNT_FILE);
 
         AccountManager bank = AccountManager.getInstance();
@@ -93,8 +94,8 @@ public class DataTest {
     @Test
     public void testDish(){
 
-        PathConfig.prefix="./";
-        PathConfig.DISH_FILE = "Test/" + PathConfig.DISH_FILE;
+        PathConfig.prefix="./Test";
+        PathConfig.checkFolder();
         DishManager dishManager = DishManager.getInstance();
 
         for(int i=0;i<5;i++){
