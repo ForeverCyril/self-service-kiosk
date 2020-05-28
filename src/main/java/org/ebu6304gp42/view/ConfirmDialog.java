@@ -70,7 +70,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
                     account.addCount();
                 }
             }
-            PrintInfo.printEmail(account);
+            PrintInfo.customerNotice(account);
         }
         order.setTime(new Date());
         if(controller.getType().equals("eat-in")){
@@ -82,7 +82,7 @@ public class ConfirmDialog extends Dialog<Boolean> {
             System.out.println("Error Type: " + controller.getType());
         }
         OrderManager.getInstance().addOrder(order);
-        PrintInfo.printTicket(order);
+        PrintInfo.outputOrderTicket(order);
     };
 
     private boolean showPayment(double price){

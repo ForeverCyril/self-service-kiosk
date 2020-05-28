@@ -18,9 +18,6 @@ public class AppLauncher {
     public static void beforeStart(String[] args){
         RecommenderSystem recommenderSystem = new RecommenderSystem();
         recommenderSystem.hotRecommend(); // set hot dish.
-
-        // send recommend email at monday
-            System.out.println("AAA");
-            //recommenderSystem.sendRecommendEmail();
+        recommenderSystem.sendRecommendEmail();
     }
 }

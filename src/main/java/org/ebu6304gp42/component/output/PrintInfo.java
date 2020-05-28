@@ -19,11 +19,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class PrintInfo {
-    private static void printToFile(File file, String data){
+    public static void sendEmailSMS(Account account, String content) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd$hh-mm-ss");
+        File file = new File(PathConfig.getEmailDir() + String.format("%08d(%s).txt", account.getId(), dateFormat.format(new Date())));
+        printToFile(file, content);
+    }
+
+    public static void printTicket(String title, String content) {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-$hh-mm-ss");
+        File file = new File(PathConfig.getTicketDir() + String.format("%s(%s)", title, dateFormat.format(new Date())) + ".txt");
+        printToFile(file, content);
+    }
+
+    private static void printToFile(File file, String data) {
         if (!file.exists()) {
             try {
                 var res = file.createNewFile();
-                if(!res){
+                if (!res) {
                     ShowAlert.error("File Create Error", "Fail to create file " + file.getName());
                 }
             } catch (IOException e) {
@@ -38,27 +50,24 @@ public class PrintInfo {
     }
 
     //消费后发送邮件
-    public static void printEmail(Account account){
-        String firstName=account.getFirst_name();
-        String lastName=account.getLast_name();
-        int stamp=account.getCount();
+    public static void customerNotice(Account account) {
+        String firstName = account.getFirst_name();
+        String lastName = account.getLast_name();
+        int stamp = account.getCount();
 
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-        File file = new File(PathConfig.getEmailDir()+ String.format("%08d(%s).txt", account.getId(), dateFormat.format(new Date())));
-
-        String data = "Dear " + firstName + " "+ lastName + "\n" +
+        String data = "Dear " + firstName + " " + lastName + "\n" +
                       "Your ID is: " + String.format("%08d", account.getId()) + "\n" +
                       "   Thanks for coming here to enjoy the food " + "\n" +
                       "   The number of your stamps is:" + stamp + "\n" +
                       "   Welcome back again!" + "\n";
-        printToFile(file, data);
+        sendEmailSMS(account, data);
     }
 
 
     //打印小票
-    public static void printTicket(Order order) {
+    public static void outputOrderTicket(Order order) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-        File file = new File(PathConfig.getTicketDir()+dateFormat.format(new Date())+".txt");
+        File file = new File(PathConfig.getTicketDir() + dateFormat.format(new Date()) + ".txt");
         //File file = new File(PathConfig.getOrderFile());
         StringBuilder data = new StringBuilder();
         String a = "-------------------------------------------\n";
@@ -82,24 +91,6 @@ public class PrintInfo {
         data.append(a);
         data.append("                    ").append(order.getType());
 
-        printToFile(file, data.toString());
-    }
-
-    //每周推荐
-    //可以加一个推荐文件夹
-    public static void RecommendEachWeek(Dish dish, HashMap<String, OptionData> dataHashMap){
-        Calendar calendar = Calendar.getInstance();
-        int recommendDay_of_week = 1;//周一推荐
-        if(calendar.get(Calendar.DAY_OF_WEEK) == recommendDay_of_week) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
-            File file = new File(PathConfig.getEmailDir() + String.format("%08d(%s).txt", dateFormat.format(new Date())) + "Recommend");
-
-            Map<String, String> optionRecommend = RecommenderSystem.getRecommend(dataHashMap);
-            String data = "Hi! The recommendations of this week are as following \n" +
-                          "The most popular dish is " + dish.getName() + "\n" +
-                          "The most popular option is : " + optionRecommend + "\n";
-            printToFile(file, data);
-        }
+        printTicket("Order", data.toString());
     }
 }
-

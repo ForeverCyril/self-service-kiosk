@@ -1,5 +1,8 @@
 package org.ebu6304gp42.data.analysis;
 
+import org.ebu6304gp42.component.output.PrintInfo;
+import org.ebu6304gp42.data.Account;
+import org.ebu6304gp42.data.AccountManager;
 import org.ebu6304gp42.data.Dish;
 import org.ebu6304gp42.data.DishManager;
 
@@ -21,32 +24,39 @@ public class RecommenderSystem {
 
     public void sendRecommendEmail(){
         if(hotDish == null) return;
-        System.out.println("Send");
+        StringBuilder content = new StringBuilder();
+        content.append("Dish Recommend of This Week\n\n");
         for(var dish:hotDish){
             var optionStatic = DataAnalyser.getDishOptionStatic(dish);
-            System.out.println("Dish: " + dish.getName());
+            content.append("Hot Dish: ").append(dish.getName());
+            content.append("\nMost Popular Option:\n");
             getRecommend(optionStatic).forEach((option_name, sel_name)->{
-                System.out.println(option_name + ": " + sel_name);
+                content.append("    ").append(option_name).append(": ").append(sel_name).append("\n");
             });
-            System.out.println();
+            content.append("\n\n");
+        }
+        System.out.println("Recommend Content: \n" + content.toString());
+        for(var acc: AccountManager.getInstance().getAccount()){
+            if (acc.isAccept_rec()){
+                PrintInfo.sendEmailSMS(acc, content.toString());
+            }
         }
     }
 
-    public static Map<String,String> getRecommend(HashMap<String, OptionData> optionData){
+    public Map<String,String> getRecommend(Map<String, OptionData> data){
         Map<String,String> optionRecommend = new HashMap<>();
-        for (String key : optionData.keySet()) {
-            String option = (getKey((Map<String, Integer>) optionData.get(key), Integer.parseInt(getMaxValue((Map<String, Integer>) optionData.get(key)).toString()))).toString();
+        for (String key : data.keySet()) {
+            OptionData optionData = data.get(key);
+            String option = (getKey(optionData.getData(), Integer.parseInt(getMaxValue(optionData.getData()).toString()))).toString();
             optionRecommend.put(key,option);
         }
-        System.out.println(optionRecommend);
-        System.out.println("1");
         return optionRecommend;
     }
 
     private static Object getKey(Map<String,Integer> optionMap,Integer value){
         String option = null;
         for(Map.Entry<String,Integer> entry : optionMap.entrySet()){
-            if(Objects.equals(value, entry.getValue())){
+            if(value == entry.getValue()){
                 option = entry.getKey();
             }
         }

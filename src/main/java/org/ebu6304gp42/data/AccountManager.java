@@ -50,7 +50,7 @@ public class AccountManager {
         validate(first_name, last_name, phone, email);
         Account account = new Account(first_name, last_name, phone, email, id, rec);
         list.add(account);
-        PrintInfo.printEmail(account);
+        PrintInfo.customerNotice(account);
         return account;
     }
 
