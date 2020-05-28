@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -165,6 +166,26 @@ public class Dish {
         Image image = new Image(Dish.class.getResourceAsStream("/res/pic/soldout.png"),
                 container.getFitWidth(), container.getFitHeight(), true, true);
         container.setImage(image);
+    }
+
+    /**
+     * Set whether the dish is hot
+     * @param isHot whether dish is hot
+     */
+    public void setHot(boolean isHot){
+        var data = this.getRecommend();
+        if (data == null){
+            if(isHot){
+                this.setRecommend("hot");
+            }
+        } else {
+            ArrayList<String> recs = new ArrayList<>(Arrays.asList(this.getRecommend()));
+            recs.remove("hot");
+            if (isHot) {
+                recs.add("hot");
+            }
+            this.setRecommend(String.join(";", recs));
+        }
     }
 
     @Override

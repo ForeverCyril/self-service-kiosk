@@ -2,14 +2,21 @@ package org.ebu6304gp42.component.output;
 
 import org.ebu6304gp42.config.PathConfig;
 import org.ebu6304gp42.data.Account;
+import org.ebu6304gp42.data.Dish;
 import org.ebu6304gp42.data.Order;
+import org.ebu6304gp42.data.analysis.DataAnalyser;
+import org.ebu6304gp42.data.analysis.OptionData;
+import org.ebu6304gp42.data.analysis.RecommenderSystem;
 import org.ebu6304gp42.view.ShowAlert;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PrintInfo {
     private static void printToFile(File file, String data){
@@ -76,6 +83,23 @@ public class PrintInfo {
         data.append("                    ").append(order.getType());
 
         printToFile(file, data.toString());
+    }
+
+    //每周推荐
+    //可以加一个推荐文件夹
+    public static void RecommendEachWeek(Dish dish, HashMap<String, OptionData> dataHashMap){
+        Calendar calendar = Calendar.getInstance();
+        int recommendDay_of_week = 1;//周一推荐
+        if(calendar.get(Calendar.DAY_OF_WEEK) == recommendDay_of_week) {
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
+            File file = new File(PathConfig.getEmailDir() + String.format("%08d(%s).txt", dateFormat.format(new Date())) + "Recommend");
+
+            Map<String, String> optionRecommend = RecommenderSystem.getRecommend(dataHashMap);
+            String data = "Hi! The recommendations of this week are as following \n" +
+                          "The most popular dish is " + dish.getName() + "\n" +
+                          "The most popular option is : " + optionRecommend + "\n";
+            printToFile(file, data);
+        }
     }
 }
 

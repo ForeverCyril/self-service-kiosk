@@ -83,7 +83,7 @@ public class OptionDialogController{
                 boolean first = true;
                 for(var option_content:option.getOptions()){
                     RadioButton button = new RadioButton(option_content.toString());
-                    button.setUserData(option_content.getPrice());
+                    button.setUserData(option_content);
                     button.setFont(Font.font(16));
                     button.setToggleGroup(group);
                     if(first && option_content.isEnabled()){
@@ -102,8 +102,8 @@ public class OptionDialogController{
                 if(sel == null) return null;
                 return new OrderedDish.SelectedOption(
                         name.getText(),
-                        ((RadioButton)group.getSelectedToggle()).getText(),
-                        (Double) sel.getUserData()
+                        ((DishOption.Option)((RadioButton)group.getSelectedToggle()).getUserData()).getOption(),
+                        ((DishOption.Option) sel.getUserData()).getPrice()
                 );
             }
 

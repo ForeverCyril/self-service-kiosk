@@ -1,4 +1,4 @@
-package org.ebu6304gp42.controller.managing.menuTable;
+package org.ebu6304gp42.data.analysis;
 
 import org.ebu6304gp42.data.DishOption;
 
@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Store the static for an option.
  */
-class OptionData {
+public class OptionData {
     Map<String, Integer> data = new HashMap<>();
     public OptionData(){}
     public OptionData(DishOption option){

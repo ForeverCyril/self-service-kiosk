@@ -55,6 +55,8 @@ public class OrderManager {
             }
             in.close();
             file.close();
+        } catch (FileNotFoundException e){
+            System.out.println("No Order Data Exist.");
         } catch (IOException e) {
             e.printStackTrace();
         }
