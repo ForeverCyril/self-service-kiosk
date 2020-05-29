@@ -46,7 +46,6 @@ public class ConfirmDialog extends Dialog<Boolean> {
      * Handle Ok Button Click Event before Dialog Close;
      */
     EventHandler<ActionEvent> onPayment = event -> {
-        System.out.println("Payment");
         Account account = controller.getLoginAccount();
         if(account == null){
             var res = showPayment(order.getPrice());

@@ -54,7 +54,6 @@ public class CartController implements Initializable {
         orderedDishes.addListener(this::onChanged);
         orderedDishPane.addEventHandler(OrderedDishDeleteEvent.DISH_DELETE_EVENT, event -> {
             Node source = (Node)event.getTarget();
-            System.out.println("Delete Event: " + source);
             if(source != null){
                 orderedDishPane.getChildren().remove(source);
                 orderedDishes.remove(event.getOrderedDish());

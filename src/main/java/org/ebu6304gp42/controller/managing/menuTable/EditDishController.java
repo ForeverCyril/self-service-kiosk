@@ -62,7 +62,6 @@ public class EditDishController implements Initializable {
             fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
             File file = fileChooser.showOpenDialog(((Node)event.getSource()).getScene().getWindow());
             if (file != null){
-                System.out.println(file.toPath().toString());
                 File newFile = new File(PathConfig.getPicDir() + file.getName());
                 try {
                     Files.copy(file.toPath(), newFile.toPath(), StandardCopyOption.REPLACE_EXISTING);

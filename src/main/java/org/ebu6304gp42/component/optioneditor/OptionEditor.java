@@ -33,9 +33,6 @@ public class OptionEditor extends ScrollPane {
                 }
             });
         }
-        for(var item:root.getChildren()){
-            System.out.println(item);
-        }
     }
 
     /**

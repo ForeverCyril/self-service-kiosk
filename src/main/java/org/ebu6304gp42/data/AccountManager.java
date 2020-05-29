@@ -160,7 +160,6 @@ public class AccountManager {
     public Account seek(int id) throws AccountException {
         for (Account account : list) {
             if (account.getId() == id) {
-                System.out.println(account);
                 return account;
             }
         }

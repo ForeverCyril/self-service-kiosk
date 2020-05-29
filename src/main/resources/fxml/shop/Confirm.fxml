@@ -59,7 +59,7 @@
                      <children>
                          <Label text="Account: " />
                          <TextField fx:id="userID" promptText="Input your Account ID" HBox.hgrow="ALWAYS" />
-                         <Button mnemonicParsing="false" onMouseClicked="#onLogin" text="Login" />
+                         <Button fx:id="btn_login" mnemonicParsing="false" onMouseClicked="#onLogin" text="Login" />
                      </children>
                      <VBox.margin>
                          <Insets />

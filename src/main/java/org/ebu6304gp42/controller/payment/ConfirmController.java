@@ -2,6 +2,7 @@ package org.ebu6304gp42.controller.payment;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -18,8 +19,10 @@ import org.ebu6304gp42.view.ShowAlert;
 import org.ebu6304gp42.view.UpdateAccountDialog;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class ConfirmController {
+public class ConfirmController implements Initializable {
     @FXML
     private VBox order_area;
     @FXML
@@ -40,9 +43,26 @@ public class ConfirmController {
     private Node acc_login;
     @FXML
     private ToggleGroup typeGroup;
-
+    @FXML
+    private Button btn_login;
 
     private Account loginAccount;
+
+
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        // Disable login button when input is short that 8 number.
+        btn_login.setDisable(true);
+        userID.textProperty().addListener((observable, oldValue, newValue)->{
+            if(newValue.length() > 8){
+                userID.setText(oldValue);
+                btn_login.setDisable(false);
+            } else {
+                btn_login.setDisable(newValue.length() != 8);
+            }
+        });
+    }
 
     @FXML
     private void onLogin(MouseEvent event){
@@ -88,7 +108,6 @@ public class ConfirmController {
 
     @FXML
     private void onEditInformation(MouseEvent event){
-        System.out.println("Clicked!");
         var res = (new UpdateAccountDialog(loginAccount.getId())).showAndWait();
         res.ifPresent(result->{
             if (result){

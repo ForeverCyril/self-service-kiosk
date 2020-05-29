@@ -43,7 +43,6 @@ public class RecommenderSystem {
             });
             content.append("\n\n");
         }
-        System.out.println("Recommend Content: \n" + content.toString());
         for(var acc: AccountManager.getInstance().getAccount()){
             if (acc.isAccept_rec()){
                 PrintInfo.sendEmailSMS(acc, content.toString());
