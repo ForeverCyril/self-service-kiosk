@@ -49,6 +49,7 @@ public class DishOption {
         /**
          * @param option name
          * @param price price
+         * @param enabled option status
          */
         public Option(String option, double price, boolean enabled){
             this.option = option;

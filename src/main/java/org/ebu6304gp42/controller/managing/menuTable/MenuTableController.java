@@ -79,7 +79,7 @@ public class MenuTableController implements Initializable {
 
     /**
      * Add dish to the table
-     * @param dish
+     * @param dish dish
      */
     public void addDish(Dish dish){
         if (dish==null)return;

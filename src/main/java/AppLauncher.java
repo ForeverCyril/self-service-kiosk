@@ -15,6 +15,7 @@ public class AppLauncher {
         Application.launch(MainWindow.class, args);
     }
 
+    // Do some thing before start application
     public static void beforeStart(String[] args){
         RecommenderSystem recommenderSystem = new RecommenderSystem();
         recommenderSystem.hotRecommend(); // set hot dish.

@@ -2,21 +2,14 @@ package org.ebu6304gp42.component.output;
 
 import org.ebu6304gp42.config.PathConfig;
 import org.ebu6304gp42.data.Account;
-import org.ebu6304gp42.data.Dish;
 import org.ebu6304gp42.data.Order;
-import org.ebu6304gp42.data.analysis.DataAnalyser;
-import org.ebu6304gp42.data.analysis.OptionData;
-import org.ebu6304gp42.data.analysis.RecommenderSystem;
 import org.ebu6304gp42.view.ShowAlert;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 public class PrintInfo {
     public static void sendEmailSMS(Account account, String content) {
@@ -49,7 +42,6 @@ public class PrintInfo {
         }
     }
 
-    //消费后发送邮件
     public static void customerNotice(Account account) {
         String firstName = account.getFirst_name();
         String lastName = account.getLast_name();
@@ -64,7 +56,6 @@ public class PrintInfo {
     }
 
 
-    //打印小票
     public static void outputOrderTicket(Order order) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd-hh-mm-ss");
         File file = new File(PathConfig.getTicketDir() + dateFormat.format(new Date()) + ".txt");

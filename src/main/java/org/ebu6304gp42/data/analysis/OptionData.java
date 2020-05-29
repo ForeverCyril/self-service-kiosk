@@ -19,6 +19,12 @@ public class OptionData {
             data.put(opt.getOption(), 0);
         }
     }
+
+    /**
+     * Increase a option number
+     * @param name option name
+     * @param amount amount
+     */
     public void increase(String name, int amount){
         Integer oldValue = data.get(name);
         if(oldValue == null){
@@ -26,5 +32,10 @@ public class OptionData {
         }
         data.put(name, oldValue + amount);
     }
+
+    /**
+     * Get Option Data
+     * @return data
+     */
     public Map<String, Integer> getData(){return data;}
 }

@@ -12,6 +12,7 @@ public class DataAnalyser {
     /**
      * Static option data for given dish
      * @param dish dish need to static
+     * @return Return A Map of option name and option data
      */
     public static HashMap<String, OptionData> getDishOptionStatic(Dish dish){
         var result = new HashMap<String, OptionData>();

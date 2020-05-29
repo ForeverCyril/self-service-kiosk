@@ -118,7 +118,7 @@ public class ConfirmController {
 
     /**
      * Get Login Account
-     * @return
+     * @return return Login Account
      */
     public Account getLoginAccount(){
         return loginAccount;

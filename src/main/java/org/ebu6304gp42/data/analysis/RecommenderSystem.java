@@ -1,13 +1,15 @@
 package org.ebu6304gp42.data.analysis;
 
 import org.ebu6304gp42.component.output.PrintInfo;
-import org.ebu6304gp42.data.Account;
 import org.ebu6304gp42.data.AccountManager;
 import org.ebu6304gp42.data.Dish;
 import org.ebu6304gp42.data.DishManager;
 
 import java.util.*;
 
+/**
+ * Handling Recommend Action
+ */
 public class RecommenderSystem {
     private ArrayList<Dish> hotDish = null;
 
@@ -15,6 +17,9 @@ public class RecommenderSystem {
         hotDish = DataAnalyser.getHotDish(2, false);
     }
 
+    /**
+     * Set Hot property for dish
+     */
     public void hotRecommend(){
         if(hotDish == null) return;;
         for(var dish: DishManager.getInstance().getDish()){
@@ -22,6 +27,9 @@ public class RecommenderSystem {
         }
     }
 
+    /**
+     * Send Recommend Email
+     */
     public void sendRecommendEmail(){
         if(hotDish == null) return;
         StringBuilder content = new StringBuilder();
