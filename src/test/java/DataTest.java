@@ -8,6 +8,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.Date;
 
 public class DataTest {
@@ -31,7 +32,7 @@ public class DataTest {
     public void testOrderManager(){
         PathConfig.prefix="./Test";
         PathConfig.checkFolder();
-        clearFile(PathConfig.ORDER_FILE);
+        clearFile(PathConfig.getOrderFile());
 
         OrderManager bank = OrderManager.getInstance();
 
@@ -66,7 +67,7 @@ public class DataTest {
 
         PathConfig.prefix="./Test";
         PathConfig.checkFolder();
-        clearFile(PathConfig.ACCOUNT_FILE);
+        clearFile(PathConfig.getAccountFile());
 
         AccountManager bank = AccountManager.getInstance();
         for(int i = 0; i <10; i++){
